@@ -15,6 +15,8 @@
 		FE5729D31DB716BC0062FF21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE5729D11DB716BC0062FF21 /* LaunchScreen.storyboard */; };
 		FE5729DE1DB716BD0062FF21 /* VInputContainerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FE5729DD1DB716BD0062FF21 /* VInputContainerTests.m */; };
 		FE5729E91DB716BD0062FF21 /* VInputContainerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = FE5729E81DB716BD0062FF21 /* VInputContainerUITests.m */; };
+		FE5729FE1DB716CD0062FF21 /* KeyboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE5729FD1DB716CD0062FF21 /* KeyboardViewController.m */; };
+		FE572A021DB716CD0062FF21 /* VInput.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = FE5729FA1DB716CD0062FF21 /* VInput.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,7 +34,28 @@
 			remoteGlobalIDString = FE5729BF1DB716BC0062FF21;
 			remoteInfo = VInputContainer;
 		};
+		FE572A001DB716CD0062FF21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FE5729B81DB716BC0062FF21 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FE5729F91DB716CD0062FF21;
+			remoteInfo = VInput;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FE572A061DB716CD0062FF21 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				FE572A021DB716CD0062FF21 /* VInput.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		FE5729C01DB716BC0062FF21 /* VInputContainer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VInputContainer.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -51,6 +74,10 @@
 		FE5729E41DB716BD0062FF21 /* VInputContainerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VInputContainerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE5729E81DB716BD0062FF21 /* VInputContainerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VInputContainerUITests.m; sourceTree = "<group>"; };
 		FE5729EA1DB716BD0062FF21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FE5729FA1DB716CD0062FF21 /* VInput.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = VInput.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE5729FC1DB716CD0062FF21 /* KeyboardViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyboardViewController.h; sourceTree = "<group>"; };
+		FE5729FD1DB716CD0062FF21 /* KeyboardViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KeyboardViewController.m; sourceTree = "<group>"; };
+		FE5729FF1DB716CD0062FF21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +102,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FE5729F71DB716CD0062FF21 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -84,6 +118,7 @@
 				FE5729C21DB716BC0062FF21 /* VInputContainer */,
 				FE5729DC1DB716BD0062FF21 /* VInputContainerTests */,
 				FE5729E71DB716BD0062FF21 /* VInputContainerUITests */,
+				FE5729FB1DB716CD0062FF21 /* VInput */,
 				FE5729C11DB716BC0062FF21 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -94,6 +129,7 @@
 				FE5729C01DB716BC0062FF21 /* VInputContainer.app */,
 				FE5729D91DB716BD0062FF21 /* VInputContainerTests.xctest */,
 				FE5729E41DB716BD0062FF21 /* VInputContainerUITests.xctest */,
+				FE5729FA1DB716CD0062FF21 /* VInput.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -140,6 +176,16 @@
 			path = VInputContainerUITests;
 			sourceTree = "<group>";
 		};
+		FE5729FB1DB716CD0062FF21 /* VInput */ = {
+			isa = PBXGroup;
+			children = (
+				FE5729FC1DB716CD0062FF21 /* KeyboardViewController.h */,
+				FE5729FD1DB716CD0062FF21 /* KeyboardViewController.m */,
+				FE5729FF1DB716CD0062FF21 /* Info.plist */,
+			);
+			path = VInput;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -150,10 +196,12 @@
 				FE5729BC1DB716BC0062FF21 /* Sources */,
 				FE5729BD1DB716BC0062FF21 /* Frameworks */,
 				FE5729BE1DB716BC0062FF21 /* Resources */,
+				FE572A061DB716CD0062FF21 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				FE572A011DB716CD0062FF21 /* PBXTargetDependency */,
 			);
 			name = VInputContainer;
 			productName = VInputContainer;
@@ -196,6 +244,23 @@
 			productReference = FE5729E41DB716BD0062FF21 /* VInputContainerUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		FE5729F91DB716CD0062FF21 /* VInput */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FE572A031DB716CD0062FF21 /* Build configuration list for PBXNativeTarget "VInput" */;
+			buildPhases = (
+				FE5729F61DB716CD0062FF21 /* Sources */,
+				FE5729F71DB716CD0062FF21 /* Frameworks */,
+				FE5729F81DB716CD0062FF21 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VInput;
+			productName = VInput;
+			productReference = FE5729FA1DB716CD0062FF21 /* VInput.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -219,6 +284,10 @@
 						ProvisioningStyle = Automatic;
 						TestTargetID = FE5729BF1DB716BC0062FF21;
 					};
+					FE5729F91DB716CD0062FF21 = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = FE5729BB1DB716BC0062FF21 /* Build configuration list for PBXProject "VInputContainer" */;
@@ -237,6 +306,7 @@
 				FE5729BF1DB716BC0062FF21 /* VInputContainer */,
 				FE5729D81DB716BD0062FF21 /* VInputContainerTests */,
 				FE5729E31DB716BD0062FF21 /* VInputContainerUITests */,
+				FE5729F91DB716CD0062FF21 /* VInput */,
 			);
 		};
 /* End PBXProject section */
@@ -260,6 +330,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		FE5729E21DB716BD0062FF21 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FE5729F81DB716CD0062FF21 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -295,6 +372,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FE5729F61DB716CD0062FF21 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE5729FE1DB716CD0062FF21 /* KeyboardViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -307,6 +392,11 @@
 			isa = PBXTargetDependency;
 			target = FE5729BF1DB716BC0062FF21 /* VInputContainer */;
 			targetProxy = FE5729E51DB716BD0062FF21 /* PBXContainerItemProxy */;
+		};
+		FE572A011DB716CD0062FF21 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FE5729F91DB716CD0062FF21 /* VInput */;
+			targetProxy = FE572A001DB716CD0062FF21 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -486,6 +576,28 @@
 			};
 			name = Release;
 		};
+		FE572A041DB716CD0062FF21 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = VInput/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = EECS481.VInputContainer.VInput;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		FE572A051DB716CD0062FF21 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = VInput/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = EECS481.VInputContainer.VInput;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -519,6 +631,14 @@
 			buildConfigurations = (
 				FE5729F41DB716BD0062FF21 /* Debug */,
 				FE5729F51DB716BD0062FF21 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		FE572A031DB716CD0062FF21 /* Build configuration list for PBXNativeTarget "VInput" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FE572A041DB716CD0062FF21 /* Debug */,
+				FE572A051DB716CD0062FF21 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
