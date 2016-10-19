@@ -8,3 +8,4 @@ Dominant hand
 Area of study
 Familiarity with binary search
 Experience using non-native keyboards
+Familiarity with accessibility tools
