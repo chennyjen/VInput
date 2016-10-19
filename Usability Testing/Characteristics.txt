@@ -1,0 +1,6 @@
+Characteristics of testers
+
+We want to keep a record of the following information for each of our test subjects:
+Age
+First Language
+Phone type
