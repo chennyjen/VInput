@@ -1,0 +1,21 @@
+“Understanding of how libraries or technology works with respect to voice prompting (voice over or non-native screen reading), keyboard dimensions, swipe gestures in keyboard, and more”
+
+--------------------------------------------------------------------------- 
+
+VoiceOver: VoiceOver captures specific gestures and narrates screen content. Since our keyboard will be mostly devoid of visible content, and rely heavily on gestures, we will probably want to use Direct Interaction (UIAccessibilityTraitAllowsDirectInteraction) in the event that VoiceOver is active so we can have the gestures passed directly to our keyboard.
+https://developer.apple.com/reference/uikit/uiaccessibilitytraitallowsdirectinteraction?language=objc
+
+Audio prompts are integral to the UI for this keyboard, and will require the use of the AVSpeechSynthesizer class to output information (current selection, current word read-out, etc.). We will have control over characteristics of the synthesized speech such as voice, pitch, and rate, which could be employed usefully (e.g. a different pitch when navigating to a letter vs. confirming a letter).
+https://developer.apple.com/reference/avfoundation/avspeechsynthesizer
+
+We have confirmed/demonstrated the ability to adjust keyboard dimensions to have a fullscreen view, in order to use the entire screen surface as a gesture area.
+
+We need to implement UIGestureRecognizer subclasses (e.g. UITapGestureRecognizer) to handle user interaction with our keyboard. We will most likely need to employ some subset of UISwipeGestureRecognizer, UITapGestureRecognizer, UILongPressGestureRecognizer, UIScreenEdgePanGestureRecognizer, and UIPinchGestureRecognizer.
+- https://developer.apple.com/library/content/documentation/EventHandling/Conceptual/EventHandlingiPhoneOS/GestureRecognizer_basics/GestureRecognizer_basics.html
+- https://developer.apple.com/reference/uikit/uigesturerecognizer
+
+We will want to employ a Settings bundle (as opposed to handling settings within the keyboard’s container app) for any features we would like to expose to the user for customization. This will provide a simple, accessible/VoiceOver-friendly, and familiar way for the user to customize the keyboard settings (e.g. turn off intermediate voice prompts, perhaps offering brief confirmation tones, haptic feedback, or no feedback).
+https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/UserDefaults/Preferences/Preferences.html
+
+For display purposes, we’ll probably need to check in with UIAccessibilityIsInvertColorsEnabled so we can make a good decision based on the user’s keyboard settings and the current display setting when selecting the high-contrast colors for displaying any text in the keyboard view. Also track UIAccessibilityInvertColorsStatusDidChangeNotification.
+
