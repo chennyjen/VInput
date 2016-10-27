@@ -1,0 +1,648 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FE3CCB741DC286DE0036DEF1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3CCB731DC286DE0036DEF1 /* AppDelegate.swift */; };
+		FE3CCB761DC286DE0036DEF1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3CCB751DC286DE0036DEF1 /* ViewController.swift */; };
+		FE3CCB791DC286DE0036DEF1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE3CCB771DC286DE0036DEF1 /* Main.storyboard */; };
+		FE3CCB7B1DC286DE0036DEF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE3CCB7A1DC286DE0036DEF1 /* Assets.xcassets */; };
+		FE3CCB7E1DC286DE0036DEF1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE3CCB7C1DC286DE0036DEF1 /* LaunchScreen.storyboard */; };
+		FE3CCB891DC286DE0036DEF1 /* VInputTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3CCB881DC286DE0036DEF1 /* VInputTests.swift */; };
+		FE3CCB941DC286DE0036DEF1 /* VInputUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3CCB931DC286DE0036DEF1 /* VInputUITests.swift */; };
+		FE3CCBA81DC286F50036DEF1 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3CCBA71DC286F50036DEF1 /* KeyboardViewController.swift */; };
+		FE3CCBAC1DC286F50036DEF1 /* VInput Keyboard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = FE3CCBA51DC286F50036DEF1 /* VInput Keyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FE3CCB851DC286DE0036DEF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FE3CCB681DC286DE0036DEF1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FE3CCB6F1DC286DE0036DEF1;
+			remoteInfo = VInput;
+		};
+		FE3CCB901DC286DE0036DEF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FE3CCB681DC286DE0036DEF1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FE3CCB6F1DC286DE0036DEF1;
+			remoteInfo = VInput;
+		};
+		FE3CCBAA1DC286F50036DEF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FE3CCB681DC286DE0036DEF1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FE3CCBA41DC286F50036DEF1;
+			remoteInfo = "VInput Keyboard";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FE3CCBB01DC286F50036DEF1 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				FE3CCBAC1DC286F50036DEF1 /* VInput Keyboard.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		FE3CCB701DC286DE0036DEF1 /* VInput.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VInput.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE3CCB731DC286DE0036DEF1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		FE3CCB751DC286DE0036DEF1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FE3CCB781DC286DE0036DEF1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FE3CCB7A1DC286DE0036DEF1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FE3CCB7D1DC286DE0036DEF1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FE3CCB7F1DC286DE0036DEF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FE3CCB841DC286DE0036DEF1 /* VInputTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VInputTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE3CCB881DC286DE0036DEF1 /* VInputTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VInputTests.swift; sourceTree = "<group>"; };
+		FE3CCB8A1DC286DE0036DEF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FE3CCB8F1DC286DE0036DEF1 /* VInputUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VInputUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE3CCB931DC286DE0036DEF1 /* VInputUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VInputUITests.swift; sourceTree = "<group>"; };
+		FE3CCB951DC286DE0036DEF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FE3CCBA51DC286F50036DEF1 /* VInput Keyboard.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "VInput Keyboard.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE3CCBA71DC286F50036DEF1 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
+		FE3CCBA91DC286F50036DEF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FE3CCB6D1DC286DE0036DEF1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FE3CCB811DC286DE0036DEF1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FE3CCB8C1DC286DE0036DEF1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FE3CCBA21DC286F50036DEF1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FE3CCB671DC286DE0036DEF1 = {
+			isa = PBXGroup;
+			children = (
+				FE3CCB721DC286DE0036DEF1 /* VInput */,
+				FE3CCB871DC286DE0036DEF1 /* VInputTests */,
+				FE3CCB921DC286DE0036DEF1 /* VInputUITests */,
+				FE3CCBA61DC286F50036DEF1 /* VInput Keyboard */,
+				FE3CCB711DC286DE0036DEF1 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FE3CCB711DC286DE0036DEF1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FE3CCB701DC286DE0036DEF1 /* VInput.app */,
+				FE3CCB841DC286DE0036DEF1 /* VInputTests.xctest */,
+				FE3CCB8F1DC286DE0036DEF1 /* VInputUITests.xctest */,
+				FE3CCBA51DC286F50036DEF1 /* VInput Keyboard.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FE3CCB721DC286DE0036DEF1 /* VInput */ = {
+			isa = PBXGroup;
+			children = (
+				FE3CCB731DC286DE0036DEF1 /* AppDelegate.swift */,
+				FE3CCB751DC286DE0036DEF1 /* ViewController.swift */,
+				FE3CCB771DC286DE0036DEF1 /* Main.storyboard */,
+				FE3CCB7A1DC286DE0036DEF1 /* Assets.xcassets */,
+				FE3CCB7C1DC286DE0036DEF1 /* LaunchScreen.storyboard */,
+				FE3CCB7F1DC286DE0036DEF1 /* Info.plist */,
+			);
+			path = VInput;
+			sourceTree = "<group>";
+		};
+		FE3CCB871DC286DE0036DEF1 /* VInputTests */ = {
+			isa = PBXGroup;
+			children = (
+				FE3CCB881DC286DE0036DEF1 /* VInputTests.swift */,
+				FE3CCB8A1DC286DE0036DEF1 /* Info.plist */,
+			);
+			path = VInputTests;
+			sourceTree = "<group>";
+		};
+		FE3CCB921DC286DE0036DEF1 /* VInputUITests */ = {
+			isa = PBXGroup;
+			children = (
+				FE3CCB931DC286DE0036DEF1 /* VInputUITests.swift */,
+				FE3CCB951DC286DE0036DEF1 /* Info.plist */,
+			);
+			path = VInputUITests;
+			sourceTree = "<group>";
+		};
+		FE3CCBA61DC286F50036DEF1 /* VInput Keyboard */ = {
+			isa = PBXGroup;
+			children = (
+				FE3CCBA71DC286F50036DEF1 /* KeyboardViewController.swift */,
+				FE3CCBA91DC286F50036DEF1 /* Info.plist */,
+			);
+			path = "VInput Keyboard";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FE3CCB6F1DC286DE0036DEF1 /* VInput */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FE3CCB981DC286DE0036DEF1 /* Build configuration list for PBXNativeTarget "VInput" */;
+			buildPhases = (
+				FE3CCB6C1DC286DE0036DEF1 /* Sources */,
+				FE3CCB6D1DC286DE0036DEF1 /* Frameworks */,
+				FE3CCB6E1DC286DE0036DEF1 /* Resources */,
+				FE3CCBB01DC286F50036DEF1 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FE3CCBAB1DC286F50036DEF1 /* PBXTargetDependency */,
+			);
+			name = VInput;
+			productName = VInput;
+			productReference = FE3CCB701DC286DE0036DEF1 /* VInput.app */;
+			productType = "com.apple.product-type.application";
+		};
+		FE3CCB831DC286DE0036DEF1 /* VInputTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FE3CCB9B1DC286DE0036DEF1 /* Build configuration list for PBXNativeTarget "VInputTests" */;
+			buildPhases = (
+				FE3CCB801DC286DE0036DEF1 /* Sources */,
+				FE3CCB811DC286DE0036DEF1 /* Frameworks */,
+				FE3CCB821DC286DE0036DEF1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FE3CCB861DC286DE0036DEF1 /* PBXTargetDependency */,
+			);
+			name = VInputTests;
+			productName = VInputTests;
+			productReference = FE3CCB841DC286DE0036DEF1 /* VInputTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		FE3CCB8E1DC286DE0036DEF1 /* VInputUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FE3CCB9E1DC286DE0036DEF1 /* Build configuration list for PBXNativeTarget "VInputUITests" */;
+			buildPhases = (
+				FE3CCB8B1DC286DE0036DEF1 /* Sources */,
+				FE3CCB8C1DC286DE0036DEF1 /* Frameworks */,
+				FE3CCB8D1DC286DE0036DEF1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FE3CCB911DC286DE0036DEF1 /* PBXTargetDependency */,
+			);
+			name = VInputUITests;
+			productName = VInputUITests;
+			productReference = FE3CCB8F1DC286DE0036DEF1 /* VInputUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		FE3CCBA41DC286F50036DEF1 /* VInput Keyboard */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FE3CCBAD1DC286F50036DEF1 /* Build configuration list for PBXNativeTarget "VInput Keyboard" */;
+			buildPhases = (
+				FE3CCBA11DC286F50036DEF1 /* Sources */,
+				FE3CCBA21DC286F50036DEF1 /* Frameworks */,
+				FE3CCBA31DC286F50036DEF1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "VInput Keyboard";
+			productName = "VInput Keyboard";
+			productReference = FE3CCBA51DC286F50036DEF1 /* VInput Keyboard.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FE3CCB681DC286DE0036DEF1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0800;
+				LastUpgradeCheck = 0800;
+				ORGANIZATIONNAME = "EECS481-VInput";
+				TargetAttributes = {
+					FE3CCB6F1DC286DE0036DEF1 = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
+					};
+					FE3CCB831DC286DE0036DEF1 = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
+						TestTargetID = FE3CCB6F1DC286DE0036DEF1;
+					};
+					FE3CCB8E1DC286DE0036DEF1 = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
+						TestTargetID = FE3CCB6F1DC286DE0036DEF1;
+					};
+					FE3CCBA41DC286F50036DEF1 = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = FE3CCB6B1DC286DE0036DEF1 /* Build configuration list for PBXProject "VInput" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FE3CCB671DC286DE0036DEF1;
+			productRefGroup = FE3CCB711DC286DE0036DEF1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FE3CCB6F1DC286DE0036DEF1 /* VInput */,
+				FE3CCB831DC286DE0036DEF1 /* VInputTests */,
+				FE3CCB8E1DC286DE0036DEF1 /* VInputUITests */,
+				FE3CCBA41DC286F50036DEF1 /* VInput Keyboard */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FE3CCB6E1DC286DE0036DEF1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE3CCB7E1DC286DE0036DEF1 /* LaunchScreen.storyboard in Resources */,
+				FE3CCB7B1DC286DE0036DEF1 /* Assets.xcassets in Resources */,
+				FE3CCB791DC286DE0036DEF1 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FE3CCB821DC286DE0036DEF1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FE3CCB8D1DC286DE0036DEF1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FE3CCBA31DC286F50036DEF1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FE3CCB6C1DC286DE0036DEF1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE3CCB761DC286DE0036DEF1 /* ViewController.swift in Sources */,
+				FE3CCB741DC286DE0036DEF1 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FE3CCB801DC286DE0036DEF1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE3CCB891DC286DE0036DEF1 /* VInputTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FE3CCB8B1DC286DE0036DEF1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE3CCB941DC286DE0036DEF1 /* VInputUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FE3CCBA11DC286F50036DEF1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE3CCBA81DC286F50036DEF1 /* KeyboardViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FE3CCB861DC286DE0036DEF1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FE3CCB6F1DC286DE0036DEF1 /* VInput */;
+			targetProxy = FE3CCB851DC286DE0036DEF1 /* PBXContainerItemProxy */;
+		};
+		FE3CCB911DC286DE0036DEF1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FE3CCB6F1DC286DE0036DEF1 /* VInput */;
+			targetProxy = FE3CCB901DC286DE0036DEF1 /* PBXContainerItemProxy */;
+		};
+		FE3CCBAB1DC286F50036DEF1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FE3CCBA41DC286F50036DEF1 /* VInput Keyboard */;
+			targetProxy = FE3CCBAA1DC286F50036DEF1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		FE3CCB771DC286DE0036DEF1 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FE3CCB781DC286DE0036DEF1 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		FE3CCB7C1DC286DE0036DEF1 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FE3CCB7D1DC286DE0036DEF1 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FE3CCB961DC286DE0036DEF1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		FE3CCB971DC286DE0036DEF1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FE3CCB991DC286DE0036DEF1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = VInput/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "EECS481-VInput.VInput";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		FE3CCB9A1DC286DE0036DEF1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = VInput/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "EECS481-VInput.VInput";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		FE3CCB9C1DC286DE0036DEF1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = VInputTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "EECS481-VInput.VInputTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VInput.app/VInput";
+			};
+			name = Debug;
+		};
+		FE3CCB9D1DC286DE0036DEF1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = VInputTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "EECS481-VInput.VInputTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VInput.app/VInput";
+			};
+			name = Release;
+		};
+		FE3CCB9F1DC286DE0036DEF1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = VInputUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "EECS481-VInput.VInputUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = VInput;
+			};
+			name = Debug;
+		};
+		FE3CCBA01DC286DE0036DEF1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = VInputUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "EECS481-VInput.VInputUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = VInput;
+			};
+			name = Release;
+		};
+		FE3CCBAE1DC286F50036DEF1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "VInput Keyboard/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "EECS481-VInput.VInput.VInput-Keyboard";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		FE3CCBAF1DC286F50036DEF1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "VInput Keyboard/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "EECS481-VInput.VInput.VInput-Keyboard";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FE3CCB6B1DC286DE0036DEF1 /* Build configuration list for PBXProject "VInput" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FE3CCB961DC286DE0036DEF1 /* Debug */,
+				FE3CCB971DC286DE0036DEF1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FE3CCB981DC286DE0036DEF1 /* Build configuration list for PBXNativeTarget "VInput" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FE3CCB991DC286DE0036DEF1 /* Debug */,
+				FE3CCB9A1DC286DE0036DEF1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		FE3CCB9B1DC286DE0036DEF1 /* Build configuration list for PBXNativeTarget "VInputTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FE3CCB9C1DC286DE0036DEF1 /* Debug */,
+				FE3CCB9D1DC286DE0036DEF1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		FE3CCB9E1DC286DE0036DEF1 /* Build configuration list for PBXNativeTarget "VInputUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FE3CCB9F1DC286DE0036DEF1 /* Debug */,
+				FE3CCBA01DC286DE0036DEF1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		FE3CCBAD1DC286F50036DEF1 /* Build configuration list for PBXNativeTarget "VInput Keyboard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FE3CCBAE1DC286F50036DEF1 /* Debug */,
+				FE3CCBAF1DC286F50036DEF1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FE3CCB681DC286DE0036DEF1 /* Project object */;
+}
