@@ -19,6 +19,11 @@ class KeyboardViewController: UIInputViewController {
     let swipeRightRecognizer = UISwipeGestureRecognizer()
     let swipeUpRecognizer = UISwipeGestureRecognizer()
     var heightConstraint: NSLayoutConstraint?
+    let alphabet: [String] = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+                              "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+    var word: String
+    var lIndex = 0
+    var rIndex = 25
     
     override func updateViewConstraints() {
         super.updateViewConstraints()
@@ -93,28 +98,61 @@ class KeyboardViewController: UIInputViewController {
         heightConstraint!.priority = 999.0
     }
     
-    func onSingleTap(){
+    func onSingleTap() {
         print("--- Single Tapped")
     }
     
-    func onDoubleTap(){
+    func onDoubleTap() {
         print("--- Double Tapped")
     }
     
-    func onSwipeLeft(){
+    // navigate left
+    func onSwipeLeft() {
         print("--- Swipe Left")
+        rIndex = Int(ceil(Double(rIndex - lIndex)/2)) + lIndex - 1
+        //checkDone
+        //rewrite
     }
     
-    func onSwipeDown(){
+    func onSwipeDown() {
         print("--- Swipe Down")
     }
     
-    func onSwipeRight(){
+    // navigate right
+    func onSwipeRight() {
         print("--- Swipe Right")
+        lIndex += Int(ceil(Double(rIndex - lIndex)/2.0))
+        //checkDone
+        //rewrite
     }
     
-    func onSwipeUp(){
+    func onSwipeUp() {
         print("--- Swipe Up")
+    }
+    
+    func checkDone() {
+        if(lIndex == rIndex)
+        {
+            //document.getElementById("typed"+active).innerHTML += letters[lIndex];
+            word += alphabet[lIndex]
+            lIndex = 0;
+            rIndex = 25;
+        }
+
+    }
+    
+    func rewrite() {
+        /*
+        var value = "";
+        for(i = lIndex; i <= rIndex; i++)
+        {
+            value += letters[i];
+        }
+        var nextMid = Math.ceil((rIndex - lIndex)/2) + lIndex - 1;
+        var leftOption = (rIndex - lIndex <= 2 ? letters[lIndex] : letters[lIndex] + "-" + letters[nextMid]);
+        var rightOption = (rIndex - lIndex <= 1 ? letters[rIndex] : letters[nextMid+1] + "-" + letters[rIndex]);
+        document.getElementById("rangeArea").innerHTML = "Options: " + leftOption + ", " + rightOption + "<br>";
+        */
     }
     
     override func didReceiveMemoryWarning() {
