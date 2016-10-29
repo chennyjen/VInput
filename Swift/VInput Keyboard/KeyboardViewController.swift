@@ -12,6 +12,7 @@ class KeyboardViewController: UIInputViewController {
 
     @IBOutlet var nextKeyboardButton: UIButton!
     var fullView: UIView!
+    var letterLabel: UILabel!
     let singleTapRecognizer = UITapGestureRecognizer()
     let doubleTapRecognizer = UITapGestureRecognizer()
     let swipeLeftRecognizer = UISwipeGestureRecognizer()
@@ -21,7 +22,7 @@ class KeyboardViewController: UIInputViewController {
     var heightConstraint: NSLayoutConstraint?
     let alphabet: [String] = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
                               "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-    var word: String
+    var word: String = ""
     var lIndex = 0
     var rIndex = 25
     
@@ -54,6 +55,28 @@ class KeyboardViewController: UIInputViewController {
         fullView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
         fullView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         
+        // Default Next Keyboard button
+        nextKeyboardButton = UIButton(type: .system)
+        nextKeyboardButton.setTitle(NSLocalizedString("Next Keyboard", comment: "Title for 'Next Keyboard' button"), for: [])
+        nextKeyboardButton.sizeToFit()
+        nextKeyboardButton.translatesAutoresizingMaskIntoConstraints = false
+        nextKeyboardButton.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
+        fullView.addSubview(nextKeyboardButton)
+        nextKeyboardButton.leftAnchor.constraint(equalTo: fullView.leftAnchor).isActive = true
+        nextKeyboardButton.bottomAnchor.constraint(equalTo: fullView.bottomAnchor).isActive = true
+        
+        // Add label for current midpoint letter
+        letterLabel = UILabel()
+        letterLabel.adjustsFontSizeToFitWidth = true
+        letterLabel.text = "n"
+        fullView.addSubview(letterLabel)
+        letterLabel.center = fullView.center
+        //letterLabel.bottomAnchor.constraint(equalTo: nextKeyboardButton.topAnchor).isActive = true
+        //letterLabel.leftAnchor.constraint(equalTo: fullView.leftAnchor).isActive = true
+        //letterLabel.topAnchor.constraint(equalTo: fullView.topAnchor).isActive = true
+        //letterLabel.heightAnchor.constraint(equalTo: fullView.heightAnchor).isActive = true
+        //letterLabel.widthAnchor.constraint(equalTo: fullView.widthAnchor).isActive = true
+        
         // Set gesture recognizer targets and values
         singleTapRecognizer.numberOfTapsRequired = 1
         singleTapRecognizer.addTarget(self, action: #selector(onSingleTap))
@@ -82,16 +105,6 @@ class KeyboardViewController: UIInputViewController {
         fullView.addGestureRecognizer(swipeRightRecognizer)
         fullView.addGestureRecognizer(swipeUpRecognizer)
         
-        // Default Next Keyboard button
-         nextKeyboardButton = UIButton(type: .system)
-         nextKeyboardButton.setTitle(NSLocalizedString("Next Keyboard", comment: "Title for 'Next Keyboard' button"), for: [])
-         nextKeyboardButton.sizeToFit()
-         nextKeyboardButton.translatesAutoresizingMaskIntoConstraints = false
-         nextKeyboardButton.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
-         fullView.addSubview(nextKeyboardButton)
-         nextKeyboardButton.leftAnchor.constraint(equalTo: fullView.leftAnchor).isActive = true
-         nextKeyboardButton.bottomAnchor.constraint(equalTo: fullView.bottomAnchor).isActive = true
-        
         // TODO fix this to check for orientation and set constraint to desired value
         heightConstraint = NSLayoutConstraint(item: view, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1.0, constant: 256)
         
@@ -110,8 +123,8 @@ class KeyboardViewController: UIInputViewController {
     func onSwipeLeft() {
         print("--- Swipe Left")
         rIndex = Int(ceil(Double(rIndex - lIndex)/2)) + lIndex - 1
-        //checkDone
-        //rewrite
+        checkDone()
+        rewrite()
     }
     
     func onSwipeDown() {
@@ -122,8 +135,8 @@ class KeyboardViewController: UIInputViewController {
     func onSwipeRight() {
         print("--- Swipe Right")
         lIndex += Int(ceil(Double(rIndex - lIndex)/2.0))
-        //checkDone
-        //rewrite
+        checkDone()
+        rewrite()
     }
     
     func onSwipeUp() {
@@ -133,15 +146,22 @@ class KeyboardViewController: UIInputViewController {
     func checkDone() {
         if(lIndex == rIndex)
         {
-            //document.getElementById("typed"+active).innerHTML += letters[lIndex];
+            print("selected", alphabet[lIndex])
+            (textDocumentProxy as UIKeyInput).insertText(alphabet[lIndex])
             word += alphabet[lIndex]
             lIndex = 0;
             rIndex = 25;
+        }
+        else
+        {
+            print(alphabet[lIndex], "to", alphabet[rIndex])
         }
 
     }
     
     func rewrite() {
+        let nextMid = Int(ceil(Double(rIndex - lIndex)/2)) + lIndex - 1
+        letterLabel.text = alphabet[nextMid]
         /*
         var value = "";
         for(i = lIndex; i <= rIndex; i++)
