@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class KeyboardViewController: UIInputViewController {
 
@@ -19,12 +20,16 @@ class KeyboardViewController: UIInputViewController {
     let swipeDownRecognizer = UISwipeGestureRecognizer()
     let swipeRightRecognizer = UISwipeGestureRecognizer()
     let swipeUpRecognizer = UISwipeGestureRecognizer()
+    //let panFromTopRecognizer = UIScreenEdgePanGestureRecognizer() - have to suppress opening notification center for this to work
+    let pinchRecognizer = UIPinchGestureRecognizer()
     var heightConstraint: NSLayoutConstraint?
     let alphabet: [String] = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
                               "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
     var word: String = ""
     var lIndex = 0
     var rIndex = 25
+    var utterance: AVSpeechUtterance!
+    let speechSynthesizer = AVSpeechSynthesizer()
     
     override func updateViewConstraints() {
         super.updateViewConstraints()
@@ -36,7 +41,7 @@ class KeyboardViewController: UIInputViewController {
         
         view.removeConstraint(heightConstraint!)
         
-        heightConstraint!.constant = UIScreen.main.bounds.size.height * 0.9
+        heightConstraint!.constant = UIScreen.main.bounds.size.height
         view.addConstraint(heightConstraint!)
         print("--- Set main view height to", heightConstraint?.constant)
     }
@@ -67,15 +72,13 @@ class KeyboardViewController: UIInputViewController {
         
         // Add label for current midpoint letter
         letterLabel = UILabel()
-        letterLabel.adjustsFontSizeToFitWidth = true
-        letterLabel.text = "n"
+        //letterLabel.adjustsFontSizeToFitWidth = true
+        letterLabel.text = "m"
+        letterLabel.translatesAutoresizingMaskIntoConstraints = false
         fullView.addSubview(letterLabel)
-        letterLabel.center = fullView.center
-        //letterLabel.bottomAnchor.constraint(equalTo: nextKeyboardButton.topAnchor).isActive = true
-        //letterLabel.leftAnchor.constraint(equalTo: fullView.leftAnchor).isActive = true
-        //letterLabel.topAnchor.constraint(equalTo: fullView.topAnchor).isActive = true
-        //letterLabel.heightAnchor.constraint(equalTo: fullView.heightAnchor).isActive = true
-        //letterLabel.widthAnchor.constraint(equalTo: fullView.widthAnchor).isActive = true
+        letterLabel.centerXAnchor.constraint(equalTo: fullView.centerXAnchor).isActive = true
+        letterLabel.centerYAnchor.constraint(equalTo: fullView.centerYAnchor).isActive = true
+        letterLabel.textColor = UIColor.black
         
         // Set gesture recognizer targets and values
         singleTapRecognizer.numberOfTapsRequired = 1
@@ -97,6 +100,11 @@ class KeyboardViewController: UIInputViewController {
         swipeUpRecognizer.direction = UISwipeGestureRecognizerDirection.up
         swipeUpRecognizer.addTarget(self, action: #selector(onSwipeUp))
         
+        //panFromTopRecognizer.edges.insert(UIRectEdge.top)
+        //panFromTopRecognizer.addTarget(self, action: #selector(onPanFromTop))
+        
+        pinchRecognizer.addTarget(self, action: #selector(onPinch))
+        
         // Add gesture recognizers to fullView
         fullView.addGestureRecognizer(doubleTapRecognizer)
         fullView.addGestureRecognizer(singleTapRecognizer)
@@ -104,6 +112,8 @@ class KeyboardViewController: UIInputViewController {
         fullView.addGestureRecognizer(swipeDownRecognizer)
         fullView.addGestureRecognizer(swipeRightRecognizer)
         fullView.addGestureRecognizer(swipeUpRecognizer)
+        //fullView.addGestureRecognizer(panFromTopRecognizer)
+        fullView.addGestureRecognizer(pinchRecognizer)
         
         // TODO fix this to check for orientation and set constraint to desired value
         heightConstraint = NSLayoutConstraint(item: view, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1.0, constant: 256)
@@ -124,11 +134,11 @@ class KeyboardViewController: UIInputViewController {
         print("--- Swipe Left")
         rIndex = Int(ceil(Double(rIndex - lIndex)/2)) + lIndex - 1
         checkDone()
-        rewrite()
     }
     
     func onSwipeDown() {
         print("--- Swipe Down")
+        (textDocumentProxy as UIKeyInput).deleteBackward()
     }
     
     // navigate right
@@ -136,11 +146,23 @@ class KeyboardViewController: UIInputViewController {
         print("--- Swipe Right")
         lIndex += Int(ceil(Double(rIndex - lIndex)/2.0))
         checkDone()
-        rewrite()
     }
     
     func onSwipeUp() {
         print("--- Swipe Up")
+        lIndex = Int(ceil(Double(rIndex - lIndex)/2)) + lIndex - 1
+        rIndex = lIndex
+        checkDone()
+    }
+    
+//    func onPanFromTop() {
+//        print("--- Pan from Top")
+//        self.dismissKeyboard()
+//    }
+    
+    func onPinch() {
+        print("--- Pinch")
+        self.dismissKeyboard()
     }
     
     func checkDone() {
@@ -149,30 +171,31 @@ class KeyboardViewController: UIInputViewController {
             print("selected", alphabet[lIndex])
             (textDocumentProxy as UIKeyInput).insertText(alphabet[lIndex])
             word += alphabet[lIndex]
-            lIndex = 0;
-            rIndex = 25;
+            // speak with a lower pitch when announcing a finalized letter,
+            // and put a one second delay after speech so call to rewrite 
+            // doesn't immediately speak the next option
+            speak(textToSpeak: alphabet[lIndex], pitchMultiplier: 0.75, postDelay: TimeInterval(0.5))
+            lIndex = 0
+            rIndex = 25
         }
         else
         {
             print(alphabet[lIndex], "to", alphabet[rIndex])
         }
-
+        rewrite()
     }
     
     func rewrite() {
         let nextMid = Int(ceil(Double(rIndex - lIndex)/2)) + lIndex - 1
         letterLabel.text = alphabet[nextMid]
-        /*
-        var value = "";
-        for(i = lIndex; i <= rIndex; i++)
-        {
-            value += letters[i];
-        }
-        var nextMid = Math.ceil((rIndex - lIndex)/2) + lIndex - 1;
-        var leftOption = (rIndex - lIndex <= 2 ? letters[lIndex] : letters[lIndex] + "-" + letters[nextMid]);
-        var rightOption = (rIndex - lIndex <= 1 ? letters[rIndex] : letters[nextMid+1] + "-" + letters[rIndex]);
-        document.getElementById("rangeArea").innerHTML = "Options: " + leftOption + ", " + rightOption + "<br>";
-        */
+        speak(textToSpeak: alphabet[nextMid])
+    }
+    
+    func speak(textToSpeak: String, pitchMultiplier: Float = 1.0, postDelay: TimeInterval = TimeInterval(0)) {
+        utterance = AVSpeechUtterance(string: textToSpeak)
+        utterance.pitchMultiplier = pitchMultiplier
+        utterance.postUtteranceDelay = postDelay
+        speechSynthesizer.speak(utterance)
     }
     
     override func didReceiveMemoryWarning() {
