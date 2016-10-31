@@ -16,6 +16,7 @@ class KeyboardViewController: UIInputViewController {
     var letterLabel: UILabel!
     let singleTapRecognizer = UITapGestureRecognizer()
     let doubleTapRecognizer = UITapGestureRecognizer()
+    let doubleTapTwoTouchRecognizer = UITapGestureRecognizer()
     let swipeLeftRecognizer = UISwipeGestureRecognizer()
     let swipeDownRecognizer = UISwipeGestureRecognizer()
     let swipeRightRecognizer = UISwipeGestureRecognizer()
@@ -73,13 +74,14 @@ class KeyboardViewController: UIInputViewController {
         
         // Add label for current midpoint letter
         letterLabel = UILabel()
-        //letterLabel.adjustsFontSizeToFitWidth = true
-        letterLabel.text = "m"
+        letterLabel.font = letterLabel.font.withSize(fullView.frame.height - nextKeyboardButton.frame.height)
+        letterLabel.adjustsFontSizeToFitWidth = true
         letterLabel.translatesAutoresizingMaskIntoConstraints = false
         fullView.addSubview(letterLabel)
         letterLabel.centerXAnchor.constraint(equalTo: fullView.centerXAnchor).isActive = true
         letterLabel.centerYAnchor.constraint(equalTo: fullView.centerYAnchor).isActive = true
         letterLabel.textColor = UIColor.black
+        rewrite()
         
         // Set gesture recognizer targets and values
         singleTapRecognizer.numberOfTapsRequired = 1
@@ -87,7 +89,13 @@ class KeyboardViewController: UIInputViewController {
         singleTapRecognizer.require(toFail: doubleTapRecognizer)
         
         doubleTapRecognizer.numberOfTapsRequired = 2
+        doubleTapRecognizer.numberOfTouchesRequired = 1
         doubleTapRecognizer.addTarget(self, action: #selector(onDoubleTap))
+        doubleTapRecognizer.require(toFail: doubleTapTwoTouchRecognizer)
+        
+        doubleTapTwoTouchRecognizer.numberOfTapsRequired = 2
+        doubleTapTwoTouchRecognizer.numberOfTouchesRequired = 2
+        doubleTapTwoTouchRecognizer.addTarget(self, action: #selector(onDoubleTapTwoTouch))
         
         swipeLeftRecognizer.direction = UISwipeGestureRecognizerDirection.left
         swipeLeftRecognizer.addTarget(self, action: #selector(onSwipeLeft))
@@ -112,6 +120,7 @@ class KeyboardViewController: UIInputViewController {
         
         // Add gesture recognizers to fullView
         fullView.addGestureRecognizer(doubleTapRecognizer)
+        fullView.addGestureRecognizer(doubleTapTwoTouchRecognizer)
         fullView.addGestureRecognizer(singleTapRecognizer)
         fullView.addGestureRecognizer(swipeLeftRecognizer)
         fullView.addGestureRecognizer(swipeDownRecognizer)
@@ -133,6 +142,12 @@ class KeyboardViewController: UIInputViewController {
     
     func onDoubleTap() {
         speak(textToSpeak: word)
+    }
+    
+    func onDoubleTapTwoTouch() {
+        for character in word.characters {
+            speak(textToSpeak: String(character))
+        }
     }
     
     // navigate left
@@ -170,7 +185,7 @@ class KeyboardViewController: UIInputViewController {
     }
     
     func onHold() {
-        if holdRecognizer.state == UIGestureRecognizerState.ended {
+        if holdRecognizer.state == UIGestureRecognizerState.began {
             (textDocumentProxy as UIKeyInput).insertText(" ")
             speak(textToSpeak: "space")
             word = ""
