@@ -30,6 +30,7 @@ class KeyboardViewController: UIInputViewController {
     var word: String = ""
     var lIndex = 0
     var rIndex = 25
+    var insertedPeriod: Bool = false
     var utterance: AVSpeechUtterance!
     let speechSynthesizer = AVSpeechSynthesizer()
     
@@ -158,8 +159,10 @@ class KeyboardViewController: UIInputViewController {
     
     func onSwipeDown() {
         (textDocumentProxy as UIKeyInput).deleteBackward()
-        word.remove(at: word.index(before: word.endIndex))
         speak(textToSpeak: "backspace")
+        if word.characters.count > 0 {
+            word.remove(at: word.index(before: word.endIndex))
+        }
     }
     
     // navigate right
@@ -186,9 +189,18 @@ class KeyboardViewController: UIInputViewController {
     
     func onHold() {
         if holdRecognizer.state == UIGestureRecognizerState.began {
-            (textDocumentProxy as UIKeyInput).insertText(" ")
-            speak(textToSpeak: "space")
-            word = ""
+            // TODO when Settings bundle is implemented, this behavior should be a setting
+            if word == "" && !insertedPeriod {
+                (textDocumentProxy as UIKeyInput).deleteBackward()
+                (textDocumentProxy as UIKeyInput).insertText(". ")
+                speak(textToSpeak: "period inserted")
+                insertedPeriod = true
+            }
+            else {
+                (textDocumentProxy as UIKeyInput).insertText(" ")
+                speak(textToSpeak: "space")
+                word = ""
+            }
         }
     }
     
@@ -203,10 +215,7 @@ class KeyboardViewController: UIInputViewController {
             speak(textToSpeak: alphabet[lIndex], pitchMultiplier: 0.75, postDelay: TimeInterval(0.5))
             lIndex = 0
             rIndex = 25
-        }
-        else
-        {
-            print(alphabet[lIndex], "to", alphabet[rIndex])
+            insertedPeriod = false
         }
         rewrite()
     }
@@ -219,8 +228,10 @@ class KeyboardViewController: UIInputViewController {
     
     func speak(textToSpeak: String, pitchMultiplier: Float = 1.0, postDelay: TimeInterval = TimeInterval(0)) {
         utterance = AVSpeechUtterance(string: textToSpeak)
+        // TODO some of these values should be exposed as options in the Settings bundle
         utterance.pitchMultiplier = pitchMultiplier
-        utterance.postUtteranceDelay = postDelay
+        //utterance.postUtteranceDelay = postDelay
+        utterance.rate = 0.6
         speechSynthesizer.speak(utterance)
     }
     
