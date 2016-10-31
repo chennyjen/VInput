@@ -22,6 +22,7 @@ class KeyboardViewController: UIInputViewController {
     let swipeUpRecognizer = UISwipeGestureRecognizer()
     //let panFromTopRecognizer = UIScreenEdgePanGestureRecognizer() - have to suppress opening notification center for this to work
     let pinchRecognizer = UIPinchGestureRecognizer()
+    let holdRecognizer = UILongPressGestureRecognizer()
     var heightConstraint: NSLayoutConstraint?
     let alphabet: [String] = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
                               "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
@@ -105,6 +106,10 @@ class KeyboardViewController: UIInputViewController {
         
         pinchRecognizer.addTarget(self, action: #selector(onPinch))
         
+        holdRecognizer.minimumPressDuration = TimeInterval(1)
+        holdRecognizer.allowableMovement = 50
+        holdRecognizer.addTarget(self, action: #selector(onHold))
+        
         // Add gesture recognizers to fullView
         fullView.addGestureRecognizer(doubleTapRecognizer)
         fullView.addGestureRecognizer(singleTapRecognizer)
@@ -114,6 +119,7 @@ class KeyboardViewController: UIInputViewController {
         fullView.addGestureRecognizer(swipeUpRecognizer)
         //fullView.addGestureRecognizer(panFromTopRecognizer)
         fullView.addGestureRecognizer(pinchRecognizer)
+        fullView.addGestureRecognizer(holdRecognizer)
         
         // TODO fix this to check for orientation and set constraint to desired value
         heightConstraint = NSLayoutConstraint(item: view, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1.0, constant: 256)
@@ -126,49 +132,54 @@ class KeyboardViewController: UIInputViewController {
     }
     
     func onDoubleTap() {
-        print("--- Double Tapped")
+        speak(textToSpeak: word)
     }
     
     // navigate left
     func onSwipeLeft() {
-        print("--- Swipe Left")
         rIndex = Int(ceil(Double(rIndex - lIndex)/2)) + lIndex - 1
         checkDone()
     }
     
     func onSwipeDown() {
-        print("--- Swipe Down")
         (textDocumentProxy as UIKeyInput).deleteBackward()
+        word.remove(at: word.index(before: word.endIndex))
+        speak(textToSpeak: "backspace")
     }
     
     // navigate right
     func onSwipeRight() {
-        print("--- Swipe Right")
         lIndex += Int(ceil(Double(rIndex - lIndex)/2.0))
         checkDone()
     }
     
     func onSwipeUp() {
-        print("--- Swipe Up")
         lIndex = Int(ceil(Double(rIndex - lIndex)/2)) + lIndex - 1
         rIndex = lIndex
         checkDone()
     }
     
 //    func onPanFromTop() {
-//        print("--- Pan from Top")
 //        self.dismissKeyboard()
 //    }
     
     func onPinch() {
-        print("--- Pinch")
-        self.dismissKeyboard()
+        if pinchRecognizer.state == UIGestureRecognizerState.ended {
+            self.dismissKeyboard()
+        }
+    }
+    
+    func onHold() {
+        if holdRecognizer.state == UIGestureRecognizerState.ended {
+            (textDocumentProxy as UIKeyInput).insertText(" ")
+            speak(textToSpeak: "space")
+            word = ""
+        }
     }
     
     func checkDone() {
         if(lIndex == rIndex)
         {
-            print("selected", alphabet[lIndex])
             (textDocumentProxy as UIKeyInput).insertText(alphabet[lIndex])
             word += alphabet[lIndex]
             // speak with a lower pitch when announcing a finalized letter,
