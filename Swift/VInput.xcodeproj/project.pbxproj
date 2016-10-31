@@ -617,6 +617,7 @@
 				FE3CCB9A1DC286DE0036DEF1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FE3CCB9B1DC286DE0036DEF1 /* Build configuration list for PBXNativeTarget "VInputTests" */ = {
 			isa = XCConfigurationList;
@@ -625,6 +626,7 @@
 				FE3CCB9D1DC286DE0036DEF1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FE3CCB9E1DC286DE0036DEF1 /* Build configuration list for PBXNativeTarget "VInputUITests" */ = {
 			isa = XCConfigurationList;
@@ -633,6 +635,7 @@
 				FE3CCBA01DC286DE0036DEF1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FE3CCBAD1DC286F50036DEF1 /* Build configuration list for PBXNativeTarget "VInput Keyboard" */ = {
 			isa = XCConfigurationList;
@@ -641,6 +644,7 @@
 				FE3CCBAF1DC286F50036DEF1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

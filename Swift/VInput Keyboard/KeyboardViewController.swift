@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class KeyboardViewController: UIInputViewController {
 
@@ -93,20 +94,70 @@ class KeyboardViewController: UIInputViewController {
         heightConstraint!.priority = 999.0
     }
     
+    /*
+     PSEUDOCODE FOR "BINARY SEARCH"
+     ---------------------------------------------------------------------------
+     alphabet = ["A", "B", "C", ... "Y", "Z"]
+     
+     func resetAlphabet() {
+        alphabet = ["A", "B", "C", ... "Y", "Z"]
+     }
+     
+     func processSwipe(swipeDirection) {
+        alphabet = ["A", "B", "C", ... "Y", "Z"]
+        if swipeDirection == "left {
+            alphabet = left side of alphabet
+        } else if swipeDirection == "right" {
+            alphabet = right side of alphabet
+        }
+     }
+     
+     func getCenter() {
+        return middle character of current alphabet
+     }
+     
+    CHANGING INDEX VERSION (MIKE)
+     var left_index
+     var right_index
+    
+     func left() {
+        right_index = (left_index + right_index) / 2 - 1
+     }
+     func right() {
+        left_index = (left_index + right_index) / 2 + 1
+     }
+     func reset() {
+        left_bound = 0
+        right_bound = alphabet.size
+        
+     }
+     */
+    
+    let speechSynthesizer = AVSpeechSynthesizer()
+    
     func onSingleTap(){
         print("--- Single Tapped")
     }
     
     func onDoubleTap(){
         print("--- Double Tapped")
+        
+        // Speaking test: speak everything that's been inputed
+        let speechUtterance = AVSpeechUtterance(string: self.textDocumentProxy.documentContextBeforeInput!)
+        speechSynthesizer.speak(speechUtterance)
     }
     
     func onSwipeLeft(){
         print("--- Swipe Left")
+        
     }
     
     func onSwipeDown(){
+        // backspace character
         print("--- Swipe Down")
+        
+        // TODO: verbosity level: should it read 'deleted x character'?
+        self.textDocumentProxy.deleteBackward()
     }
     
     func onSwipeRight(){
@@ -114,7 +165,17 @@ class KeyboardViewController: UIInputViewController {
     }
     
     func onSwipeUp(){
+        // insert current character into buffer
         print("--- Swipe Up")
+
+        // get character user has swiped to
+        let currentCharacter = "c "
+        
+        // insert current character into
+        self.textDocumentProxy.insertText(currentCharacter)
+        
+        // TODO: Use for reading back words
+        // print(self.textDocumentProxy.documentContextBeforeInput!)
     }
     
     override func didReceiveMemoryWarning() {
