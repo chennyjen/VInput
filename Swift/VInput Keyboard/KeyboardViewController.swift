@@ -33,6 +33,7 @@ class KeyboardViewController: UIInputViewController {
     var insertedPeriod: Bool = false
     var utterance: AVSpeechUtterance!
     let speechSynthesizer = AVSpeechSynthesizer()
+    var searching: Bool = false
     
     override func updateViewConstraints() {
         super.updateViewConstraints()
@@ -51,7 +52,6 @@ class KeyboardViewController: UIInputViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Perform custom UI setup here
         // Set up UIView over full area to accept gestures
         fullView = UIView()
@@ -82,12 +82,12 @@ class KeyboardViewController: UIInputViewController {
         letterLabel.centerXAnchor.constraint(equalTo: fullView.centerXAnchor).isActive = true
         letterLabel.centerYAnchor.constraint(equalTo: fullView.centerYAnchor).isActive = true
         letterLabel.textColor = UIColor.black
-        rewrite()
+        announceLetter()
         
         // Set gesture recognizer targets and values
-        singleTapRecognizer.numberOfTapsRequired = 1
-        singleTapRecognizer.addTarget(self, action: #selector(onSingleTap))
-        singleTapRecognizer.require(toFail: doubleTapRecognizer)
+//        singleTapRecognizer.numberOfTapsRequired = 1
+//        singleTapRecognizer.addTarget(self, action: #selector(onSingleTap))
+//        singleTapRecognizer.require(toFail: doubleTapRecognizer)
         
         doubleTapRecognizer.numberOfTapsRequired = 2
         doubleTapRecognizer.numberOfTouchesRequired = 1
@@ -137,44 +137,50 @@ class KeyboardViewController: UIInputViewController {
         heightConstraint!.priority = 999.0
     }
     
-    func onSingleTap() {
-        print("--- Single Tapped")
-    }
-    
     func onDoubleTap() {
-        speak(textToSpeak: word)
+        speak(textToSpeak: self.textDocumentProxy.documentContextBeforeInput!)
     }
     
     func onDoubleTapTwoTouch() {
+        //TODO: Broken for now
         for character in word.characters {
             speak(textToSpeak: String(character))
         }
     }
-    
-    // navigate left
+
     func onSwipeLeft() {
-        rIndex = Int(ceil(Double(rIndex - lIndex)/2)) + lIndex - 1
-        checkDone()
-    }
-    
-    func onSwipeDown() {
-        (textDocumentProxy as UIKeyInput).deleteBackward()
-        speak(textToSpeak: "backspace")
-        if word.characters.count > 0 {
-            word.remove(at: word.index(before: word.endIndex))
+        searching = true
+        if !isDone() {
+            rIndex = Int(ceil(Double(rIndex - lIndex)/2)) + lIndex - 1
+            announceLetter()
         }
     }
     
-    // navigate right
+    func onSwipeDown() {
+        if searching {
+            restartSearch()
+        }
+        else {
+            speak(textToSpeak: "deleting previous character", postDelay: TimeInterval(4))
+            self.textDocumentProxy.deleteBackward()
+            announceLetter()
+        }
+    }
+    
     func onSwipeRight() {
-        lIndex += Int(ceil(Double(rIndex - lIndex)/2.0))
-        checkDone()
+        searching = true
+        if !isDone() {
+            lIndex += Int(ceil(Double(rIndex - lIndex)/2.0))
+            announceLetter()
+        }
     }
     
     func onSwipeUp() {
-        lIndex = Int(ceil(Double(rIndex - lIndex)/2)) + lIndex - 1
-        rIndex = lIndex
-        checkDone()
+        let mid = Int(ceil(Double(rIndex - lIndex)/2)) + lIndex - 1
+        self.textDocumentProxy.insertText(alphabet[mid])
+        let text = alphabet[mid] + " inserted"
+        speak(textToSpeak: text, pitchMultiplier: 1.0, postDelay: TimeInterval(4))
+        restartSearch()
     }
     
 //    func onPanFromTop() {
@@ -188,6 +194,7 @@ class KeyboardViewController: UIInputViewController {
     }
     
     func onHold() {
+        // TODO: CLEAN UP
         if holdRecognizer.state == UIGestureRecognizerState.began {
             // TODO when Settings bundle is implemented, this behavior should be a setting
             if word == "" && !insertedPeriod {
@@ -197,33 +204,38 @@ class KeyboardViewController: UIInputViewController {
                 insertedPeriod = true
             }
             else {
-                (textDocumentProxy as UIKeyInput).insertText(" ")
-                speak(textToSpeak: "space")
-                word = ""
+                self.textDocumentProxy.insertText(" ")
+                speak(textToSpeak: "inserted space")
             }
         }
     }
     
-    func checkDone() {
+    func isDone() -> Bool {
         if(lIndex == rIndex)
         {
-            (textDocumentProxy as UIKeyInput).insertText(alphabet[lIndex])
-            word += alphabet[lIndex]
             // speak with a lower pitch when announcing a finalized letter,
             // and put a one second delay after speech so call to rewrite 
             // doesn't immediately speak the next option
-            speak(textToSpeak: alphabet[lIndex], pitchMultiplier: 0.75, postDelay: TimeInterval(0.5))
-            lIndex = 0
-            rIndex = 25
-            insertedPeriod = false
+            let text = "Swipe up to select " + String(alphabet[lIndex]) + ", swipe down to restart search"
+            speak(textToSpeak: text, pitchMultiplier: 0.75, postDelay: TimeInterval(0.5))
         }
-        rewrite()
+        return lIndex == rIndex
     }
     
-    func rewrite() {
+    func restartSearch() {
+        lIndex = 0
+        rIndex = 25
+        searching = false
+        insertedPeriod = false
+        
+        announceLetter()
+    }
+    
+    func announceLetter() {
         let nextMid = Int(ceil(Double(rIndex - lIndex)/2)) + lIndex - 1
-        letterLabel.text = alphabet[nextMid]
-        speak(textToSpeak: alphabet[nextMid])
+        letterLabel.text = String(nextMid)
+        let text = "Left or right of " + alphabet[nextMid]
+        speak(textToSpeak: text)
     }
     
     func speak(textToSpeak: String, pitchMultiplier: Float = 1.0, postDelay: TimeInterval = TimeInterval(0)) {
@@ -231,7 +243,7 @@ class KeyboardViewController: UIInputViewController {
         // TODO some of these values should be exposed as options in the Settings bundle
         utterance.pitchMultiplier = pitchMultiplier
         //utterance.postUtteranceDelay = postDelay
-        utterance.rate = 0.6
+        utterance.rate = 0.5
         speechSynthesizer.speak(utterance)
     }
     
