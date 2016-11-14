@@ -84,8 +84,6 @@ class KeyboardViewController: UIInputViewController {
         letterLabel.centerXAnchor.constraint(equalTo: fullView.centerXAnchor).isActive = true
         letterLabel.centerYAnchor.constraint(equalTo: fullView.centerYAnchor).isActive = true
         letterLabel.textColor = UIColor.black
-        
-        
         announceLetter()
         
         // Set gesture recognizer targets and values
@@ -150,6 +148,7 @@ class KeyboardViewController: UIInputViewController {
     
 //    Holder for reading back word
     func onDoubleTapTwoTouch() {
+        //TODO: Broken for now
         for character in word.characters {
             speak(textToSpeak: String(character))
         }
@@ -185,10 +184,8 @@ class KeyboardViewController: UIInputViewController {
     func onSwipeUp() {
         let mid = Int(ceil(Double(rIndex - lIndex)/2)) + lIndex - 1
         self.textDocumentProxy.insertText(alphabet[mid])
-        
         word = newWord ? alphabet[mid] : word + alphabet[mid]
         newWord = false
-        
         let text = alphabet[mid] + " inserted"
         speak(textToSpeak: text, pitchMultiplier: 1.0, postDelay: TimeInterval(4))
         restartSearch()
