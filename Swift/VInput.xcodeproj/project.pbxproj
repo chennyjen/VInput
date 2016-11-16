@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE2C0C341DDCDB790074BCEF /* Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C0C331DDCDB790074BCEF /* Mode.swift */; };
+		CE2C0C351DDCDB790074BCEF /* Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C0C331DDCDB790074BCEF /* Mode.swift */; };
+		CE2C0C361DDCDB790074BCEF /* Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C0C331DDCDB790074BCEF /* Mode.swift */; };
+		CE2C0C371DDCDB790074BCEF /* Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C0C331DDCDB790074BCEF /* Mode.swift */; };
+		CE2C0C391DDCDB8D0074BCEF /* InputMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C0C381DDCDB8D0074BCEF /* InputMode.swift */; };
+		CE2C0C3A1DDCDB8D0074BCEF /* InputMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C0C381DDCDB8D0074BCEF /* InputMode.swift */; };
+		CE2C0C3B1DDCDB8D0074BCEF /* InputMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C0C381DDCDB8D0074BCEF /* InputMode.swift */; };
+		CE2C0C3C1DDCDB8D0074BCEF /* InputMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C0C381DDCDB8D0074BCEF /* InputMode.swift */; };
+		CE2C0C3E1DDCDD4A0074BCEF /* TutorialMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C0C3D1DDCDD4A0074BCEF /* TutorialMode.swift */; };
+		CE2C0C3F1DDCDD4A0074BCEF /* TutorialMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C0C3D1DDCDD4A0074BCEF /* TutorialMode.swift */; };
+		CE2C0C401DDCDD4A0074BCEF /* TutorialMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C0C3D1DDCDD4A0074BCEF /* TutorialMode.swift */; };
+		CE2C0C411DDCDD4A0074BCEF /* TutorialMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C0C3D1DDCDD4A0074BCEF /* TutorialMode.swift */; };
 		FE3CCB741DC286DE0036DEF1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3CCB731DC286DE0036DEF1 /* AppDelegate.swift */; };
 		FE3CCB761DC286DE0036DEF1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3CCB751DC286DE0036DEF1 /* ViewController.swift */; };
 		FE3CCB791DC286DE0036DEF1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE3CCB771DC286DE0036DEF1 /* Main.storyboard */; };
@@ -57,6 +69,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CE2C0C331DDCDB790074BCEF /* Mode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mode.swift; sourceTree = "<group>"; };
+		CE2C0C381DDCDB8D0074BCEF /* InputMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputMode.swift; sourceTree = "<group>"; };
+		CE2C0C3D1DDCDD4A0074BCEF /* TutorialMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialMode.swift; sourceTree = "<group>"; };
 		FE3CCB701DC286DE0036DEF1 /* VInput.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VInput.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE3CCB731DC286DE0036DEF1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FE3CCB751DC286DE0036DEF1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -164,6 +179,9 @@
 			isa = PBXGroup;
 			children = (
 				FE3CCBA71DC286F50036DEF1 /* KeyboardViewController.swift */,
+				CE2C0C331DDCDB790074BCEF /* Mode.swift */,
+				CE2C0C381DDCDB8D0074BCEF /* InputMode.swift */,
+				CE2C0C3D1DDCDD4A0074BCEF /* TutorialMode.swift */,
 				FE3CCBA91DC286F50036DEF1 /* Info.plist */,
 			);
 			path = "VInput Keyboard";
@@ -336,6 +354,9 @@
 			files = (
 				FE3CCB761DC286DE0036DEF1 /* ViewController.swift in Sources */,
 				FE3CCB741DC286DE0036DEF1 /* AppDelegate.swift in Sources */,
+				CE2C0C391DDCDB8D0074BCEF /* InputMode.swift in Sources */,
+				CE2C0C341DDCDB790074BCEF /* Mode.swift in Sources */,
+				CE2C0C3E1DDCDD4A0074BCEF /* TutorialMode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,7 +364,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE2C0C351DDCDB790074BCEF /* Mode.swift in Sources */,
 				FE3CCB891DC286DE0036DEF1 /* VInputTests.swift in Sources */,
+				CE2C0C3F1DDCDD4A0074BCEF /* TutorialMode.swift in Sources */,
+				CE2C0C3A1DDCDB8D0074BCEF /* InputMode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,7 +375,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE2C0C361DDCDB790074BCEF /* Mode.swift in Sources */,
 				FE3CCB941DC286DE0036DEF1 /* VInputUITests.swift in Sources */,
+				CE2C0C401DDCDD4A0074BCEF /* TutorialMode.swift in Sources */,
+				CE2C0C3B1DDCDB8D0074BCEF /* InputMode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -359,7 +386,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE2C0C371DDCDB790074BCEF /* Mode.swift in Sources */,
 				FE3CCBA81DC286F50036DEF1 /* KeyboardViewController.swift in Sources */,
+				CE2C0C411DDCDD4A0074BCEF /* TutorialMode.swift in Sources */,
+				CE2C0C3C1DDCDB8D0074BCEF /* InputMode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -617,6 +647,7 @@
 				FE3CCB9A1DC286DE0036DEF1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FE3CCB9B1DC286DE0036DEF1 /* Build configuration list for PBXNativeTarget "VInputTests" */ = {
 			isa = XCConfigurationList;
@@ -625,6 +656,7 @@
 				FE3CCB9D1DC286DE0036DEF1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FE3CCB9E1DC286DE0036DEF1 /* Build configuration list for PBXNativeTarget "VInputUITests" */ = {
 			isa = XCConfigurationList;
@@ -633,6 +665,7 @@
 				FE3CCBA01DC286DE0036DEF1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FE3CCBAD1DC286F50036DEF1 /* Build configuration list for PBXNativeTarget "VInput Keyboard" */ = {
 			isa = XCConfigurationList;
@@ -641,6 +674,7 @@
 				FE3CCBAF1DC286F50036DEF1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
