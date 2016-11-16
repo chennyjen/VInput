@@ -36,6 +36,7 @@ class KeyboardViewController: UIInputViewController {
     let speechSynthesizer = AVSpeechSynthesizer()
     var searching: Bool = false
     var newWord: Bool = true
+    var mode: Mode? = nil
     
     override func updateViewConstraints() {
         super.updateViewConstraints()
@@ -84,6 +85,7 @@ class KeyboardViewController: UIInputViewController {
         letterLabel.centerXAnchor.constraint(equalTo: fullView.centerXAnchor).isActive = true
         letterLabel.centerYAnchor.constraint(equalTo: fullView.centerYAnchor).isActive = true
         letterLabel.textColor = UIColor.black
+        tutorial()
         announceLetter()
         
         // Set gesture recognizer targets and values
@@ -141,6 +143,7 @@ class KeyboardViewController: UIInputViewController {
     
     func onDoubleTap() {
 //        self.textDocumentProxy.documentContextBeforeInput!
+        cutOffSpeech()
         let mid = Int(ceil(Double(rIndex - lIndex)/2)) + lIndex - 1
         let text = "Left or right of " + alphabet[mid]
         speak(textToSpeak: text)
@@ -149,6 +152,7 @@ class KeyboardViewController: UIInputViewController {
 //    Holder for reading back word
     func onDoubleTapTwoTouch() {
         //TODO: Broken for now
+        cutOffSpeech()
         for character in word.characters {
             speak(textToSpeak: String(character))
         }
@@ -156,6 +160,7 @@ class KeyboardViewController: UIInputViewController {
 
     func onSwipeLeft() {
         searching = true
+        cutOffSpeech()
         if !isDone() {
             rIndex = Int(ceil(Double(rIndex - lIndex)/2)) + lIndex - 1
             announceLetter()
@@ -163,6 +168,7 @@ class KeyboardViewController: UIInputViewController {
     }
     
     func onSwipeDown() {
+        cutOffSpeech()
         if searching {
             restartSearch()
         }
@@ -174,6 +180,7 @@ class KeyboardViewController: UIInputViewController {
     }
     
     func onSwipeRight() {
+        cutOffSpeech()
         searching = true
         if !isDone() {
             lIndex += Int(ceil(Double(rIndex - lIndex)/2.0))
@@ -182,6 +189,7 @@ class KeyboardViewController: UIInputViewController {
     }
     
     func onSwipeUp() {
+        cutOffSpeech()
         let mid = Int(ceil(Double(rIndex - lIndex)/2)) + lIndex - 1
         self.textDocumentProxy.insertText(alphabet[mid])
         word = newWord ? alphabet[mid] : word + alphabet[mid]
@@ -196,6 +204,7 @@ class KeyboardViewController: UIInputViewController {
 //    }
     
     func onPinch() {
+        cutOffSpeech()
         if pinchRecognizer.state == UIGestureRecognizerState.ended {
             self.dismissKeyboard()
         }
@@ -203,6 +212,7 @@ class KeyboardViewController: UIInputViewController {
     
     func onHold() {
         // TODO: CLEAN UP
+        cutOffSpeech()
         if shortHoldRecognizer.state == UIGestureRecognizerState.began {
             self.textDocumentProxy.insertText(" ")
             newWord = true
@@ -254,6 +264,36 @@ class KeyboardViewController: UIInputViewController {
         //utterance.postUtteranceDelay = postDelay
         utterance.rate = 0.5
         speechSynthesizer.speak(utterance)
+    }
+    
+    func cutOffSpeech() {
+        if speechSynthesizer.isSpeaking{
+            speechSynthesizer.stopSpeaking(at: AVSpeechBoundary.immediate)
+        }
+    }
+    
+    func tutorial(){
+        let welcome = "You've entered tutorial mode. Welcome to VInput, a text input application for the visually impaired. Swipe left and right to navigate between sections of this tutorial."
+        let getting_started = "Getting started. To start using VInput imagine the alphabet as a string of letters next to each other. For example, the letter A is left of B and the letter D is right of C. To spell a word, you will search along the alphabet to find each letter."
+        let navigation = "Navigation. VInput will prompt you with a letter. Swipe left or right of the prompted letter toward the letter you are looking for. For example, if you are looking for letter Z and VInput prompts you with M, swipe right."
+        let letter_selection = "Letter selection. If at any time VInput prompts you with the letter you are searching for, swipe up to select the letter."
+        let restart_delete = "Restarting the search. If at any time you would like to stop your current search and restart, swipe down. If you would like to delete the last letter you entered, swipe down again."
+        let enter_space = "Entering a space. To enter a space, hold down with one finger on the screen until VInput says a space has been inserted"
+        let read_back = "Reading back current letter. If at any time you would like to hear where you are in the search again, double tap the screen." //double tap
+        let launch_training = "You've reached the end of this tutorial. To launch an interactive training mode, swipe up now. To exit this tutorial, swipe down."
+//        let next_keyboard
+//        let 
+//        speak(textToSpeak: welcome + getting_started + navigation + letter_selection + restart_delete + enter_space + read_back + launch_training)
+        speak(textToSpeak: welcome, postDelay: TimeInterval(4))
+        speak(textToSpeak: getting_started, postDelay: TimeInterval(4))
+        speak(textToSpeak: navigation, postDelay: TimeInterval(4))
+        speak(textToSpeak: letter_selection, postDelay: TimeInterval(4))
+        speak(textToSpeak: restart_delete, postDelay: TimeInterval(4))
+        speak(textToSpeak: enter_space, postDelay: TimeInterval(4))
+        speak(textToSpeak: read_back, postDelay: TimeInterval(4))
+        speak(textToSpeak: launch_training, postDelay: TimeInterval(4))
+        //let tut: [String] = [sec0,sec1]
+        //speak(textToSpeak: tut[0])
     }
     
     override func didReceiveMemoryWarning() {
