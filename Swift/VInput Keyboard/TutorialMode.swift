@@ -8,11 +8,10 @@
 
 import Foundation
 
-
 class TutorialMode : InputMode {
     
     override func onSwipeLeft() {
-        return
+        SpeachUtil.speak(textToSpeak: "TESTING")
     }
     
     override func onSwipeRight() {

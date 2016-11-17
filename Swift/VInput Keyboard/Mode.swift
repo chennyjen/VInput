@@ -18,9 +18,9 @@ protocol Mode {
     
     func onSwipeUp()
     
-    func onSwipeDown()
+    func swipeDown()
     
-    func onDoubleTap()
+    func doubleTap()
     
     func onHold()
     
