@@ -13,7 +13,7 @@ class KeyboardViewController: UIInputViewController {
 
     @IBOutlet var nextKeyboardButton: UIButton!
     var fullView: UIView!
-    var letterLabel: UILabel!
+    static var letterLabel: UILabel!
     let singleTapRecognizer = UITapGestureRecognizer()
     let doubleTapRecognizer = UITapGestureRecognizer()
     let doubleTapTwoTouchRecognizer = UITapGestureRecognizer()
@@ -34,9 +34,11 @@ class KeyboardViewController: UIInputViewController {
     var insertedPeriod: Bool = false
     var utterance: AVSpeechUtterance!
     let speechSynthesizer = AVSpeechSynthesizer()
-    var searching: Bool = false
     var newWord: Bool = true
-    var mode: Mode? = nil
+    
+    //TO-DO: This is a place holder for now. Dynamic generation coming soon -> Mike
+    var currentValues: Values = AlphaValues()
+    var currentMode: Mode = InputMode(values: AlphaValues())
     
     override func updateViewConstraints() {
         super.updateViewConstraints()
@@ -55,6 +57,11 @@ class KeyboardViewController: UIInputViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //TO-DO: This is a place holder for now -> Mike
+        //currentMode = InputMode(values: currentValues)
+        currentMode = InputMode(values: currentValues)
+        
         // Perform custom UI setup here
         // Set up UIView over full area to accept gestures
         fullView = UIView()
@@ -77,18 +84,19 @@ class KeyboardViewController: UIInputViewController {
         nextKeyboardButton.bottomAnchor.constraint(equalTo: fullView.bottomAnchor).isActive = true
         
         // Add label for current midpoint letter
-        letterLabel = UILabel()
-        letterLabel.font = letterLabel.font.withSize(fullView.frame.height - nextKeyboardButton.frame.height)
-        letterLabel.adjustsFontSizeToFitWidth = true
-        letterLabel.translatesAutoresizingMaskIntoConstraints = false
-        fullView.addSubview(letterLabel)
-        letterLabel.centerXAnchor.constraint(equalTo: fullView.centerXAnchor).isActive = true
-        letterLabel.centerYAnchor.constraint(equalTo: fullView.centerYAnchor).isActive = true
-        letterLabel.textColor = UIColor.black
-        tutorial()
-        announceLetter()
+        KeyboardViewController.letterLabel = UILabel()
+        KeyboardViewController.letterLabel.font = KeyboardViewController.letterLabel.font.withSize(fullView.frame.height - nextKeyboardButton.frame.height)
+        KeyboardViewController.letterLabel.adjustsFontSizeToFitWidth = true
+        KeyboardViewController.letterLabel.translatesAutoresizingMaskIntoConstraints = false
+        fullView.addSubview(KeyboardViewController.letterLabel)
+        KeyboardViewController.letterLabel.centerXAnchor.constraint(equalTo: fullView.centerXAnchor).isActive = true
+        KeyboardViewController.letterLabel.centerYAnchor.constraint(equalTo: fullView.centerYAnchor).isActive = true
+        KeyboardViewController.letterLabel.textColor = UIColor.black
         
-        // Set gesture recognizer targets and values
+        //TO-DO: PLACE HOLDER FOR NOW -> Mike
+        VisualUtil.updateViewAndAnnounce(letter: currentValues.getCurrentValue())
+        
+//         Set gesture recognizer targets and values
 //        singleTapRecognizer.numberOfTapsRequired = 1
 //        singleTapRecognizer.addTarget(self, action: #selector(onSingleTap))
 //        singleTapRecognizer.require(toFail: doubleTapRecognizer)
@@ -142,83 +150,68 @@ class KeyboardViewController: UIInputViewController {
     }
     
     func onDoubleTap() {
-//        self.textDocumentProxy.documentContextBeforeInput!
-        cutOffSpeech()
-        let mid = Int(ceil(Double(rIndex - lIndex)/2)) + lIndex - 1
-        let text = "Left or right of " + alphabet[mid]
-        speak(textToSpeak: text)
+        currentMode.doubleTap()
     }
     
-//    Holder for reading back word
+//  TODO: Migrate Over -> Mike
     func onDoubleTapTwoTouch() {
-        //TODO: Broken for now
-        cutOffSpeech()
-        for character in word.characters {
-            speak(textToSpeak: String(character))
-        }
+//        for character in word.characters {
+//            speak(textToSpeak: String(character))
+//        }
     }
 
     func onSwipeLeft() {
-        searching = true
-        cutOffSpeech()
-        if !isDone() {
-            rIndex = Int(ceil(Double(rIndex - lIndex)/2)) + lIndex - 1
-            announceLetter()
-        }
+        currentMode.onSwipeLeft()
     }
     
+    //TODO: Migrate Over -> Mike
     func onSwipeDown() {
-        cutOffSpeech()
-        if searching {
-            restartSearch()
-        }
-        else {
-            speak(textToSpeak: "Deleting previous character", postDelay: TimeInterval(4))
-            self.textDocumentProxy.deleteBackward()
-            announceLetter()
-        }
+        currentMode.swipeDown()
+//        if searching {
+//            restartSearch()
+//        }
+//        else {
+//            speak(textToSpeak: "Deleting previous character", postDelay: TimeInterval(4))
+//            self.textDocumentProxy.deleteBackward()
+//            announceLetter()
+//        }
     }
     
     func onSwipeRight() {
-        cutOffSpeech()
-        searching = true
-        if !isDone() {
-            lIndex += Int(ceil(Double(rIndex - lIndex)/2.0))
-            announceLetter()
-        }
+        currentMode.onSwipeRight()
     }
     
+    //TO-DO: Migrate functionality over -> Mike
     func onSwipeUp() {
-        cutOffSpeech()
-        let mid = Int(ceil(Double(rIndex - lIndex)/2)) + lIndex - 1
-        self.textDocumentProxy.insertText(alphabet[mid])
-        word = newWord ? alphabet[mid] : word + alphabet[mid]
-        newWord = false
-        let text = alphabet[mid] + " inserted"
-        speak(textToSpeak: text, pitchMultiplier: 1.0, postDelay: TimeInterval(4))
-        restartSearch()
+        currentMode.onSwipeUp()
+//        let mid = Int(ceil(Double(rIndex - lIndex)/2)) + lIndex - 1
+//        self.textDocumentProxy.insertText(alphabet[mid])
+//        word = newWord ? alphabet[mid] : word + alphabet[mid]
+//        newWord = false
+//        let text = alphabet[mid] + " inserted"
+//        SpeachUtil.speak(textToSpeak: text, pitchMultiplier: 1.0, postDelay: TimeInterval(4))
+//        restartSearch()
     }
     
 //    func onPanFromTop() {
 //        self.dismissKeyboard()
 //    }
     
+    //TODO: Figure out if this is necessary -> ?
     func onPinch() {
-        cutOffSpeech()
         if pinchRecognizer.state == UIGestureRecognizerState.ended {
             self.dismissKeyboard()
         }
     }
     
+    //To-do: Migrate over -> Mike
     func onHold() {
-        // TODO: CLEAN UP
-        cutOffSpeech()
-        if shortHoldRecognizer.state == UIGestureRecognizerState.began {
-            self.textDocumentProxy.insertText(" ")
-            newWord = true
-            speak(textToSpeak: "Space inserted")
-            
-            // TODO when Settings bundle is implemented, this behavior should be a setting
+//        if shortHoldRecognizer.state == UIGestureRecognizerState.began {
+//            self.textDocumentProxy.insertText(" ")
+//            newWord = true
+//            speak(textToSpeak: "Space inserted")
+//            
+    // TODO when Settings bundle is implemented, this behavior should be a setting
 //            if word == "" && !insertedPeriod {
 //                (textDocumentProxy as UIKeyInput).deleteBackward()
 //                (textDocumentProxy as UIKeyInput).insertText(". ")
@@ -227,74 +220,21 @@ class KeyboardViewController: UIInputViewController {
 //            }
 //            else {
 //            }
-        }
+//        }
     }
-    
-    func isDone() -> Bool {
-        if(lIndex == rIndex)
-        {
-            // speak with a lower pitch when announcing a finalized letter,
-            // and put a one second delay after speech so call to rewrite 
-            // doesn't immediately speak the next option
-            let text = "Swipe up to select " + String(alphabet[lIndex]) + ", swipe down to restart search"
-            speak(textToSpeak: text, pitchMultiplier: 0.75, postDelay: TimeInterval(0.5))
-        }
-        return lIndex == rIndex
-    }
-    
-    func restartSearch() {
-        lIndex = 0
-        rIndex = 25
-        searching = false
-        insertedPeriod = false
-        announceLetter()
-    }
-    
-    func announceLetter() {
-        let nextMid = Int(ceil(Double(rIndex - lIndex)/2)) + lIndex - 1
-        letterLabel.text = String(alphabet[nextMid])
-        let text = "Left or right of " + alphabet[nextMid]
-        speak(textToSpeak: text)
-    }
-    
-    func speak(textToSpeak: String, pitchMultiplier: Float = 1.0, postDelay: TimeInterval = TimeInterval(0)) {
-        utterance = AVSpeechUtterance(string: textToSpeak)
-        // TODO some of these values should be exposed as options in the Settings bundle
-        utterance.pitchMultiplier = pitchMultiplier
-        //utterance.postUtteranceDelay = postDelay
-        utterance.rate = 0.5
-        speechSynthesizer.speak(utterance)
-    }
-    
-    func cutOffSpeech() {
-        if speechSynthesizer.isSpeaking{
-            speechSynthesizer.stopSpeaking(at: AVSpeechBoundary.immediate)
-        }
-    }
-    
-    func tutorial(){
-        let welcome = "You've entered tutorial mode. Welcome to VInput, a text input application for the visually impaired. Swipe left and right to navigate between sections of this tutorial."
-        let getting_started = "Getting started. To start using VInput imagine the alphabet as a string of letters next to each other. For example, the letter A is left of B and the letter D is right of C. To spell a word, you will search along the alphabet to find each letter."
-        let navigation = "Navigation. VInput will prompt you with a letter. Swipe left or right of the prompted letter toward the letter you are looking for. For example, if you are looking for letter Z and VInput prompts you with M, swipe right."
-        let letter_selection = "Letter selection. If at any time VInput prompts you with the letter you are searching for, swipe up to select the letter."
-        let restart_delete = "Restarting the search. If at any time you would like to stop your current search and restart, swipe down. If you would like to delete the last letter you entered, swipe down again."
-        let enter_space = "Entering a space. To enter a space, hold down with one finger on the screen until VInput says a space has been inserted"
-        let read_back = "Reading back current letter. If at any time you would like to hear where you are in the search again, double tap the screen." //double tap
-        let launch_training = "You've reached the end of this tutorial. To launch an interactive training mode, swipe up now. To exit this tutorial, swipe down."
-//        let next_keyboard
-//        let 
-//        speak(textToSpeak: welcome + getting_started + navigation + letter_selection + restart_delete + enter_space + read_back + launch_training)
-        speak(textToSpeak: welcome, postDelay: TimeInterval(4))
-        speak(textToSpeak: getting_started, postDelay: TimeInterval(4))
-        speak(textToSpeak: navigation, postDelay: TimeInterval(4))
-        speak(textToSpeak: letter_selection, postDelay: TimeInterval(4))
-        speak(textToSpeak: restart_delete, postDelay: TimeInterval(4))
-        speak(textToSpeak: enter_space, postDelay: TimeInterval(4))
-        speak(textToSpeak: read_back, postDelay: TimeInterval(4))
-        speak(textToSpeak: launch_training, postDelay: TimeInterval(4))
-        //let tut: [String] = [sec0,sec1]
-        //speak(textToSpeak: tut[0])
-    }
+
+    //TO-DO: Migrate this functionaility to new code -> Mike
+//    func isDone() -> Bool {
+//        if(lIndex == rIndex)
+//        {
+//            // speak with a lower pitch when announcing a finalized letter,
+//            // and put a one second delay after speech so call to rewrite 
+//            // doesn't immediately speak the next option
+//            let text = "Swipe up to select " + String(alphabet[lIndex]) + ", swipe down to restart search"
+//            speak(textToSpeak: text, pitchMultiplier: 0.75, postDelay: TimeInterval(0.5))
+//        }
+//        return lIndex == rIndex
+//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

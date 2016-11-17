@@ -5,36 +5,50 @@
 //  Created by Michael Vander Lugt on 11/16/16.
 //  Copyright © 2016 EECS481-VInput. All rights reserved.
 //
+
 import Foundation
+import AVFoundation
 
 class InputMode : Mode {
     
+    var values: Values!
+    let MODE_NAME = "InputMode"
+    
+    init(values: Values) {
+        self.values = values
+    }
+    
     func getModeName() -> String {
-        return ""
+        return MODE_NAME
     }
     
     func onSwipeLeft() {
-        return
+        values.shiftLeft()
+        VisualUtil.updateViewAndAnnounce(letter: values.getCurrentValue())
     }
     
     func onSwipeRight() {
-        return
+        values.shiftRight()
+        VisualUtil.updateViewAndAnnounce(letter: values.getCurrentValue())
     }
     
     func onSwipeUp() {
-        return
+        // TO DO
     }
     
-    func onSwipeDown() {
-        return
+    func swipeDown() {
+        //TO-DO: Change this to be handled outside
+        values.resetIfSearching()
+        VisualUtil.updateViewAndAnnounce(letter: values.getCurrentValue())
     }
     
-    func onDoubleTap() {
-        return
+    func doubleTap() {
+        let text = "Left or right of " + values.getCurrentValue()
+        SpeachUtil.speak(textToSpeak: text)
     }
     
     func onHold() {
-        return
+        // TO DO
     }
     
 }
