@@ -9,7 +9,7 @@
 import Foundation
 import AVFoundation
 
-class SpeachUtil {
+class SpeechUtil {
     
     static var utterance: AVSpeechUtterance!
     static let speechSynthesizer = AVSpeechSynthesizer()

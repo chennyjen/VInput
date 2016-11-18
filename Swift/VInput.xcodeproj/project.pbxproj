@@ -21,8 +21,8 @@
 		CE2C0C411DDCDD4A0074BCEF /* TutorialMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C0C3D1DDCDD4A0074BCEF /* TutorialMode.swift */; };
 		CED2B0A41DDD0C4E00A5827F /* Values.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2B0A31DDD0C4E00A5827F /* Values.swift */; };
 		CED2B0A51DDD0C4E00A5827F /* Values.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2B0A31DDD0C4E00A5827F /* Values.swift */; };
-		CED2B0A71DDD12E400A5827F /* SpeachUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2B0A61DDD12E400A5827F /* SpeachUtil.swift */; };
-		CED2B0A81DDD12E400A5827F /* SpeachUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2B0A61DDD12E400A5827F /* SpeachUtil.swift */; };
+		CED2B0A71DDD12E400A5827F /* SpeechUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2B0A61DDD12E400A5827F /* SpeechUtil.swift */; };
+		CED2B0A81DDD12E400A5827F /* SpeechUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2B0A61DDD12E400A5827F /* SpeechUtil.swift */; };
 		CED2B0AA1DDD18C900A5827F /* AlphaValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2B0A91DDD18C900A5827F /* AlphaValues.swift */; };
 		CED2B0AB1DDD18C900A5827F /* AlphaValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2B0A91DDD18C900A5827F /* AlphaValues.swift */; };
 		CED2B0AD1DDD18E000A5827F /* EmojiValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2B0AC1DDD18E000A5827F /* EmojiValues.swift */; };
@@ -88,7 +88,7 @@
 		CE2C0C381DDCDB8D0074BCEF /* InputMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputMode.swift; sourceTree = "<group>"; };
 		CE2C0C3D1DDCDD4A0074BCEF /* TutorialMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialMode.swift; sourceTree = "<group>"; };
 		CED2B0A31DDD0C4E00A5827F /* Values.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Values.swift; sourceTree = "<group>"; };
-		CED2B0A61DDD12E400A5827F /* SpeachUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeachUtil.swift; sourceTree = "<group>"; };
+		CED2B0A61DDD12E400A5827F /* SpeechUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechUtil.swift; sourceTree = "<group>"; };
 		CED2B0A91DDD18C900A5827F /* AlphaValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlphaValues.swift; sourceTree = "<group>"; };
 		CED2B0AC1DDD18E000A5827F /* EmojiValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiValues.swift; sourceTree = "<group>"; };
 		CED2B0AF1DDD326000A5827F /* TrainingValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainingValues.swift; sourceTree = "<group>"; };
@@ -147,7 +147,7 @@
 		CED2B0B21DDD3BF400A5827F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				CED2B0A61DDD12E400A5827F /* SpeachUtil.swift */,
+				CED2B0A61DDD12E400A5827F /* SpeechUtil.swift */,
 				CED2B0BB1DDD78E800A5827F /* VisualUtil.swift */,
 			);
 			name = Utils;
@@ -231,10 +231,10 @@
 		FE3CCBA61DC286F50036DEF1 /* VInput Keyboard */ = {
 			isa = PBXGroup;
 			children = (
+				FE3CCBA71DC286F50036DEF1 /* KeyboardViewController.swift */,
 				CED2B0B71DDD410700A5827F /* Modes */,
 				CED2B0B61DDD40F400A5827F /* Values */,
 				CED2B0B21DDD3BF400A5827F /* Utils */,
-				FE3CCBA71DC286F50036DEF1 /* KeyboardViewController.swift */,
 				FE3CCBA91DC286F50036DEF1 /* Info.plist */,
 			);
 			path = "VInput Keyboard";
@@ -411,7 +411,7 @@
 				FE3CCB761DC286DE0036DEF1 /* ViewController.swift in Sources */,
 				FE3CCB741DC286DE0036DEF1 /* AppDelegate.swift in Sources */,
 				CE2C0C391DDCDB8D0074BCEF /* InputMode.swift in Sources */,
-				CED2B0A71DDD12E400A5827F /* SpeachUtil.swift in Sources */,
+				CED2B0A71DDD12E400A5827F /* SpeechUtil.swift in Sources */,
 				CE2C0C341DDCDB790074BCEF /* Mode.swift in Sources */,
 				CED2B0BE1DDE31FF00A5827F /* KeyboardViewController.swift in Sources */,
 				CED2B0A41DDD0C4E00A5827F /* Values.swift in Sources */,
@@ -457,7 +457,7 @@
 				CED2B0A51DDD0C4E00A5827F /* Values.swift in Sources */,
 				CE2C0C411DDCDD4A0074BCEF /* TutorialMode.swift in Sources */,
 				CE2C0C3C1DDCDB8D0074BCEF /* InputMode.swift in Sources */,
-				CED2B0A81DDD12E400A5827F /* SpeachUtil.swift in Sources */,
+				CED2B0A81DDD12E400A5827F /* SpeechUtil.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

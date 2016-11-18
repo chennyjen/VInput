@@ -11,7 +11,7 @@ import Foundation
 class TutorialMode : InputMode {
     
     override func onSwipeLeft() {
-        SpeachUtil.speak(textToSpeak: "TESTING")
+        SpeechUtil.speak(textToSpeak: "TESTING")
     }
     
     override func onSwipeRight() {
