@@ -39,7 +39,7 @@ class KeyboardViewController: UIInputViewController {
     //TO-DO: This is a place holder for now. Dynamic generation coming soon -> Mike
     var currentValues: Values = AlphaValues()
     var currentMode: Mode = TrainingMode() //Dummy for now
-    
+
     override func updateViewConstraints() {
         super.updateViewConstraints()
         
