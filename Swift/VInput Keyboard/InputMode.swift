@@ -8,14 +8,22 @@
 
 import Foundation
 import AVFoundation
+import UIKit
 
 class InputMode : Mode {
     
     var values: Values!
+    var keyboardController: KeyboardViewController!
     let MODE_NAME = "InputMode"
+    var currentWord: String = ""
     
-    init(values: Values) {
+    init(values: Values, keyboardController: KeyboardViewController) {
         self.values = values
+        self.keyboardController = keyboardController
+        self.currentWord = self.loadFromProxy()
+//        keyboardController.textDocumentProxy.adjustTextPosition(byCharacterOffset: 1)
+//        SpeechUtil.speak(textToSpeak: self.loadFromProxy())
+        SpeechUtil.speak(textToSpeak: keyboardController.textDocumentProxy.documentContextBeforeInput!)
     }
     
     func getModeName() -> String {
@@ -23,32 +31,59 @@ class InputMode : Mode {
     }
     
     func onSwipeLeft() {
+        SpeechUtil.stopSpeech()
         values.shiftLeft()
         VisualUtil.updateViewAndAnnounce(letter: values.getCurrentValue())
     }
     
     func onSwipeRight() {
+        SpeechUtil.stopSpeech()
         values.shiftRight()
         VisualUtil.updateViewAndAnnounce(letter: values.getCurrentValue())
     }
     
     func onSwipeUp() {
+        SpeechUtil.stopSpeech()
         // TO DO
+        let text = "Inserting " + values.getCurrentValue()
+        SpeechUtil.speak(textToSpeak: text)
+        currentWord.append(values.getCurrentValue())
+        keyboardController.textDocumentProxy.insertText(values.getCurrentValue())
+        values.isSearchingThenReset()
+        VisualUtil.updateViewAndAnnounce(letter: values.getCurrentValue())
     }
     
     func swipeDown() {
+        SpeechUtil.stopSpeech()
         //TO-DO: Change this to be handled outside
-        values.resetIfSearching()
+        if !values.isSearchingThenReset() {
+            SpeechUtil.speak(textToSpeak: "Deleting previous character")
+            keyboardController.textDocumentProxy.deleteBackward()
+            currentWord = currentWord.substring(to: currentWord.index(before: currentWord.endIndex))
+//            if currentWord.isEmpty {
+//                currentWord = loadFromProxy()
+//            }
+        }
         VisualUtil.updateViewAndAnnounce(letter: values.getCurrentValue())
     }
     
     func doubleTap() {
+        SpeechUtil.stopSpeech()
         let text = "Left or right of " + values.getCurrentValue()
-        SpeachUtil.speak(textToSpeak: text)
+        keyboardController.textDocumentProxy.adjustTextPosition(byCharacterOffset: 1)
+        SpeechUtil.speak(textToSpeak: loadFromProxy())
     }
     
     func onHold() {
-        // TO DO
+        SpeechUtil.stopSpeech()
+        //Reset search here?
+        keyboardController.textDocumentProxy.insertText(" ")
+        currentWord = ""
+        SpeechUtil.speak(textToSpeak: "Inserting space")
     }
     
+    private func loadFromProxy() -> String {
+        let textInDocumentProxy : [String] = keyboardController.textDocumentProxy.documentContextBeforeInput!.components(separatedBy: " ")
+        return textInDocumentProxy.last!
+    }
 }

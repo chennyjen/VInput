@@ -38,7 +38,7 @@ class KeyboardViewController: UIInputViewController {
     
     //TO-DO: This is a place holder for now. Dynamic generation coming soon -> Mike
     var currentValues: Values = AlphaValues()
-    var currentMode: Mode = InputMode(values: AlphaValues())
+    var currentMode: Mode = TrainingMode() //Dummy for now
     
     override func updateViewConstraints() {
         super.updateViewConstraints()
@@ -59,8 +59,8 @@ class KeyboardViewController: UIInputViewController {
         super.viewDidLoad()
         
         //TO-DO: This is a place holder for now -> Mike
-        //currentMode = InputMode(values: currentValues)
-        currentMode = InputMode(values: currentValues)
+        currentMode = TutorialMode()
+        
         
         // Perform custom UI setup here
         // Set up UIView over full area to accept gestures
@@ -235,6 +235,7 @@ class KeyboardViewController: UIInputViewController {
 //        }
 //        return lIndex == rIndex
 //    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

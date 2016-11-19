@@ -7,3 +7,34 @@
 //
 
 import Foundation
+
+class TrainingMode : Mode {
+    
+    func getModeName() -> String {
+        return ""
+    }
+    
+    func onSwipeLeft() {
+        
+    }
+    
+    func onSwipeRight() {
+        
+    }
+    
+    func onSwipeUp() {
+        
+    }
+    
+    func swipeDown() {
+        
+    }
+    
+    func doubleTap() {
+        
+    }
+    
+    func onHold() {
+        
+    }
+}
