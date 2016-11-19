@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import CoreData
 
 class KeyboardViewController: UIInputViewController {
 
@@ -147,6 +148,61 @@ class KeyboardViewController: UIInputViewController {
         heightConstraint = NSLayoutConstraint(item: view, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1.0, constant: 256)
         
         heightConstraint!.priority = 999.0
+        
+        // CORE DATA http://stackoverflow.com/questions/37956720/how-to-create-managedobjectcontext-using-swift-3-in-xcode-8
+        let persistentContainer: NSPersistentContainer = {
+            /*
+             The persistent container for the application. This implementation
+             creates and returns a container, having loaded the store for the
+             application to it. This property is optional since there are legitimate
+             error conditions that could cause the creation of the store to fail.
+             */
+            let container = NSPersistentContainer(name: "Prediction")
+            let containerPath = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.VInput")!
+            let description = NSPersistentStoreDescription(url: containerPath)
+            container.persistentStoreDescriptions = [description]
+            container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+                if let error = error as NSError? {
+                    // Replace this implementation with code to handle the error appropriately.
+                    // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                    
+                    /*
+                     Typical reasons for an error here include:
+                     * The parent directory does not exist, cannot be created, or disallows writing.
+                     * The persistent store is not accessible, due to permissions or data protection when the device is locked.
+                     * The device is out of space.
+                     * The store could not be migrated to the current model version.
+                     Check the error message to determine what the actual problem was.
+                     */
+                    fatalError("Unresolved error \(error), \(error.userInfo)")
+                }
+            })
+            return container
+        }()
+        
+        let context = persistentContainer.viewContext
+        if let word = NSEntityDescription.insertNewObject(forEntityName: "TypedWord", into: context) as? TypedWord {
+            word.word = "Ryan"
+            word.frequency = 100
+        }
+        
+        // Initialize Fetch Request
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
+        
+        // Create Entity Description
+        let entityDescription = NSEntityDescription.entity(forEntityName: "TypedWord", in: context)
+        
+        // Configure Fetch Request
+        fetchRequest.entity = entityDescription
+        
+        do {
+            let result = try context.executeFetchRequest(fetchRequest)
+            print(result)
+            
+        } catch {
+            let fetchError = error as NSError
+            print(fetchError)
+        }
     }
     
     func onDoubleTap() {
