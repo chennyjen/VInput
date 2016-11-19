@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D5E48AA1DDFEBA9008AE472 /* Prediction.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1D5E48A81DDFEBA9008AE472 /* Prediction.xcdatamodeld */; };
+		1D5E48AB1DDFEBA9008AE472 /* Prediction.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1D5E48A81DDFEBA9008AE472 /* Prediction.xcdatamodeld */; };
+		1D5E48AC1DDFEE0B008AE472 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3CCB731DC286DE0036DEF1 /* AppDelegate.swift */; };
+		1D5E48AF1DDFF433008AE472 /* Prediction.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = 1D5E48A81DDFEBA9008AE472 /* Prediction.xcdatamodeld */; };
 		CE2C0C341DDCDB790074BCEF /* Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C0C331DDCDB790074BCEF /* Mode.swift */; };
 		CE2C0C351DDCDB790074BCEF /* Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C0C331DDCDB790074BCEF /* Mode.swift */; };
 		CE2C0C361DDCDB790074BCEF /* Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C0C331DDCDB790074BCEF /* Mode.swift */; };
@@ -84,6 +88,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1D5E48A91DDFEBA9008AE472 /* Prediction.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Prediction.xcdatamodel; sourceTree = "<group>"; };
+		1D5E48AD1DDFF369008AE472 /* VInput.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VInput.entitlements; sourceTree = "<group>"; };
+		1D5E48AE1DDFF3ED008AE472 /* VInput Keyboard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "VInput Keyboard.entitlements"; sourceTree = "<group>"; };
 		CE2C0C331DDCDB790074BCEF /* Mode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mode.swift; sourceTree = "<group>"; };
 		CE2C0C381DDCDB8D0074BCEF /* InputMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputMode.swift; sourceTree = "<group>"; };
 		CE2C0C3D1DDCDD4A0074BCEF /* TutorialMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialMode.swift; sourceTree = "<group>"; };
@@ -178,6 +185,7 @@
 		FE3CCB671DC286DE0036DEF1 = {
 			isa = PBXGroup;
 			children = (
+				1D5E48A81DDFEBA9008AE472 /* Prediction.xcdatamodeld */,
 				FE3CCB721DC286DE0036DEF1 /* VInput */,
 				FE3CCB871DC286DE0036DEF1 /* VInputTests */,
 				FE3CCB921DC286DE0036DEF1 /* VInputUITests */,
@@ -200,6 +208,7 @@
 		FE3CCB721DC286DE0036DEF1 /* VInput */ = {
 			isa = PBXGroup;
 			children = (
+				1D5E48AD1DDFF369008AE472 /* VInput.entitlements */,
 				FE3CCB731DC286DE0036DEF1 /* AppDelegate.swift */,
 				FE3CCB751DC286DE0036DEF1 /* ViewController.swift */,
 				FE3CCB771DC286DE0036DEF1 /* Main.storyboard */,
@@ -231,6 +240,7 @@
 		FE3CCBA61DC286F50036DEF1 /* VInput Keyboard */ = {
 			isa = PBXGroup;
 			children = (
+				1D5E48AE1DDFF3ED008AE472 /* VInput Keyboard.entitlements */,
 				FE3CCBA71DC286F50036DEF1 /* KeyboardViewController.swift */,
 				CED2B0B71DDD410700A5827F /* Modes */,
 				CED2B0B61DDD40F400A5827F /* Values */,
@@ -327,7 +337,13 @@
 				TargetAttributes = {
 					FE3CCB6F1DC286DE0036DEF1 = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = LZNU75VU4R;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					FE3CCB831DC286DE0036DEF1 = {
 						CreatedOnToolsVersion = 8.0;
@@ -341,7 +357,13 @@
 					};
 					FE3CCBA41DC286F50036DEF1 = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = LZNU75VU4R;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -395,6 +417,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D5E48AF1DDFF433008AE472 /* Prediction.xcdatamodeld in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,6 +431,7 @@
 				CED2B0AA1DDD18C900A5827F /* AlphaValues.swift in Sources */,
 				CED2B0BC1DDD78E800A5827F /* VisualUtil.swift in Sources */,
 				CED2B0B01DDD326000A5827F /* TrainingValues.swift in Sources */,
+				1D5E48AA1DDFEBA9008AE472 /* Prediction.xcdatamodeld in Sources */,
 				FE3CCB761DC286DE0036DEF1 /* ViewController.swift in Sources */,
 				FE3CCB741DC286DE0036DEF1 /* AppDelegate.swift in Sources */,
 				CE2C0C391DDCDB8D0074BCEF /* InputMode.swift in Sources */,
@@ -455,7 +479,9 @@
 				CED2B0BA1DDD420F00A5827F /* TrainingMode.swift in Sources */,
 				CED2B0AE1DDD18E000A5827F /* EmojiValues.swift in Sources */,
 				CED2B0A51DDD0C4E00A5827F /* Values.swift in Sources */,
+				1D5E48AC1DDFEE0B008AE472 /* AppDelegate.swift in Sources */,
 				CE2C0C411DDCDD4A0074BCEF /* TutorialMode.swift in Sources */,
+				1D5E48AB1DDFEBA9008AE472 /* Prediction.xcdatamodeld in Sources */,
 				CE2C0C3C1DDCDB8D0074BCEF /* InputMode.swift in Sources */,
 				CED2B0A81DDD12E400A5827F /* SpeechUtil.swift in Sources */,
 			);
@@ -597,6 +623,8 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = VInput/VInput.entitlements;
+				DEVELOPMENT_TEAM = LZNU75VU4R;
 				INFOPLIST_FILE = VInput/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "EECS481-VInput.VInput";
@@ -610,6 +638,8 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = VInput/VInput.entitlements;
+				DEVELOPMENT_TEAM = LZNU75VU4R;
 				INFOPLIST_FILE = VInput/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "EECS481-VInput.VInput";
@@ -675,6 +705,8 @@
 		FE3CCBAE1DC286F50036DEF1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "VInput Keyboard/VInput Keyboard.entitlements";
+				DEVELOPMENT_TEAM = LZNU75VU4R;
 				INFOPLIST_FILE = "VInput Keyboard/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "EECS481-VInput.VInput.VInput-Keyboard";
@@ -687,6 +719,8 @@
 		FE3CCBAF1DC286F50036DEF1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "VInput Keyboard/VInput Keyboard.entitlements";
+				DEVELOPMENT_TEAM = LZNU75VU4R;
 				INFOPLIST_FILE = "VInput Keyboard/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "EECS481-VInput.VInput.VInput-Keyboard";
@@ -745,6 +779,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		1D5E48A81DDFEBA9008AE472 /* Prediction.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				1D5E48A91DDFEBA9008AE472 /* Prediction.xcdatamodel */,
+			);
+			currentVersion = 1D5E48A91DDFEBA9008AE472 /* Prediction.xcdatamodel */;
+			path = Prediction.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = FE3CCB681DC286DE0036DEF1 /* Project object */;
 }
