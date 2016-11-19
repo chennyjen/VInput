@@ -148,7 +148,6 @@ class KeyboardViewController: UIInputViewController {
         
         heightConstraint!.priority = 999.0
         
-        // CORE DATA http://stackoverflow.com/questions/37956720/how-to-create-managedobjectcontext-using-swift-3-in-xcode-8
         let persistentContainer: NSPersistentContainer = {
             /*
              The persistent container for the application. This implementation
@@ -157,7 +156,8 @@ class KeyboardViewController: UIInputViewController {
              error conditions that could cause the creation of the store to fail.
              */
             let container = NSPersistentContainer(name: "Prediction")
-            let containerPath = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.VInput")!
+            var containerPath = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.VInput")!
+            containerPath = containerPath.appendingPathComponent("store.sqlite")
             let description = NSPersistentStoreDescription(url: containerPath)
             container.persistentStoreDescriptions = [description]
             container.loadPersistentStores(completionHandler: { (storeDescription, error) in
@@ -202,6 +202,7 @@ class KeyboardViewController: UIInputViewController {
             let fetchError = error as NSError
             print(fetchError)
         }
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
