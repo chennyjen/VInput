@@ -163,6 +163,24 @@ class InputMode : Mode {
         VisualUtil.updateViewAndAnnounce(letter: values.getCurrentValue())
     }
     
+    
+    func onTwoTouchTap() {
+        SpeechUtil.speak(textToSpeak: "Left or right of " + values.getCurrentValue())
+    }
+    
+    func onTwoTouchHold(){
+        var text = ""
+        if (currentWord == ""){
+            text = "No words inserted yet."
+        }
+        else {
+            text = "Current word: " + currentWord
+        }
+        SpeechUtil.speak(textToSpeak: text)
+    }
+    
+
+    
     private func loadFromProxy() -> String {
         let textInDocumentProxy : [String] = keyboardController.textDocumentProxy.documentContextBeforeInput!.components(separatedBy: " ").filter{$0.isEmpty == false}
         return textInDocumentProxy.isEmpty ? "" : textInDocumentProxy.last!

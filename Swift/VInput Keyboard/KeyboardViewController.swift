@@ -27,7 +27,7 @@ class KeyboardViewController: UIInputViewController {
     let pinchRecognizer = UIPinchGestureRecognizer()
     let shortHoldRecognizer = UILongPressGestureRecognizer()
     let longHoldRecognizer = UILongPressGestureRecognizer()
-    //let twoTouchHoldRecognizer = UILongPressGestureRecognizer()
+    let twoTouchHoldRecognizer = UILongPressGestureRecognizer()
     var heightConstraint: NSLayoutConstraint?
     let alphabet: [String] = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
                               "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
@@ -141,6 +141,13 @@ class KeyboardViewController: UIInputViewController {
         shortHoldRecognizer.allowableMovement = 50
         shortHoldRecognizer.addTarget(self, action: #selector(onHold))
         
+        twoTouchHoldRecognizer.numberOfTouchesRequired = 2
+        twoTouchHoldRecognizer.minimumPressDuration = TimeInterval(1)
+        twoTouchHoldRecognizer.allowableMovement = 50
+        twoTouchHoldRecognizer.addTarget(self, action: #selector(onTwoTouchHold))
+        twoTouchHoldRecognizer.require(toFail: shortHoldRecognizer)
+        //twoTouchHoldRecognizer.delaysTouchesBegan = true
+        
         // Add gesture recognizers to fullView
         fullView.addGestureRecognizer(doubleTapRecognizer)
         fullView.addGestureRecognizer(twoTouchTapRecognizer)
@@ -153,6 +160,7 @@ class KeyboardViewController: UIInputViewController {
         //fullView.addGestureRecognizer(panFromTopRecognizer)
         fullView.addGestureRecognizer(pinchRecognizer)
         fullView.addGestureRecognizer(shortHoldRecognizer)
+        fullView.addGestureRecognizer(twoTouchHoldRecognizer)
         
         // TODO fix this to check for orientation and set constraint to desired value
         heightConstraint = NSLayoutConstraint(item: view, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1.0, constant: 256)
@@ -221,7 +229,7 @@ class KeyboardViewController: UIInputViewController {
     }
     
     func onTwoTouchTap() {
-        SpeechUtil.speak(textToSpeak: "Left or right of " + currentValues.getCurrentValue())
+        currentMode.onTwoTouchTap()
     }
 
     func onSwipeLeft() {
@@ -277,6 +285,12 @@ class KeyboardViewController: UIInputViewController {
 //            else {
 //            }
 //        }
+    }
+    
+    func onTwoTouchHold(gestureRecognizer: UILongPressGestureRecognizer) {
+        if gestureRecognizer.state == UIGestureRecognizerState.began{
+            currentMode.onTwoTouchHold()
+        }
     }
 
     override func didReceiveMemoryWarning() {

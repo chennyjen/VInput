@@ -26,4 +26,8 @@ protocol Mode {
     
     func onHold()
     
+    func onTwoTouchTap()
+    
+    func onTwoTouchHold()
+    
 }
