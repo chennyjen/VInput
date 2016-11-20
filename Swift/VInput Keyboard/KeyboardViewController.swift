@@ -39,7 +39,7 @@ class KeyboardViewController: UIInputViewController {
     
     //TO-DO: This is a place holder for now. Dynamic generation coming soon -> Mike
     var currentValues: Values = AlphaValues()
-    var currentMode: Mode = TrainingMode() //Dummy for now
+    var currentMode: Mode? = nil //Dummy for now
     
     var persistentContainer: NSPersistentContainer?
 
@@ -60,9 +60,8 @@ class KeyboardViewController: UIInputViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         //TO-DO: This is a place holder for now -> Mike
-        currentMode = InputMode(values: currentValues, keyboardController: self)
+//            TrainingMode(values: currentValues, keyboardController: self, key: Key(trainingStrings: ["testing", "twice"], callingMode: .tutorial))
         
         
         // Perform custom UI setup here
@@ -196,12 +195,15 @@ class KeyboardViewController: UIInputViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        currentMode.initialize()
-        VisualUtil.updateViewAndAnnounce(letter: currentValues.getCurrentValue())
+//        currentMode!.initialize()
+//        VisualUtil.updateViewAndAnnounce(letter: currentValues.getCurrentValue())
+        VisualUtil.updateView(letter: currentValues.getCurrentValue())
+        currentMode = TutorialMode(values: currentValues, keyboardController: self)
+        currentMode!.initialize()
     }
     
     func onDoubleTap() {
-        currentMode.doubleTap()
+        currentMode!.doubleTap()
     }
     
 //  TODO: Migrate Over -> Mike
@@ -212,58 +214,35 @@ class KeyboardViewController: UIInputViewController {
     }
 
     func onSwipeLeft() {
-        currentMode.onSwipeLeft()
+        currentMode!.onSwipeLeft()
     }
     
     func onSwipeDown() {
-        currentMode.swipeDown()
+        currentMode!.swipeDown()
     }
     
     func onSwipeRight() {
-        currentMode.onSwipeRight()
+        currentMode!.onSwipeRight()
     }
     
-    //TO-DO: Migrate functionality over -> Mike
     func onSwipeUp() {
-        currentMode.onSwipeUp()
-//        let mid = Int(ceil(Double(rIndex - lIndex)/2)) + lIndex - 1
-//        self.textDocumentProxy.insertText(alphabet[mid])
-//        word = newWord ? alphabet[mid] : word + alphabet[mid]
-//        newWord = false
-//        let text = alphabet[mid] + " inserted"
-//        SpeachUtil.speak(textToSpeak: text, pitchMultiplier: 1.0, postDelay: TimeInterval(4))
-//        restartSearch()
+        currentMode!.onSwipeUp()
     }
     
 //    func onPanFromTop() {
 //        self.dismissKeyboard()
 //    }
     
-    //TODO: Figure out if this is necessary -> ?
     func onPinch() {
         if pinchRecognizer.state == UIGestureRecognizerState.ended {
             self.dismissKeyboard()
         }
     }
     
-    //To-do: Migrate over -> Mike
     func onHold() {
-        currentMode.onHold()
-//        if shortHoldRecognizer.state == UIGestureRecognizerState.began {
-//            self.textDocumentProxy.insertText(" ")
-//            newWord = true
-//            speak(textToSpeak: "Space inserted")
-//            
-    // TODO when Settings bundle is implemented, this behavior should be a setting
-//            if word == "" && !insertedPeriod {
-//                (textDocumentProxy as UIKeyInput).deleteBackward()
-//                (textDocumentProxy as UIKeyInput).insertText(". ")
-//                speak(textToSpeak: "period inserted")
-//                insertedPeriod = true
-//            }
-//            else {
-//            }
-//        }
+        if shortHoldRecognizer.state == UIGestureRecognizerState.began {
+            currentMode!.onHold()
+        }
     }
 
     override func didReceiveMemoryWarning() {

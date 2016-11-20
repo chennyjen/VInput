@@ -17,4 +17,8 @@ class VisualUtil {
         SpeechUtil.speak(textToSpeak: text)
     }
     
+    static func updateView(letter: String) {
+        KeyboardViewController.letterLabel.text = letter
+    }
+    
 }
