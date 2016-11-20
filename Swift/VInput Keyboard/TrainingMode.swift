@@ -14,6 +14,10 @@ class TrainingMode : Mode {
         return ""
     }
     
+    func initialize() {
+        
+    }
+    
     func onSwipeLeft() {
         
     }

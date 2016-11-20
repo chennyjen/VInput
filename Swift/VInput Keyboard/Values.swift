@@ -37,6 +37,7 @@ extension Values {
         self.leftIndex += Int(ceil(Double(rightIndex - leftIndex)/2.0))
     }
     
+    //TO-DO: Refactor this --> Mike
     mutating func isSearchingThenReset() -> Bool {
         if leftIndex != leftBound || rightIndex != rightBound {
             leftIndex = leftBound

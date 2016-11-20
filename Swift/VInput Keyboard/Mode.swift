@@ -12,6 +12,8 @@ protocol Mode {
     
     func getModeName() -> String
     
+    func initialize()
+    
     func onSwipeLeft()
     
     func onSwipeRight()

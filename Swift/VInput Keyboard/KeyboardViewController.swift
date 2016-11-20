@@ -94,7 +94,6 @@ class KeyboardViewController: UIInputViewController {
         KeyboardViewController.letterLabel.textColor = UIColor.black
         
         //TO-DO: PLACE HOLDER FOR NOW -> Mike
-        VisualUtil.updateViewAndAnnounce(letter: currentValues.getCurrentValue())
         
 //         Set gesture recognizer targets and values
 //        singleTapRecognizer.numberOfTapsRequired = 1
@@ -147,6 +146,12 @@ class KeyboardViewController: UIInputViewController {
         heightConstraint = NSLayoutConstraint(item: view, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1.0, constant: 256)
         
         heightConstraint!.priority = 999.0
+//        self.textDocumentProxy.adjustTextPosition(byCharacterOffset: 1)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        currentMode.initialize()
+        VisualUtil.updateViewAndAnnounce(letter: currentValues.getCurrentValue())
     }
     
     func onDoubleTap() {
@@ -164,17 +169,8 @@ class KeyboardViewController: UIInputViewController {
         currentMode.onSwipeLeft()
     }
     
-    //TODO: Migrate Over -> Mike
     func onSwipeDown() {
         currentMode.swipeDown()
-//        if searching {
-//            restartSearch()
-//        }
-//        else {
-//            speak(textToSpeak: "Deleting previous character", postDelay: TimeInterval(4))
-//            self.textDocumentProxy.deleteBackward()
-//            announceLetter()
-//        }
     }
     
     func onSwipeRight() {
@@ -223,19 +219,6 @@ class KeyboardViewController: UIInputViewController {
 //        }
     }
 
-    //TO-DO: Migrate this functionaility to new code -> Mike
-//    func isDone() -> Bool {
-//        if(lIndex == rIndex)
-//        {
-//            // speak with a lower pitch when announcing a finalized letter,
-//            // and put a one second delay after speech so call to rewrite 
-//            // doesn't immediately speak the next option
-//            let text = "Swipe up to select " + String(alphabet[lIndex]) + ", swipe down to restart search"
-//            speak(textToSpeak: text, pitchMultiplier: 0.75, postDelay: TimeInterval(0.5))
-//        }
-//        return lIndex == rIndex
-//    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated

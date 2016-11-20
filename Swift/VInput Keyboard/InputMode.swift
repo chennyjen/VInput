@@ -20,10 +20,20 @@ class InputMode : Mode {
     init(values: Values, keyboardController: KeyboardViewController) {
         self.values = values
         self.keyboardController = keyboardController
-        self.currentWord = self.loadFromProxy()
-//        keyboardController.textDocumentProxy.adjustTextPosition(byCharacterOffset: 1)
-//        SpeechUtil.speak(textToSpeak: self.loadFromProxy())
-        SpeechUtil.speak(textToSpeak: keyboardController.textDocumentProxy.documentContextBeforeInput!)
+    }
+    
+    func initialize() {
+        let textAfterMarker: String? = keyboardController.textDocumentProxy.documentContextAfterInput
+        var shiftInputCount: Int = 1
+        if textAfterMarker != nil {
+            shiftInputCount = textAfterMarker!.characters.count
+        }
+        keyboardController.textDocumentProxy.adjustTextPosition(byCharacterOffset: shiftInputCount)
+       
+        let textBeforeMarker: String? = keyboardController.textDocumentProxy.documentContextBeforeInput
+        if textBeforeMarker != nil && textBeforeMarker!.characters.last != " " {
+            currentWord = loadFromProxy()
+        }
     }
     
     func getModeName() -> String {
@@ -53,31 +63,40 @@ class InputMode : Mode {
     func swipeDown() {
         //TO-DO: Change this to be handled outside
         if !values.isSearchingThenReset() {
+            if keyboardController.textDocumentProxy.documentContextBeforeInput == nil {
+                SpeechUtil.speak(textToSpeak: "No characters to delete")
+                return
+            }
             SpeechUtil.speak(textToSpeak: "Deleting previous character")
-            keyboardController.textDocumentProxy.deleteBackward()
-            currentWord = currentWord.substring(to: currentWord.index(before: currentWord.endIndex))
-//            if currentWord.isEmpty {
-//                currentWord = loadFromProxy()
-//            }
+            keyboardController.textDocumentProxy
+                .deleteBackward()
+            if !currentWord.isEmpty {
+                currentWord = currentWord.substring(to: currentWord.index(before: currentWord.endIndex))
+            }
+            else if keyboardController.textDocumentProxy.documentContextBeforeInput?.characters.last != " " {
+                currentWord = loadFromProxy()
+                
+            }
         }
         VisualUtil.updateViewAndAnnounce(letter: values.getCurrentValue())
     }
     
     func doubleTap() {
         let text = "Left or right of " + values.getCurrentValue()
-        keyboardController.textDocumentProxy.adjustTextPosition(byCharacterOffset: 1)
-        SpeechUtil.speak(textToSpeak: loadFromProxy())
+        SpeechUtil.speak(textToSpeak: currentWord)
     }
     
     func onHold() {
-        //Reset search here?
+        SpeechUtil.speak(textToSpeak: "Inserting space")
         keyboardController.textDocumentProxy.insertText(" ")
         currentWord = ""
-        SpeechUtil.speak(textToSpeak: "Inserting space")
+        values.isSearchingThenReset()
+        VisualUtil.updateViewAndAnnounce(letter: values.getCurrentValue())
     }
     
     private func loadFromProxy() -> String {
-        let textInDocumentProxy : [String] = keyboardController.textDocumentProxy.documentContextBeforeInput!.components(separatedBy: " ")
-        return textInDocumentProxy.last!
+        let textInDocumentProxy : [String] = keyboardController.textDocumentProxy.documentContextBeforeInput!.components(separatedBy: " ").filter{$0.isEmpty == false}
+        return textInDocumentProxy.isEmpty ? "" : textInDocumentProxy.last!
+    
     }
 }
