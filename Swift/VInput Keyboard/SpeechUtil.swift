@@ -26,4 +26,9 @@ class SpeechUtil {
     static func generatePrompt() {
         //TO-DO: Implement a speach generation here
     }
+    static func stopSpeech() {
+        if speechSynthesizer.isSpeaking {
+            speechSynthesizer.stopSpeaking(at: AVSpeechBoundary.immediate)
+        }
+    }
 }
