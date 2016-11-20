@@ -40,6 +40,8 @@ class KeyboardViewController: UIInputViewController {
     //TO-DO: This is a place holder for now. Dynamic generation coming soon -> Mike
     var currentValues: Values = AlphaValues()
     var currentMode: Mode = TrainingMode() //Dummy for now
+    
+    var persistentContainer: NSPersistentContainer?
 
     override func updateViewConstraints() {
         super.updateViewConstraints()
@@ -149,7 +151,8 @@ class KeyboardViewController: UIInputViewController {
         
         heightConstraint!.priority = 999.0
         
-        let persistentContainer: NSPersistentContainer = {
+        // Setup Core Data container
+        persistentContainer = {
             /*
              The persistent container for the application. This implementation
              creates and returns a container, having loaded the store for the
@@ -180,30 +183,15 @@ class KeyboardViewController: UIInputViewController {
             return container
         }()
         
-        let context = persistentContainer.viewContext
+        let context = persistentContainer!.viewContext
         if let word = NSEntityDescription.insertNewObject(forEntityName: "TypedWord", into: context) as? TypedWord {
             word.word = "Ryan"
             word.frequency = 100
         }
-        
-        // Initialize Fetch Request
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
-        
-        // Create Entity Description
-        let entityDescription = NSEntityDescription.entity(forEntityName: "TypedWord", in: context)
-        
-        // Configure Fetch Request
-        fetchRequest.entity = entityDescription
-        
-        do {
-            let result = try context.fetch(fetchRequest)
-            print(result)
-            
-        } catch {
-            let fetchError = error as NSError
-            print(fetchError)
+        if let word = NSEntityDescription.insertNewObject(forEntityName: "TypedWord", into: context) as? TypedWord {
+            word.word = "Mike"
+            word.frequency = 90
         }
-        
     }
     
     func onDoubleTap() {
@@ -263,6 +251,7 @@ class KeyboardViewController: UIInputViewController {
     
     //To-do: Migrate over -> Mike
     func onHold() {
+        currentMode.onHold()
 //        if shortHoldRecognizer.state == UIGestureRecognizerState.began {
 //            self.textDocumentProxy.insertText(" ")
 //            newWord = true
