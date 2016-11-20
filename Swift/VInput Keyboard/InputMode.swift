@@ -17,6 +17,7 @@ class InputMode : Mode {
     var keyboardController: KeyboardViewController!
     let MODE_NAME = "InputMode"
     var currentWord: String = ""
+    var capsOn: Bool = false
     
     init(values: Values, keyboardController: KeyboardViewController) {
         self.values = values
@@ -53,12 +54,21 @@ class InputMode : Mode {
     
     func onSwipeUp() {
         // TO DO
-        let text = "Inserting " + values.getCurrentValue()
+        var text = "Inserting " + values.getCurrentValue()
+        //SpeechUtil.speak(textToSpeak: text)
+        if capsOn {
+            currentWord.append(values.getCurrentValue().uppercased())
+            keyboardController.textDocumentProxy.insertText(values.getCurrentValue().uppercased())
+            text = "Inserting upper case " + values.getCurrentValue()
+        }
+        else{
+            currentWord.append(values.getCurrentValue())
+            keyboardController.textDocumentProxy.insertText(values.getCurrentValue())
+        }
         SpeechUtil.speak(textToSpeak: text)
-        currentWord.append(values.getCurrentValue())
-        keyboardController.textDocumentProxy.insertText(values.getCurrentValue())
         values.isSearchingThenReset()
         VisualUtil.updateViewAndAnnounce(letter: values.getCurrentValue())
+        
         
         
         // search for results
@@ -110,8 +120,18 @@ class InputMode : Mode {
     }
     
     func doubleTap() {
-        let text = "Left or right of " + values.getCurrentValue()
-        SpeechUtil.speak(textToSpeak: currentWord)
+//        let text = "Left or right of " + values.getCurrentValue()
+//        SpeechUtil.speak(textToSpeak: currentWord)
+        if capsOn {
+            capsOn = false
+            VisualUtil.updateView(letter: values.getCurrentValue())
+            SpeechUtil.speak(textToSpeak: "Current letter lower cased")
+        }
+        else {
+            capsOn = true
+            VisualUtil.updateView(letter: values.getCurrentValue().uppercased())
+            SpeechUtil.speak(textToSpeak: "Current letter upper cased")
+        }
     }
     
     func onHold() {
