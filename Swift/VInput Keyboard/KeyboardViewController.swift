@@ -67,8 +67,9 @@ class KeyboardViewController: UIInputViewController {
         
         // Perform custom UI setup here
         // Set up UIView over full area to accept gestures
-        fullView = UIView()
-        fullView.backgroundColor = UIColor.gray
+        fullView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+        fullView.frame = self.view.bounds;
+        fullView.backgroundColor = UIColor.clear
         fullView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(fullView)
         fullView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
@@ -88,7 +89,7 @@ class KeyboardViewController: UIInputViewController {
         
         // Add label for current midpoint letter
         KeyboardViewController.letterLabel = UILabel()
-        KeyboardViewController.letterLabel.font = KeyboardViewController.letterLabel.font.withSize(fullView.frame.height - nextKeyboardButton.frame.height)
+        KeyboardViewController.letterLabel.font = UIFont.boldSystemFont(ofSize: 72)
         KeyboardViewController.letterLabel.adjustsFontSizeToFitWidth = true
         KeyboardViewController.letterLabel.translatesAutoresizingMaskIntoConstraints = false
         fullView.addSubview(KeyboardViewController.letterLabel)
@@ -182,15 +183,16 @@ class KeyboardViewController: UIInputViewController {
             return container
         }()
         
-        let context = persistentContainer!.viewContext
-        if let word = NSEntityDescription.insertNewObject(forEntityName: "TypedWord", into: context) as? TypedWord {
-            word.word = "Ryan"
-            word.frequency = 100
-        }
-        if let word = NSEntityDescription.insertNewObject(forEntityName: "TypedWord", into: context) as? TypedWord {
-            word.word = "Mike"
-            word.frequency = 90
-        }
+        // EXAMPLES OF INSERTING WORDS INTO CORE DATA
+//        let context = persistentContainer!.viewContext
+//        if let word = NSEntityDescription.insertNewObject(forEntityName: "TypedWord", into: context) as? TypedWord {
+//            word.word = "Ryan"
+//            word.frequency = 100
+//        }
+//        if let word = NSEntityDescription.insertNewObject(forEntityName: "TypedWord", into: context) as? TypedWord {
+//            word.word = "Mike"
+//            word.frequency = 90
+//        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
