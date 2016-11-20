@@ -59,6 +59,33 @@ class InputMode : Mode {
         keyboardController.textDocumentProxy.insertText(values.getCurrentValue())
         values.isSearchingThenReset()
         VisualUtil.updateViewAndAnnounce(letter: values.getCurrentValue())
+        
+        
+        // search for results
+        let partialTypedWord = loadFromProxy()
+        // Threshold for when to start "predicting"
+        if partialTypedWord.characters.count < 3 {
+            return
+        }
+        let context = self.keyboardController.persistentContainer!.viewContext
+        let request = NSFetchRequest<NSFetchRequestResult>()
+        request.predicate = NSPredicate(format: "word beginswith[c] %@", partialTypedWord)
+        request.entity = NSEntityDescription.entity(forEntityName: "TypedWord", in: context)
+        request.sortDescriptors = [NSSortDescriptor(key: "frequency", ascending: false)]
+        
+        do {
+            let results = try context.fetch(request)
+            if results.count > 0 {
+                // PRINT ALL WORDS
+                for result in results {
+                    print((result as! TypedWord).word)
+                    print((result as! TypedWord).frequency)
+                }
+            }
+        } catch {
+            let fetchError = error as NSError
+            print(fetchError)
+        }
     }
     
     func swipeDown() {
@@ -132,29 +159,9 @@ class InputMode : Mode {
             print(fetchError)
         }
         
-        //        SEARCHING FOR WORD
-        //        let request = NSFetchRequest<NSFetchRequestResult>()
-        //        request.predicate = NSPredicate(format: "word beginswith[c] %@", word)
-        //        request.entity = NSEntityDescription.entity(forEntityName: "TypedWord", in: context)
-        //
-        //        do {
-        //            let results = try context.fetch(request)
-        //            if results.count > 0 {
-        //                // suggestion = results[0]
-        //            }
-        //
-        //        } catch {
-        //            let fetchError = error as NSError
-        //            print(fetchError)
-        //        }
-        // if word in DB, increment
-        // else
-        // add to DB and increment
-        
-        //Not sure if this should be here
+        //TO-DO: Figure out on-hold behavior if in the middle of the search
         values.isSearchingThenReset()
         VisualUtil.updateViewAndAnnounce(letter: values.getCurrentValue())
-
     }
     
     private func loadFromProxy() -> String {
