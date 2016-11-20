@@ -157,8 +157,7 @@ class InputMode : Mode {
         } catch {
             let fetchError = error as NSError
             print(fetchError)
-        }
-        
+        }     
         //TO-DO: Figure out on-hold behavior if in the middle of the search
         values.isSearchingThenReset()
         VisualUtil.updateViewAndAnnounce(letter: values.getCurrentValue())
