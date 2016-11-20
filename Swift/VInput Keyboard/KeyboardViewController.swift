@@ -18,6 +18,7 @@ class KeyboardViewController: UIInputViewController {
     let singleTapRecognizer = UITapGestureRecognizer()
     let doubleTapRecognizer = UITapGestureRecognizer()
     let doubleTapTwoTouchRecognizer = UITapGestureRecognizer()
+    let twoTouchTapRecognizer = UITapGestureRecognizer()
     let swipeLeftRecognizer = UISwipeGestureRecognizer()
     let swipeDownRecognizer = UISwipeGestureRecognizer()
     let swipeRightRecognizer = UISwipeGestureRecognizer()
@@ -26,6 +27,7 @@ class KeyboardViewController: UIInputViewController {
     let pinchRecognizer = UIPinchGestureRecognizer()
     let shortHoldRecognizer = UILongPressGestureRecognizer()
     let longHoldRecognizer = UILongPressGestureRecognizer()
+    //let twoTouchHoldRecognizer = UILongPressGestureRecognizer()
     var heightConstraint: NSLayoutConstraint?
     let alphabet: [String] = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
                               "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
@@ -109,6 +111,11 @@ class KeyboardViewController: UIInputViewController {
         doubleTapRecognizer.addTarget(self, action: #selector(onDoubleTap))
         doubleTapRecognizer.require(toFail: doubleTapTwoTouchRecognizer)
         
+        twoTouchTapRecognizer.numberOfTapsRequired = 1
+        twoTouchTapRecognizer.numberOfTouchesRequired = 2
+        twoTouchTapRecognizer.addTarget(self, action: #selector(onTwoTouchTap))
+        twoTouchTapRecognizer.require(toFail: doubleTapTwoTouchRecognizer)
+        
         doubleTapTwoTouchRecognizer.numberOfTapsRequired = 2
         doubleTapTwoTouchRecognizer.numberOfTouchesRequired = 2
         doubleTapTwoTouchRecognizer.addTarget(self, action: #selector(onDoubleTapTwoTouch))
@@ -136,6 +143,7 @@ class KeyboardViewController: UIInputViewController {
         
         // Add gesture recognizers to fullView
         fullView.addGestureRecognizer(doubleTapRecognizer)
+        fullView.addGestureRecognizer(twoTouchTapRecognizer)
         fullView.addGestureRecognizer(doubleTapTwoTouchRecognizer)
         fullView.addGestureRecognizer(singleTapRecognizer)
         fullView.addGestureRecognizer(swipeLeftRecognizer)
@@ -209,6 +217,11 @@ class KeyboardViewController: UIInputViewController {
 //        for character in word.characters {
 //            speak(textToSpeak: String(character))
 //        }
+        //SpeechUtil.speak(textToSpeak: "Two touch recognized")
+    }
+    
+    func onTwoTouchTap() {
+        SpeechUtil.speak(textToSpeak: "Left or right of " + currentValues.getCurrentValue())
     }
 
     func onSwipeLeft() {
