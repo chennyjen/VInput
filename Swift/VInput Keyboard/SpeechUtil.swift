@@ -32,4 +32,12 @@ class SpeechUtil
             speechSynthesizer.stopSpeaking(at: AVSpeechBoundary.immediate)
         }
     }
+    static func checkIfSpeaking() -> Bool {
+        if speechSynthesizer.isSpeaking {
+            return true
+        }
+        else {
+            return false
+        }
+    }
 }

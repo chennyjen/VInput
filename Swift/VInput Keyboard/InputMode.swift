@@ -23,6 +23,7 @@ class InputMode : Mode {
         self.currentWord = self.loadFromProxy()
 //        keyboardController.textDocumentProxy.adjustTextPosition(byCharacterOffset: 1)
 //        SpeechUtil.speak(textToSpeak: self.loadFromProxy())
+//        SpeechUtil.speak(textToSpeak: "Input mode")
         SpeechUtil.speak(textToSpeak: keyboardController.textDocumentProxy.documentContextBeforeInput!)
     }
     
@@ -31,17 +32,20 @@ class InputMode : Mode {
     }
     
     func onSwipeLeft() {
+        SpeechUtil.stopSpeech()
         values.shiftLeft()
         VisualUtil.updateViewAndAnnounce(letter: values.getCurrentValue())
     }
     
     func onSwipeRight() {
+        SpeechUtil.stopSpeech()
         values.shiftRight()
         VisualUtil.updateViewAndAnnounce(letter: values.getCurrentValue())
     }
     
     func onSwipeUp() {
         // TO DO
+        SpeechUtil.stopSpeech()
         let text = "Inserting " + values.getCurrentValue()
         SpeechUtil.speak(textToSpeak: text)
         currentWord.append(values.getCurrentValue())
@@ -52,6 +56,7 @@ class InputMode : Mode {
     
     func swipeDown() {
         //TO-DO: Change this to be handled outside
+        SpeechUtil.stopSpeech()
         if !values.isSearchingThenReset() {
             SpeechUtil.speak(textToSpeak: "Deleting previous character")
             keyboardController.textDocumentProxy.deleteBackward()
@@ -64,13 +69,15 @@ class InputMode : Mode {
     }
     
     func doubleTap() {
+        SpeechUtil.stopSpeech()
         let text = "Left or right of " + values.getCurrentValue()
 //        keyboardController.textDocumentProxy.adjustTextPosition(byCharacterOffset: 1)
 //        SpeechUtil.speak(textToSpeak: loadFromProxy())
-        ModeUtil.swapMode(keyboardController: keyboardController, stateKey: Key(index: 2), mode: "Tutorial_Mode")
+        ModeUtil.swapMode(keyboardController: keyboardController, stateKey: Key(), mode: "Tutorial_Mode")
     }
     
     func onHold() {
+        SpeechUtil.stopSpeech()
         //Reset search here?
         keyboardController.textDocumentProxy.insertText(" ")
         currentWord = ""

@@ -14,6 +14,8 @@ class ModeUtil
     static func swapMode(keyboardController: KeyboardViewController, stateKey: Key, mode: String)
     {
         switch mode {
+            case "Input_Mode":
+                keyboardController.currentMode = InputMode(values: keyboardController.currentValues,keyboardController:keyboardController)
             case "Training_Mode":
                 return
             case "Tutorial_Mode":
