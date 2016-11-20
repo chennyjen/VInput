@@ -65,8 +65,9 @@ class InputMode : Mode {
     
     func doubleTap() {
         let text = "Left or right of " + values.getCurrentValue()
-        keyboardController.textDocumentProxy.adjustTextPosition(byCharacterOffset: 1)
-        SpeechUtil.speak(textToSpeak: loadFromProxy())
+//        keyboardController.textDocumentProxy.adjustTextPosition(byCharacterOffset: 1)
+//        SpeechUtil.speak(textToSpeak: loadFromProxy())
+        ModeUtil.swapMode(keyboardController: keyboardController, stateKey: Key(index: 2), mode: "Tutorial_Mode")
     }
     
     func onHold() {

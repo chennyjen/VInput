@@ -7,14 +7,14 @@
 //
 import Foundation
 
-class TutorialMode : InputMode {
+class TutorialMode : Mode {
     
-    var tut_values: Values!
-    var tut_keyboardController: KeyboardViewController!
-    
+    let DUMMY: String = "Tutorial Mode"
     //override let MODE_NAME = "TutorialMode"
     //let speechSynthesizer = AVSpeechSynthesizer()
     var tutorialIndex: Int!
+    var values: Values
+    var keyboardController: KeyboardViewController
     
     //Mike and Jenny Comments:
     //1) single letter (L/R, Up)
@@ -30,8 +30,9 @@ class TutorialMode : InputMode {
     
     let tut : [String] = ["You've entered tutorial mode. Welcome to VInput, a text input application for the visually impaired. Swipe left and right to navigate between sections of this tutorial. At any point, swipe up to enter an interactive training mode, or swipe down to exit.","Section 1: Getting started. To start using VInput imagine the alphabet as a string of letters next to each other. For example, the letter A is left of B and the letter D is right of C. To spell a word, you will search along the alphabet to find each letter.","Section 2: Navigation. VInput will prompt you with a letter. Swipe left or right of the prompted letter toward the letter you are looking for. For example, if you are looking for letter Z and VInput prompts you with M, swipe right.","Section 3: Letter selection. If at any time VInput prompts you with the letter you are searching for, swipe up to select the letter.","Restarting the search. If at any time you would like to stop your current search and restart, swipe down. If you would like to delete the last letter you entered, swipe down again.","Section 4: Entering a space. To enter a space, hold down with one finger on the screen until VInput says a space has been inserted.","Reading back current letter. If at any time you would like to hear where you are in the search again, double tap the screen." ,"You've reached the end of this tutorial. To launch an interactive training mode, swipe up now. To exit this tutorial, swipe down."]
     
-    init(tutorialIndexState: Int = 0) {
-        super.init(values: tut_values, keyboardController: tut_keyboardController)
+    init(values: Values, keyboardController: KeyboardViewController, tutorialIndexState: Int = 0) {
+        self.values = values
+        self.keyboardController = keyboardController
         self.tutorialIndex = tutorialIndexState
         SpeechUtil.speak(textToSpeak: tut[self.tutorialIndex])
     }
@@ -52,11 +53,11 @@ class TutorialMode : InputMode {
     //        super.init(values: tut_values)
     //    }
     
-    override func getModeName() -> String {
+    func getModeName() -> String {
         return "TutorialMode"
     }
     
-    override func onSwipeLeft() {
+    func onSwipeLeft() {
         SpeechUtil.stopSpeech()
         if tutorialIndex > 0{
             tutorialIndex = tutorialIndex - 1
@@ -64,7 +65,7 @@ class TutorialMode : InputMode {
         }
     }
     
-    override func onSwipeRight() {
+    func onSwipeRight() {
         SpeechUtil.stopSpeech()
         if tutorialIndex < tut.count{
             tutorialIndex = tutorialIndex + 1
@@ -72,20 +73,20 @@ class TutorialMode : InputMode {
         }
     }
     
-    override func onSwipeUp() {
+    func onSwipeUp() {
         // TO DO: Enter Training mode
     }
     
-    override func swipeDown() {
+    func swipeDown() {
         //TODO: Enter Input Mode
     }
     
-    override func doubleTap() {
+    func doubleTap() {
         SpeechUtil.stopSpeech()
         SpeechUtil.speak(textToSpeak: tut[tutorialIndex])
     }
     
-    override func onHold() {
+    func onHold() {
     }
     
     //Holder:

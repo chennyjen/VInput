@@ -9,7 +9,8 @@
 import Foundation
 import UIKit
 
-class VisualUtil {
+class VisualUtil
+{
     
     static func updateViewAndAnnounce(letter: String) {
         KeyboardViewController.letterLabel.text = letter
