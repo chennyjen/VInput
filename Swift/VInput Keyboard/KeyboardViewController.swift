@@ -248,7 +248,9 @@ class KeyboardViewController: UIInputViewController {
     
     //To-do: Migrate over -> Mike
     func onHold() {
-        currentMode.onHold()
+        if shortHoldRecognizer.state == UIGestureRecognizerState.began {
+            currentMode.onHold()
+        }
 //        if shortHoldRecognizer.state == UIGestureRecognizerState.began {
 //            self.textDocumentProxy.insertText(" ")
 //            newWord = true
