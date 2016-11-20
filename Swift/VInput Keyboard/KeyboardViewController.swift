@@ -150,22 +150,26 @@ class KeyboardViewController: UIInputViewController {
     }
     
     func onDoubleTap() {
+        SpeechUtil.stopSpeech()
         currentMode.doubleTap()
     }
     
 //  TODO: Migrate Over -> Mike
     func onDoubleTapTwoTouch() {
+        SpeechUtil.stopSpeech()
 //        for character in word.characters {
 //            speak(textToSpeak: String(character))
 //        }
     }
 
     func onSwipeLeft() {
+        SpeechUtil.stopSpeech()
         currentMode.onSwipeLeft()
     }
     
     //TODO: Migrate Over -> Mike
     func onSwipeDown() {
+        SpeechUtil.stopSpeech()
         currentMode.swipeDown()
 //        if searching {
 //            restartSearch()
@@ -178,11 +182,13 @@ class KeyboardViewController: UIInputViewController {
     }
     
     func onSwipeRight() {
+        SpeechUtil.stopSpeech()
         currentMode.onSwipeRight()
     }
     
     //TO-DO: Migrate functionality over -> Mike
     func onSwipeUp() {
+        SpeechUtil.stopSpeech()
         currentMode.onSwipeUp()
 //        let mid = Int(ceil(Double(rIndex - lIndex)/2)) + lIndex - 1
 //        self.textDocumentProxy.insertText(alphabet[mid])
@@ -199,6 +205,7 @@ class KeyboardViewController: UIInputViewController {
     
     //TODO: Figure out if this is necessary -> ?
     func onPinch() {
+        SpeechUtil.stopSpeech()
         if pinchRecognizer.state == UIGestureRecognizerState.ended {
             self.dismissKeyboard()
         }
@@ -206,6 +213,7 @@ class KeyboardViewController: UIInputViewController {
     
     //To-do: Migrate over -> Mike
     func onHold() {
+        SpeechUtil.stopSpeech()
 //        if shortHoldRecognizer.state == UIGestureRecognizerState.began {
 //            self.textDocumentProxy.insertText(" ")
 //            newWord = true
