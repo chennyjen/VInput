@@ -239,13 +239,15 @@ class KeyboardViewController: UIInputViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        currentMode = InputMode(values: currentValues, keyboardController: self)
+        currentMode = InputMode(keyboardController: self)
         SpeechUtil.speak(textToSpeak: "Vinput Keyboard", preDelay: 0.5)
         currentMode!.initialize()
     }
     
     func onDoubleTap() {
-        currentMode!.doubleTap()
+//        currentMode!.doubleTap()
+        ValueUtil.swapMode(keyboardController: self, valueType: .emoji)
+        VisualUtil.updateViewAndAnnounce(letter: currentValues.getCurrentValue())
     }
     
 //  TODO: Migrate Over -> Mike

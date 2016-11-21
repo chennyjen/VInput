@@ -13,13 +13,13 @@ import CoreData
 
 class InputMode : Mode {
     
-    var values: Values!
+//    var values: Values!
     var keyboardController: KeyboardViewController!
     let MODE_NAME = "InputMode"
     var currentWord: String = ""
     
-    init(values: Values, keyboardController: KeyboardViewController) {
-        self.values = values
+    init(keyboardController: KeyboardViewController) {
+//        self.values = values
         self.keyboardController = keyboardController
     }
     
@@ -35,7 +35,7 @@ class InputMode : Mode {
         if textBeforeMarker != nil && textBeforeMarker!.characters.last != " " {
             currentWord = loadFromProxy()
         }
-        VisualUtil.updateViewAndAnnounce(letter: values.getCurrentValue())
+        VisualUtil.updateViewAndAnnounce(letter: keyboardController.currentValues.getCurrentValue())
     }
     
     func getModeName() -> String {
@@ -43,23 +43,23 @@ class InputMode : Mode {
     }
     
     func onSwipeLeft() {
-        values.shiftLeft()
-        VisualUtil.updateViewAndAnnounce(letter: values.getCurrentValue())
+        keyboardController.currentValues.shiftLeft()
+        VisualUtil.updateViewAndAnnounce(letter: keyboardController.currentValues.getCurrentValue())
     }
     
     func onSwipeRight() {
-        values.shiftRight()
-        VisualUtil.updateViewAndAnnounce(letter: values.getCurrentValue())
+        keyboardController.currentValues.shiftRight()
+        VisualUtil.updateViewAndAnnounce(letter: keyboardController.currentValues.getCurrentValue())
     }
     
     func onSwipeUp() {
         // TO DO
-        let text = "Inserting " + values.getCurrentValue()
+        let text = "Inserting " + keyboardController.currentValues.getCurrentValue()
         SpeechUtil.speak(textToSpeak: text)
-        currentWord.append(values.getCurrentValue())
-        keyboardController.textDocumentProxy.insertText(values.getCurrentValue())
-        values.resetIndexes()
-        VisualUtil.updateViewAndAnnounce(letter: values.getCurrentValue())
+        currentWord.append(keyboardController.currentValues.getCurrentValue())
+        keyboardController.textDocumentProxy.insertText(keyboardController.currentValues.getCurrentValue())
+        keyboardController.currentValues.resetIndexes()
+        VisualUtil.updateViewAndAnnounce(letter: keyboardController.currentValues.getCurrentValue())
         
         
         // search for results
@@ -91,7 +91,7 @@ class InputMode : Mode {
     
     func swipeDown() {
         //TO-DO: Change this to be handled outside
-        if !values.isSearchingResetAndAnounce() {
+        if !keyboardController.currentValues.isSearchingResetAndAnounce() {
             if keyboardController.textDocumentProxy.documentContextBeforeInput == nil {
                 SpeechUtil.speak(textToSpeak: "No characters to delete")
                 return
@@ -107,11 +107,11 @@ class InputMode : Mode {
                 
             }
         }
-        VisualUtil.updateViewAndAnnounce(letter: values.getCurrentValue())
+        VisualUtil.updateViewAndAnnounce(letter: keyboardController.currentValues.getCurrentValue())
     }
     
     func doubleTap() {
-        let text = "Left or right of " + values.getCurrentValue()
+        let text = "Left or right of " + keyboardController.currentValues.getCurrentValue()
         SpeechUtil.speak(textToSpeak: currentWord)
     }
     
@@ -161,13 +161,13 @@ class InputMode : Mode {
             print(fetchError)
         }     
         //TO-DO: Figure out on-hold behavior if in the middle of the search
-        values.resetIndexes()
-        VisualUtil.updateViewAndAnnounce(letter: values.getCurrentValue())
+        keyboardController.currentValues.resetIndexes()
+        VisualUtil.updateViewAndAnnounce(letter: keyboardController.currentValues.getCurrentValue())
     }
     
     
     func onTwoTouchTap() {
-        SpeechUtil.speak(textToSpeak: "Left or right of " + values.getCurrentValue())
+        SpeechUtil.speak(textToSpeak: "Left or right of " + keyboardController.currentValues.getCurrentValue())
     }
     
     func onTwoTouchHold(){

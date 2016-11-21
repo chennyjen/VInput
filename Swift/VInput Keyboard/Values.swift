@@ -13,7 +13,7 @@ protocol Values {
     
     func getCurrentValue() -> String
     
-    func getValueType() -> VALUE_TYPE
+    func getValueType() -> ValueUtil.VALUE_TYPE
     
     func shiftLeft()
     
@@ -25,8 +25,4 @@ protocol Values {
     
     func isDone() -> Bool
 
-}
-
-enum VALUE_TYPE {
-    case lowercase, uppercase, emoji, training
 }

@@ -20,16 +20,16 @@ class ModeUtil
     {
         switch mode {
             case .training:
-                keyboardController.currentMode = TrainingMode(values: keyboardController.currentValues, keyboardController: keyboardController, key: stateKey)
+                keyboardController.currentMode = TrainingMode(keyboardController: keyboardController, key: stateKey)
                 keyboardController.currentMode!.initialize()
                 break
             case .tutorial:
-                keyboardController.currentMode = TutorialMode(values: keyboardController.currentValues, keyboardController: keyboardController, tutorialIndexState: stateKey.getIndex())
+                keyboardController.currentMode = TutorialMode(keyboardController: keyboardController, tutorialIndexState: stateKey.getIndex())
                 keyboardController.currentMode!.initialize()
                 break
             default: //Default to Input Mode
                 SpeechUtil.speak(textToSpeak: "Entering into Input Mode")
-                keyboardController.currentMode = InputMode(values: keyboardController.currentValues, keyboardController: keyboardController)
+                keyboardController.currentMode = InputMode(keyboardController: keyboardController)
                 keyboardController.currentMode!.initialize()
         }
     }

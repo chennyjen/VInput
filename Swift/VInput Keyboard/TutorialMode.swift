@@ -12,7 +12,7 @@ class TutorialMode : Mode {
     let DUMMY: String = "Tutorial Mode"
     //override let MODE_NAME = "TutorialMode"
     var tutorialIndex: Int!
-    var values: Values
+//    var values: Values
     var keyboardController: KeyboardViewController
     
     //Mike and Jenny Comments:
@@ -35,8 +35,8 @@ class TutorialMode : Mode {
                           "Section 6: Advanced gestures. At any time, tap the screen with two fingers to read back the letter you are on in the search. Hold down on the screen with two fingers to read back the current word you are typing. Swipe up now to test these gestures. Swipe right to move on to the next section",
         "You've reached the end of this tutorial. To continue training, swipe up now. To exit this tutorial, swipe down."]
     
-    init(values: Values, keyboardController: KeyboardViewController, tutorialIndexState: Int = 0) {
-        self.values = values
+    init(keyboardController: KeyboardViewController, tutorialIndexState: Int = 0) {
+//        self.values = values
         self.keyboardController = keyboardController
         self.tutorialIndex = tutorialIndexState
     }

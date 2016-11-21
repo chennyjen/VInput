@@ -19,7 +19,7 @@ class TrainingMode : InputMode {
     var shouldSwapBack: Bool = false
     var trainingLevel: TRAINING_LEVELS = .all
     
-    init(values: Values, keyboardController: KeyboardViewController, key: Key? = nil) {
+    init(keyboardController: KeyboardViewController, key: Key? = nil) {
         if key != nil {
             self.key = key
             self.stateIndex = key!.getIndex()
@@ -28,7 +28,7 @@ class TrainingMode : InputMode {
                 self.shouldSwapBack = true
             }
         }
-        super.init(values: values, keyboardController: keyboardController)
+        super.init(keyboardController: keyboardController)
     }
     
     override func getModeName() -> String {
@@ -52,18 +52,18 @@ class TrainingMode : InputMode {
             text = "The first word to spell is " + defaultTrainingWords[0]
         }
         SpeechUtil.speak(textToSpeak: text)
-        VisualUtil.updateViewAndAnnounce(letter: values.getCurrentValue())
+        VisualUtil.updateViewAndAnnounce(letter: keyboardController.currentValues.getCurrentValue())
     }
     
     override func onSwipeUp() {
-        SpeechUtil.speak(textToSpeak: "Inserting " + values.getCurrentValue())
-        currentWord.append(values.getCurrentValue())
-        values.resetIndexes()
-        VisualUtil.updateViewAndAnnounce(letter: values.getCurrentValue())
+        SpeechUtil.speak(textToSpeak: "Inserting " + keyboardController.currentValues.getCurrentValue())
+        currentWord.append(keyboardController.currentValues.getCurrentValue())
+        keyboardController.currentValues.resetIndexes()
+        VisualUtil.updateViewAndAnnounce(letter: keyboardController.currentValues.getCurrentValue())
     }
     
     override func swipeDown() {
-        if !values.isSearchingResetAndAnounce() {
+        if !keyboardController.currentValues.isSearchingResetAndAnounce() {
             if trainingLevel.rawValue >= TRAINING_LEVELS.delete.rawValue && !currentWord.isEmpty {
                 SpeechUtil.speak(textToSpeak: "Deleting previous character")
                 currentWord = currentWord.substring(to: currentWord.index(before: currentWord.endIndex))
@@ -72,14 +72,14 @@ class TrainingMode : InputMode {
                 SpeechUtil.speak(textToSpeak: "No characters in this word to delete")
             }
         }
-        VisualUtil.updateViewAndAnnounce(letter: values.getCurrentValue())
+        VisualUtil.updateViewAndAnnounce(letter: keyboardController.currentValues.getCurrentValue())
     }
     
     //Indicates end of word
     override func onHold() {
         currentWord = ""
         startingIndex += 1
-        values.resetIndexes()
+        keyboardController.currentValues.resetIndexes()
         
         if trainingLevel == .space && startingIndex < key!.getStrings().count {
             SpeechUtil.speak(textToSpeak: "Space inserted")
