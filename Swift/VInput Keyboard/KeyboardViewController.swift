@@ -248,7 +248,7 @@ class KeyboardViewController: UIInputViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         currentMode = InputMode(keyboardController: self)
-        SpeechUtil.speak(textToSpeak: "Vinput Keyboard", preDelay: 0.5)
+        SpeechUtil.speak(textToSpeak: "VInput Keyboard", preDelay: 0.5)
         currentMode!.initialize()
     }
     
