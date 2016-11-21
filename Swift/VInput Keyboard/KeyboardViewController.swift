@@ -156,7 +156,7 @@ class KeyboardViewController: UIInputViewController {
         shortHoldRecognizer.addTarget(self, action: #selector(onHold))
         shortHoldRecognizer.require(toFail: longHoldRecognizer)
         
-        longHoldRecognizer.minimumPressDuration = TimeInterval(4)
+        longHoldRecognizer.minimumPressDuration = TimeInterval(10)
         longHoldRecognizer.numberOfTouchesRequired = 1
         longHoldRecognizer.allowableMovement = 50
         longHoldRecognizer.addTarget(self, action: #selector(onLongHold))
@@ -248,7 +248,7 @@ class KeyboardViewController: UIInputViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         currentMode = InputMode(keyboardController: self)
-        SpeechUtil.speak(textToSpeak: "Vinput Keyboard", preDelay: 0.5)
+        SpeechUtil.speak(textToSpeak: "VInput Keyboard", preDelay: 0.5)
         currentMode!.initialize()
     }
     

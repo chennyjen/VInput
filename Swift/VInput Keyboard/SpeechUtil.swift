@@ -16,13 +16,14 @@ class SpeechUtil {
     
     static func speak(textToSpeak: String, pitchMultiplier: Float = 1.0,
                       postDelay: TimeInterval = TimeInterval(0),
-                      preDelay: TimeInterval = TimeInterval(0)) {
+                      preDelay: TimeInterval = TimeInterval(0),
+                      speechRate: Float = 0.55) {
         utterance = AVSpeechUtterance(string: textToSpeak)
         // TODO some of these values should be exposed as options in the Settings bundle
         utterance.pitchMultiplier = pitchMultiplier
         //utterance.postUtteranceDelay = postDelay
         utterance.preUtteranceDelay = preDelay
-        utterance.rate = 0.55
+        utterance.rate = speechRate
         speechSynthesizer.speak(utterance)
     }
     
