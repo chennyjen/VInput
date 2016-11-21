@@ -115,6 +115,7 @@ class InputMode : Mode {
     }
     
     func onHold() {
+        
         SpeechUtil.speak(textToSpeak: "Inserting space")
         keyboardController.textDocumentProxy.insertText(" ")
         currentWord = ""
@@ -170,11 +171,11 @@ class InputMode : Mode {
     
     func onTwoTouchHold(){
         var text = ""
-        if (currentWord == ""){
-            text = "No words inserted yet."
+        if (currentWord != ""){
+            text = "Current word: " + currentWord
         }
         else {
-            text = "Current word: " + currentWord
+            text = "No letters in current word yet."
         }
         SpeechUtil.speak(textToSpeak: text)
     }
