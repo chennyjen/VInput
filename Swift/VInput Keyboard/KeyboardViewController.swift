@@ -62,6 +62,8 @@ class KeyboardViewController: UIInputViewController {
         // Set up UIView over full area to accept gestures
         fullView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
         fullView.frame = self.view.bounds;
+        fullView.accessibilityTraits = UIAccessibilityTraitAllowsDirectInteraction
+        fullView.isAccessibilityElement = true
         fullView.backgroundColor = UIColor.clear
         fullView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(fullView)
@@ -76,13 +78,20 @@ class KeyboardViewController: UIInputViewController {
         nextKeyboardButton.sizeToFit()
         nextKeyboardButton.translatesAutoresizingMaskIntoConstraints = false
         nextKeyboardButton.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
+        nextKeyboardButton.backgroundColor = .clear
+        nextKeyboardButton.contentEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
+        nextKeyboardButton.layer.cornerRadius = 5
+        nextKeyboardButton.layer.borderWidth = 1
+        nextKeyboardButton.layer.borderColor = UIColor(white: 0.5, alpha: 0.5).cgColor
+        nextKeyboardButton.titleLabel!.font = UIFont.systemFont(ofSize: 24)
+        nextKeyboardButton.accessibilityTraits = UIAccessibilityTraitNone
         fullView.addSubview(nextKeyboardButton)
-        nextKeyboardButton.leftAnchor.constraint(equalTo: fullView.leftAnchor).isActive = true
-        nextKeyboardButton.bottomAnchor.constraint(equalTo: fullView.bottomAnchor).isActive = true
+        nextKeyboardButton.centerXAnchor.constraint(equalTo: fullView.centerXAnchor).isActive = true
+        nextKeyboardButton.bottomAnchor.constraint(equalTo: fullView.bottomAnchor, constant: -20).isActive = true
         
         // Add label for current midpoint letter
         KeyboardViewController.letterLabel = UILabel()
-        KeyboardViewController.letterLabel.font = UIFont.boldSystemFont(ofSize: 72)
+        KeyboardViewController.letterLabel.font = UIFont.boldSystemFont(ofSize: 136)
         KeyboardViewController.letterLabel.adjustsFontSizeToFitWidth = true
         KeyboardViewController.letterLabel.translatesAutoresizingMaskIntoConstraints = false
         fullView.addSubview(KeyboardViewController.letterLabel)
@@ -167,8 +176,16 @@ class KeyboardViewController: UIInputViewController {
              error conditions that could cause the creation of the store to fail.
              */
             let container = NSPersistentContainer(name: "Prediction")
+            let documentsDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
             var containerPath = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.VInput")!
-            containerPath = containerPath.appendingPathComponent("store.sqlite")
+            containerPath = URL(fileURLWithPath: documentsDirectory.appending("/store.sqlite"), isDirectory: false)
+//            containerPath = containerPath.appendingPathComponent("store.sqlite")
+            do {
+                try FileManager.default.removeItem(at: containerPath)
+            } catch {
+                // nothing
+                print("Could not delete CD DB")
+            }
             let description = NSPersistentStoreDescription(url: containerPath)
             container.persistentStoreDescriptions = [description]
             container.loadPersistentStores(completionHandler: { (storeDescription, error) in
@@ -189,6 +206,9 @@ class KeyboardViewController: UIInputViewController {
             })
             return container
         }()
+        
+        // Focus VO on VInput keyboard
+        UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, fullView)
         
         // EXAMPLES OF INSERTING WORDS INTO CORE DATA
 //        let context = persistentContainer!.viewContext

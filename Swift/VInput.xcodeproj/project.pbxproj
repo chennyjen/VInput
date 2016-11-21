@@ -650,6 +650,7 @@
 				CODE_SIGN_ENTITLEMENTS = VInput/VInput.entitlements;
 				DEVELOPMENT_TEAM = LZNU75VU4R;
 				INFOPLIST_FILE = VInput/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "EECS481-VInput.VInput";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -665,6 +666,7 @@
 				CODE_SIGN_ENTITLEMENTS = VInput/VInput.entitlements;
 				DEVELOPMENT_TEAM = LZNU75VU4R;
 				INFOPLIST_FILE = VInput/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "EECS481-VInput.VInput";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -732,6 +734,7 @@
 				CODE_SIGN_ENTITLEMENTS = "VInput Keyboard/VInput Keyboard.entitlements";
 				DEVELOPMENT_TEAM = LZNU75VU4R;
 				INFOPLIST_FILE = "VInput Keyboard/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "EECS481-VInput.VInput.VInput-Keyboard";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -746,6 +749,7 @@
 				CODE_SIGN_ENTITLEMENTS = "VInput Keyboard/VInput Keyboard.entitlements";
 				DEVELOPMENT_TEAM = LZNU75VU4R;
 				INFOPLIST_FILE = "VInput Keyboard/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "EECS481-VInput.VInput.VInput-Keyboard";
 				PRODUCT_NAME = "$(TARGET_NAME)";
