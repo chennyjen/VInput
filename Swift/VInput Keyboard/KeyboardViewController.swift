@@ -29,19 +29,11 @@ class KeyboardViewController: UIInputViewController {
     let longHoldRecognizer = UILongPressGestureRecognizer()
     let twoTouchHoldRecognizer = UILongPressGestureRecognizer()
     var heightConstraint: NSLayoutConstraint?
-    let alphabet: [String] = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
-                              "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-    var word: String = ""
-    var lIndex = 0
-    var rIndex = 25
-    var insertedPeriod: Bool = false
-    var utterance: AVSpeechUtterance!
-    let speechSynthesizer = AVSpeechSynthesizer()
-    var newWord: Bool = true
+    
     
     //TO-DO: This is a place holder for now. Dynamic generation coming soon -> Mike
-    var currentValues: Values = AlphaValues()
-    var currentMode: Mode? = nil //Dummy for now
+    var currentValues: Values = LowerAlphaValues()
+    var currentMode: Mode? = nil
     
     var persistentContainer: NSPersistentContainer?
 

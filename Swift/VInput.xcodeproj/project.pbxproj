@@ -27,8 +27,8 @@
 		CED2B0A51DDD0C4E00A5827F /* Values.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2B0A31DDD0C4E00A5827F /* Values.swift */; };
 		CED2B0A71DDD12E400A5827F /* SpeechUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2B0A61DDD12E400A5827F /* SpeechUtil.swift */; };
 		CED2B0A81DDD12E400A5827F /* SpeechUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2B0A61DDD12E400A5827F /* SpeechUtil.swift */; };
-		CED2B0AA1DDD18C900A5827F /* AlphaValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2B0A91DDD18C900A5827F /* AlphaValues.swift */; };
-		CED2B0AB1DDD18C900A5827F /* AlphaValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2B0A91DDD18C900A5827F /* AlphaValues.swift */; };
+		CED2B0AA1DDD18C900A5827F /* LowerAlphaValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2B0A91DDD18C900A5827F /* LowerAlphaValues.swift */; };
+		CED2B0AB1DDD18C900A5827F /* LowerAlphaValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2B0A91DDD18C900A5827F /* LowerAlphaValues.swift */; };
 		CED2B0AD1DDD18E000A5827F /* EmojiValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2B0AC1DDD18E000A5827F /* EmojiValues.swift */; };
 		CED2B0AE1DDD18E000A5827F /* EmojiValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2B0AC1DDD18E000A5827F /* EmojiValues.swift */; };
 		CED2B0B01DDD326000A5827F /* TrainingValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2B0AF1DDD326000A5827F /* TrainingValues.swift */; };
@@ -42,6 +42,10 @@
 		CEEE67851DE219860043A4F1 /* ModeUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE67831DE219860043A4F1 /* ModeUtil.swift */; };
 		CEEE67871DE219AA0043A4F1 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE67861DE219AA0043A4F1 /* Key.swift */; };
 		CEEE67881DE219AA0043A4F1 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE67861DE219AA0043A4F1 /* Key.swift */; };
+		CEEE678A1DE29F820043A4F1 /* InsertableValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE67891DE29F820043A4F1 /* InsertableValues.swift */; };
+		CEEE678B1DE29F850043A4F1 /* InsertableValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE67891DE29F820043A4F1 /* InsertableValues.swift */; };
+		CEEE678F1DE2A29C0043A4F1 /* CapitalAlphaValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE678E1DE2A29C0043A4F1 /* CapitalAlphaValues.swift */; };
+		CEEE67901DE2A29C0043A4F1 /* CapitalAlphaValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE678E1DE2A29C0043A4F1 /* CapitalAlphaValues.swift */; };
 		FE3CCB741DC286DE0036DEF1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3CCB731DC286DE0036DEF1 /* AppDelegate.swift */; };
 		FE3CCB761DC286DE0036DEF1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3CCB751DC286DE0036DEF1 /* ViewController.swift */; };
 		FE3CCB791DC286DE0036DEF1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE3CCB771DC286DE0036DEF1 /* Main.storyboard */; };
@@ -100,13 +104,15 @@
 		CE2C0C3D1DDCDD4A0074BCEF /* TutorialMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialMode.swift; sourceTree = "<group>"; };
 		CED2B0A31DDD0C4E00A5827F /* Values.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Values.swift; sourceTree = "<group>"; };
 		CED2B0A61DDD12E400A5827F /* SpeechUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechUtil.swift; sourceTree = "<group>"; };
-		CED2B0A91DDD18C900A5827F /* AlphaValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlphaValues.swift; sourceTree = "<group>"; };
+		CED2B0A91DDD18C900A5827F /* LowerAlphaValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LowerAlphaValues.swift; sourceTree = "<group>"; };
 		CED2B0AC1DDD18E000A5827F /* EmojiValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiValues.swift; sourceTree = "<group>"; };
 		CED2B0AF1DDD326000A5827F /* TrainingValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainingValues.swift; sourceTree = "<group>"; };
 		CED2B0B81DDD420F00A5827F /* TrainingMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainingMode.swift; sourceTree = "<group>"; };
 		CED2B0BB1DDD78E800A5827F /* VisualUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualUtil.swift; sourceTree = "<group>"; };
 		CEEE67831DE219860043A4F1 /* ModeUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModeUtil.swift; sourceTree = "<group>"; };
 		CEEE67861DE219AA0043A4F1 /* Key.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
+		CEEE67891DE29F820043A4F1 /* InsertableValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsertableValues.swift; sourceTree = "<group>"; };
+		CEEE678E1DE2A29C0043A4F1 /* CapitalAlphaValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CapitalAlphaValues.swift; sourceTree = "<group>"; };
 		FE3CCB701DC286DE0036DEF1 /* VInput.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VInput.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE3CCB731DC286DE0036DEF1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FE3CCB751DC286DE0036DEF1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -172,7 +178,9 @@
 			isa = PBXGroup;
 			children = (
 				CED2B0A31DDD0C4E00A5827F /* Values.swift */,
-				CED2B0A91DDD18C900A5827F /* AlphaValues.swift */,
+				CEEE67891DE29F820043A4F1 /* InsertableValues.swift */,
+				CED2B0A91DDD18C900A5827F /* LowerAlphaValues.swift */,
+				CEEE678E1DE2A29C0043A4F1 /* CapitalAlphaValues.swift */,
 				CED2B0AC1DDD18E000A5827F /* EmojiValues.swift */,
 				CED2B0AF1DDD326000A5827F /* TrainingValues.swift */,
 			);
@@ -436,7 +444,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CED2B0AA1DDD18C900A5827F /* AlphaValues.swift in Sources */,
+				CED2B0AA1DDD18C900A5827F /* LowerAlphaValues.swift in Sources */,
 				CED2B0BC1DDD78E800A5827F /* VisualUtil.swift in Sources */,
 				CED2B0B01DDD326000A5827F /* TrainingValues.swift in Sources */,
 				1D5E48AA1DDFEBA9008AE472 /* Prediction.xcdatamodeld in Sources */,
@@ -446,8 +454,10 @@
 				CE2C0C391DDCDB8D0074BCEF /* InputMode.swift in Sources */,
 				CED2B0A71DDD12E400A5827F /* SpeechUtil.swift in Sources */,
 				CE2C0C341DDCDB790074BCEF /* Mode.swift in Sources */,
+				CEEE678B1DE29F850043A4F1 /* InsertableValues.swift in Sources */,
 				CED2B0BE1DDE31FF00A5827F /* KeyboardViewController.swift in Sources */,
 				CED2B0A41DDD0C4E00A5827F /* Values.swift in Sources */,
+				CEEE678F1DE2A29C0043A4F1 /* CapitalAlphaValues.swift in Sources */,
 				CE2C0C3E1DDCDD4A0074BCEF /* TutorialMode.swift in Sources */,
 				CEEE67871DE219AA0043A4F1 /* Key.swift in Sources */,
 				CED2B0B91DDD420F00A5827F /* TrainingMode.swift in Sources */,
@@ -481,16 +491,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEEE67901DE2A29C0043A4F1 /* CapitalAlphaValues.swift in Sources */,
 				CE2C0C371DDCDB790074BCEF /* Mode.swift in Sources */,
 				FE3CCBA81DC286F50036DEF1 /* KeyboardViewController.swift in Sources */,
 				CED2B0BD1DDD78E800A5827F /* VisualUtil.swift in Sources */,
-				CED2B0AB1DDD18C900A5827F /* AlphaValues.swift in Sources */,
+				CED2B0AB1DDD18C900A5827F /* LowerAlphaValues.swift in Sources */,
 				CEEE67851DE219860043A4F1 /* ModeUtil.swift in Sources */,
 				CED2B0B11DDD326000A5827F /* TrainingValues.swift in Sources */,
 				CED2B0BA1DDD420F00A5827F /* TrainingMode.swift in Sources */,
 				CED2B0AE1DDD18E000A5827F /* EmojiValues.swift in Sources */,
 				CED2B0A51DDD0C4E00A5827F /* Values.swift in Sources */,
 				1D5E48AC1DDFEE0B008AE472 /* AppDelegate.swift in Sources */,
+				CEEE678A1DE29F820043A4F1 /* InsertableValues.swift in Sources */,
 				CE2C0C411DDCDD4A0074BCEF /* TutorialMode.swift in Sources */,
 				CEEE67881DE219AA0043A4F1 /* Key.swift in Sources */,
 				1D5E48AB1DDFEBA9008AE472 /* Prediction.xcdatamodeld in Sources */,

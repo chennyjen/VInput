@@ -11,44 +11,17 @@ import Foundation
 
 protocol Values {
     
-    var values : [String] { get }
+    func getCurrentValue() -> String
     
-    var leftBound : Int { get }
+    func shiftLeft()
     
-    var rightBound : Int { get }
+    func shiftRight()
     
-    var leftIndex : Int { get set }
+    func isSearchingResetAndAnounce() -> Bool
     
-    var rightIndex : Int { get set }
+    func resetIndexes()
+    
+    func isDone() -> Bool
     
 }
 
-extension Values {
-    
-    func getCurrentValue() -> String {
-        return values[Int(ceil(Double(rightIndex - leftIndex)/2)) + leftIndex - 1]
-    }
-    
-    mutating func shiftLeft() {
-        self.rightIndex = Int(ceil(Double(rightIndex - leftIndex)/2)) + leftIndex - 1
-    }
-    
-    mutating func shiftRight() {
-        self.leftIndex += Int(ceil(Double(rightIndex - leftIndex)/2.0))
-    }
-    
-    //TO-DO: Refactor this --> Mike
-    mutating func isSearchingThenReset() -> Bool {
-        if leftIndex != leftBound || rightIndex != rightBound {
-            leftIndex = leftBound
-            rightIndex = rightBound
-            SpeechUtil.speak(textToSpeak: "Restarting Search")
-            return true
-        }
-        return false
-    }
-
-    func isDone() -> Bool {
-        return leftIndex == rightIndex
-    }
-}
