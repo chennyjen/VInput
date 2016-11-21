@@ -27,12 +27,12 @@ class TutorialMode : Mode {
     // 8) Two finger hold -> read back current word
     
     let tut : [String] = ["Welcome to VInput, a text input application for the visually impaired. Swipe left and right to navigate between sections of this tutorial or swipe down to exit.",
-                          "Section 1: Getting started. To start using VInput imagine the alphabet as a string of letters next to each other. For example, the letter A is left of B and the letter D is right of C. To spell a word, you will search along the alphabet to find each letter. VInput will prompt you with a letter. Swipe left or right of the prompted letter toward the letter you are looking for. Swipe up to select the current letter. Swipe up to test these gestures. Swipe right to learn a new gesture",
-                          "Section 2: Spelling full words. VInput will automatically restart the search for you after you have inserted a letter by swiping up. Swipe up to test this gesture. Swipe right to learn a new gesture",
-                          "Section 3: Inserting a space. To insert a space,hold down with one finger on the screen until VInput says a space has been inserted. Swipe up to test this gesture. Swipe right to learn a new gesture",
-                          "Section 4: Restarting the search and deleting a letter. If at any time you would like to stop your current search and restart, swipe down. If you would like to delete the last letter you entered, swipe down again. Swipe up to test this gesture. Swipe right to learn a new gesture",
-                          "Section 5: Capitalization. To capitalize a letter, double tap the screen with one finger just before you swipe up to select it. Swipe up to test this gesture. Swipe right to learn a new gesture",
-                          "Section 6: Advanced gestures. At any time, tap the screen with two fingers to read back the letter you are on in the search. Hold the screen with two fingers to read back the current word you are typing. Swipe up to test this gesture. Swipe right to learn a new gesture",
+                          "Section 1: Getting started. To start using VInput imagine the alphabet as a string of letters next to each other. For example, the letter A is left of B and the letter D is right of C. To spell a word, you will search along the alphabet to find each letter. VInput will prompt you with a letter. Swipe left or right of the prompted letter toward the letter you are looking for. Swipe up to select the current letter. Swipe up now to test these gestures. Swipe right to move on to the next section.",
+                          "Section 2: Spelling full words. VInput will automatically restart the search for you after you have inserted a letter by swiping up. Swipe up now to test this gesture. Swipe right to move on to the next section.",
+                          "Section 3: Inserting a space. To insert a space, double tap with one finger on the screen. Swipe up now to test this gesture. Swipe right to move on to the next section.",
+                          "Section 4: Restarting the search and deleting a letter. If at any time you would like to stop your current search and restart, swipe down. If you would like to delete the last letter you entered, swipe down again. Swipe up to test this gesture. Swipe right to move on to the next section.",
+                          "Section 5: Capitalization. To capitalize a letter, hold down on the screen with one finger until VInput tells you your letter has been capitalized, then swipe up to select the letter. The capitalization will only affect the current letter you are on. Swiping past the letter will reset letters in the search to lower case. Swipe up now to test this gesture. Swipe right to move on to the next section.",
+                          "Section 6: Advanced gestures. At any time, tap the screen with two fingers to read back the letter you are on in the search. Hold down on the screen with two fingers to read back the current word you are typing. Swipe up now to test these gestures. Swipe right to move on to the next section",
         "You've reached the end of this tutorial. To continue training, swipe up now. To exit this tutorial, swipe down."]
     
     init(values: Values, keyboardController: KeyboardViewController, tutorialIndexState: Int = 0) {
@@ -103,7 +103,9 @@ class TutorialMode : Mode {
             case 3:
                 trainingStrings = ["I love spaces"] //training for spaces
             // train for delete; not sure what to pass here
-            case 4, 5:
+            case 4:
+                trainingStrings = ["water"]
+            case 5:
                 trainingStrings = ["India", "Michigan"] //capitalization
             case 6:
                 trainingStrings = ["University","difficult", "computational"]
