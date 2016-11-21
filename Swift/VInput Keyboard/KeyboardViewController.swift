@@ -23,6 +23,8 @@ class KeyboardViewController: UIInputViewController {
     let swipeDownRecognizer = UISwipeGestureRecognizer()
     let swipeRightRecognizer = UISwipeGestureRecognizer()
     let swipeUpRecognizer = UISwipeGestureRecognizer()
+    let twoFingerSwipeRightRecognizer = UISwipeGestureRecognizer()
+    let threeFingerSwipeRightRecognizer = UISwipeGestureRecognizer()
     //let panFromTopRecognizer = UIScreenEdgePanGestureRecognizer() - have to suppress opening notification center for this to work
     let pinchRecognizer = UIPinchGestureRecognizer()
     let shortHoldRecognizer = UILongPressGestureRecognizer()
@@ -129,6 +131,16 @@ class KeyboardViewController: UIInputViewController {
         swipeRightRecognizer.direction = UISwipeGestureRecognizerDirection.right
         swipeRightRecognizer.addTarget(self, action: #selector(onSwipeRight))
         
+        twoFingerSwipeRightRecognizer.direction = UISwipeGestureRecognizerDirection.right
+        twoFingerSwipeRightRecognizer.numberOfTouchesRequired = 2
+        twoFingerSwipeRightRecognizer.addTarget(self, action: #selector(onTwoFingerSwipeRight))
+        twoFingerSwipeRightRecognizer.require(toFail: swipeRightRecognizer)
+        
+        threeFingerSwipeRightRecognizer.direction = UISwipeGestureRecognizerDirection.right
+        threeFingerSwipeRightRecognizer.numberOfTouchesRequired = 3
+        threeFingerSwipeRightRecognizer.addTarget(self, action: #selector(onThreeFingerSwipeRight))
+        threeFingerSwipeRightRecognizer.require(toFail: twoFingerSwipeRightRecognizer)
+        
         swipeUpRecognizer.direction = UISwipeGestureRecognizerDirection.up
         swipeUpRecognizer.addTarget(self, action: #selector(onSwipeUp))
         
@@ -136,6 +148,8 @@ class KeyboardViewController: UIInputViewController {
         //panFromTopRecognizer.addTarget(self, action: #selector(onPanFromTop))
         
         pinchRecognizer.addTarget(self, action: #selector(onPinch))
+        pinchRecognizer.require(toFail: twoFingerSwipeRightRecognizer)
+        pinchRecognizer.require(toFail: threeFingerSwipeRightRecognizer)
         
         shortHoldRecognizer.minimumPressDuration = TimeInterval(1)
         shortHoldRecognizer.allowableMovement = 50
@@ -157,6 +171,8 @@ class KeyboardViewController: UIInputViewController {
         fullView.addGestureRecognizer(swipeDownRecognizer)
         fullView.addGestureRecognizer(swipeRightRecognizer)
         fullView.addGestureRecognizer(swipeUpRecognizer)
+        fullView.addGestureRecognizer(twoFingerSwipeRightRecognizer)
+        fullView.addGestureRecognizer(threeFingerSwipeRightRecognizer)
         //fullView.addGestureRecognizer(panFromTopRecognizer)
         fullView.addGestureRecognizer(pinchRecognizer)
         fullView.addGestureRecognizer(shortHoldRecognizer)
@@ -224,6 +240,7 @@ class KeyboardViewController: UIInputViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         currentMode = InputMode(values: currentValues, keyboardController: self)
+        SpeechUtil.speak(textToSpeak: "Vinput Keyboard", preDelay: 0.5)
         currentMode!.initialize()
     }
     
@@ -279,6 +296,18 @@ class KeyboardViewController: UIInputViewController {
         if gestureRecognizer.state == UIGestureRecognizerState.began{
             currentMode!.onTwoTouchHold()
         }
+    }
+    
+    func onTwoFingerSwipeRight() {
+        SpeechUtil.speak(textToSpeak: "Two Finger Swipe Right")
+    }
+    
+    func onThreeFingerSwipeRight() {
+        // Renable normalVO functionality and allow user to transition 
+        // to another keyboard
+        fullView.accessibilityTraits = UIAccessibilityTraitNone
+        fullView.isAccessibilityElement = false
+        UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nextKeyboardButton)
     }
 
     override func didReceiveMemoryWarning() {
