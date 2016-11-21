@@ -247,7 +247,7 @@ class KeyboardViewController: UIInputViewController {
     func onDoubleTap() {
         SpeechUtil.stopSpeech()
 //        currentMode!.doubleTap()
-        ValueUtil.swapMode(keyboardController: self, valueType: .emoji)
+        ValueUtil.swapMode(keyboardController: self, valueType: .numerical)
         VisualUtil.updateViewAndAnnounce(letter: currentValues.getCurrentValue())
     }
     
