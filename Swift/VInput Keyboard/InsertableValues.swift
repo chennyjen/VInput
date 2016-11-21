@@ -31,6 +31,9 @@ class InsertableValues : Values {
     }
     
     func getCurrentValue() -> String {
+        if isDone() {
+            return values[rightIndex]
+        }
         return values[Int(ceil(Double(rightIndex - leftIndex)/2)) + leftIndex - 1]
     }
     
@@ -39,11 +42,15 @@ class InsertableValues : Values {
     }
     
     func shiftLeft() {
-        self.rightIndex = Int(ceil(Double(rightIndex - leftIndex)/2)) + leftIndex - 1
+        if rightIndex > leftIndex {
+            self.rightIndex = Int(ceil(Double(rightIndex - leftIndex)/2)) + leftIndex - 1
+        }
     }
     
     func shiftRight() {
-        self.leftIndex += Int(ceil(Double(rightIndex - leftIndex)/2.0))
+        if leftIndex < rightIndex {
+            self.leftIndex += Int(ceil(Double(rightIndex - leftIndex)/2.0))
+        }
     }
     
     //TO-DO: Refactor this --> Mike
