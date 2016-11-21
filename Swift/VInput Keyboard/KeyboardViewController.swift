@@ -156,7 +156,7 @@ class KeyboardViewController: UIInputViewController {
         shortHoldRecognizer.addTarget(self, action: #selector(onHold))
         shortHoldRecognizer.require(toFail: longHoldRecognizer)
         
-        longHoldRecognizer.minimumPressDuration = TimeInterval(4)
+        longHoldRecognizer.minimumPressDuration = TimeInterval(10)
         longHoldRecognizer.numberOfTouchesRequired = 1
         longHoldRecognizer.allowableMovement = 50
         longHoldRecognizer.addTarget(self, action: #selector(onLongHold))
