@@ -35,6 +35,7 @@ class InputMode : Mode {
         if textBeforeMarker != nil && textBeforeMarker!.characters.last != " " {
             currentWord = loadFromProxy()
         }
+        VisualUtil.updateViewAndAnnounce(letter: values.getCurrentValue())
     }
     
     func getModeName() -> String {

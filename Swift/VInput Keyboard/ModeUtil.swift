@@ -15,8 +15,7 @@ class ModeUtil
         case tutorial
         case input
     }
-    
-    //TO-DO: Move mode over to an enum
+
     static func swapMode(keyboardController: KeyboardViewController, stateKey: Key, mode: MODE)
     {
         switch mode {
@@ -29,7 +28,9 @@ class ModeUtil
                 keyboardController.currentMode!.initialize()
                 break
             default: //Default to Input Mode
-                return
+                SpeechUtil.speak(textToSpeak: "Entering into Input Mode")
+                keyboardController.currentMode = InputMode(values: keyboardController.currentValues, keyboardController: keyboardController)
+                keyboardController.currentMode!.initialize()
         }
     }
 }

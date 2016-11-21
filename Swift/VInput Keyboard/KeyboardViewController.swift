@@ -195,10 +195,7 @@ class KeyboardViewController: UIInputViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-//        currentMode!.initialize()
-//        VisualUtil.updateViewAndAnnounce(letter: currentValues.getCurrentValue())
-        VisualUtil.updateView(letter: currentValues.getCurrentValue())
-        currentMode = TutorialMode(values: currentValues, keyboardController: self)
+        currentMode = InputMode(values: currentValues, keyboardController: self)
         currentMode!.initialize()
     }
     

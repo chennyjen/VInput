@@ -35,10 +35,7 @@ class TrainingMode : InputMode {
     }
     
     override func initialize() {
-//        SpeechUtil.speak(textToSpeak: "Entered Training Mode")
-//        SpeechUtil.blockIfSpeeking()
         var text = ""
-        
         if providedTrainingWords != nil {
             if stateIndex == 1 {
                 text = "Try finding the letter " + providedTrainingWords![0] + ". Hold on the screen with one finger when you find it"
@@ -60,6 +57,7 @@ class TrainingMode : InputMode {
     override func onSwipeUp() {
         SpeechUtil.speak(textToSpeak: "Inserting " + values.getCurrentValue())
         currentWord.append(values.getCurrentValue())
+        values.isSearchingThenReset()
         VisualUtil.updateViewAndAnnounce(letter: values.getCurrentValue())
     }
     
@@ -80,6 +78,7 @@ class TrainingMode : InputMode {
     override func onHold() {
         currentWord = ""
         startingIndex += 1
+        values.isSearchingThenReset()
         
         if trainingLevel == .space && startingIndex < key!.getStrings().count {
             SpeechUtil.speak(textToSpeak: "Space inserted")
