@@ -10,13 +10,17 @@ import Foundation
 
 class ValueUtil {
     
-    enum VALUE_TYPE
+    enum VALUE_TYPE: Int
     {
-        case numerical
-        case lowercase
+        case lowercase = 0
         case uppercase
+        case numerical
         case emoji
-        case training
+        
+        func numValueTypes() -> Int {
+            return VALUE_TYPE.emoji.rawValue
+        }
+        
     }
 
     static func swapMode(keyboardController: KeyboardViewController, valueType: VALUE_TYPE)

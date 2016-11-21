@@ -197,7 +197,7 @@ class InputMode : Mode {
         SpeechUtil.speak(textToSpeak: "Left or right of " + keyboardController.currentValues.getCurrentValue())
     }
     
-    func onTwoTouchHold(){
+    func onTwoTouchHold() {
         var text = ""
         if (currentWord != ""){
             text = "Current word: " + currentWord
@@ -209,6 +209,13 @@ class InputMode : Mode {
     }
     
 
+    func onTwoFingerSwipeRight() {
+        keyboardController.currentValues.resetIndexes()
+        let currentValueType: ValueUtil.VALUE_TYPE = keyboardController.currentValues.getValueType()
+        let numValueTypes: Int = ValueUtil.VALUE_TYPE.numValueTypes(currentValueType)() + 1
+        ValueUtil.swapMode(keyboardController: keyboardController, valueType: ValueUtil.VALUE_TYPE(rawValue: ((currentValueType.rawValue + 1) % numValueTypes))!)
+        VisualUtil.updateViewAndAnnounce(letter: keyboardController.currentValues.getCurrentValue())
+    }
     
     private func loadFromProxy() -> String {
         let textInDocumentProxy : [String] = keyboardController.textDocumentProxy.documentContextBeforeInput!.components(separatedBy: " ").filter{$0.isEmpty == false}
