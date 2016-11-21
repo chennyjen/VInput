@@ -12,7 +12,7 @@ class CapitalAlphaValues : InsertableValues {
     var capitalAlphaValues: [String] = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
                                  "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
     
-    override init(values: [String] = []) {
+    override init(values: [String] = [], valueType: VALUE_TYPE = .uppercase) {
         super.init(values: capitalAlphaValues)
     }
 }

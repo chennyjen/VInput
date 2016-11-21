@@ -10,7 +10,8 @@ import Foundation
 
 class InsertableValues : Values {
     
-    internal var values : [String]
+    var values : [String]
+    var valueType: VALUE_TYPE
     
     var leftBound : Int
     
@@ -20,8 +21,9 @@ class InsertableValues : Values {
     
     var rightIndex : Int
     
-    init(values: [String] = []) {
+    init(values: [String] = [], valueType: VALUE_TYPE = VALUE_TYPE.lowercase) {
         self.values = values
+        self.valueType = valueType
         self.leftBound = 0
         self.rightBound = self.values.count - 1
         self.leftIndex = self.leftBound
@@ -30,6 +32,10 @@ class InsertableValues : Values {
     
     func getCurrentValue() -> String {
         return values[Int(ceil(Double(rightIndex - leftIndex)/2)) + leftIndex - 1]
+    }
+    
+    func getValueType() -> VALUE_TYPE {
+        return valueType
     }
     
     func shiftLeft() {
