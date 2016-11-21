@@ -23,6 +23,10 @@ protocol Values {
     
     func resetIndexes()
     
+    func getLeftIndex() -> Int
+    
+    func getRightIndex() -> Int
+    
     func isDone() -> Bool
 
 }

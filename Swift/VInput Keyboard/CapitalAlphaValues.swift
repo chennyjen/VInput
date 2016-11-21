@@ -13,6 +13,6 @@ class CapitalAlphaValues : InsertableValues {
                                  "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
     
     override init(values: [String] = [], valueType: ValueUtil.VALUE_TYPE = .uppercase) {
-        super.init(values: capitalAlphaValues)
+        super.init(values: capitalAlphaValues, valueType: valueType)
     }
 }

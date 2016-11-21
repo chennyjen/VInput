@@ -11,6 +11,7 @@ import Foundation
 class InsertableValues : Values {
     
     var values : [String]
+    
     var valueType: ValueUtil.VALUE_TYPE
     
     var leftBound : Int
@@ -21,13 +22,20 @@ class InsertableValues : Values {
     
     var rightIndex : Int
     
-    init(values: [String] = [], valueType: ValueUtil.VALUE_TYPE = .lowercase) {
+    init(values: [String] = [], valueType: ValueUtil.VALUE_TYPE) {
         self.values = values
         self.valueType = valueType
         self.leftBound = 0
         self.rightBound = self.values.count - 1
         self.leftIndex = self.leftBound
         self.rightIndex = self.rightBound
+    }
+    
+    //TO-DO: Check how the subclass initializers use this. Proven to be safe, but unsure if valueType needs to be forced -> Mike
+    convenience init(values: [String] = [], valueType: ValueUtil.VALUE_TYPE, presetLeftIndex: Int, presetRightIndex: Int) {
+        self.init(values: values, valueType: valueType)
+        self.leftIndex = presetLeftIndex
+        self.rightIndex = presetRightIndex
     }
     
     func getCurrentValue() -> String {
@@ -59,6 +67,14 @@ class InsertableValues : Values {
     func resetIndexes() {
         leftIndex = leftBound
         rightIndex = rightBound
+    }
+    
+    func getLeftIndex() -> Int {
+        return leftIndex
+    }
+    
+    func getRightIndex() -> Int {
+        return rightIndex
     }
     
     func isDone() -> Bool {
