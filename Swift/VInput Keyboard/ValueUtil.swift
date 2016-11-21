@@ -24,9 +24,9 @@ class ValueUtil {
         var toSwap: Values? = nil
         switch valueType {
         case .lowercase:
-            toSwap = LowerAlphaValues()
+            toSwap = LowerAlphaValues(valueType: .lowercase, presetLeftIndex: keyboardController.currentValues.getLeftIndex(), presetRightIndex: keyboardController.currentValues.getRightIndex())
         case .uppercase:
-            toSwap = CapitalAlphaValues()
+            toSwap = CapitalAlphaValues(valueType: .uppercase, presetLeftIndex: keyboardController.currentValues.getLeftIndex(), presetRightIndex: keyboardController.currentValues.getRightIndex())
         case .emoji:
             toSwap = EmojiValues()
         default:

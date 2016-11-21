@@ -14,7 +14,7 @@ class EmojiValues : InsertableValues {
     let emojiValueNames: [String] = ["Angry", "Sad", "Neutral", "Grinning", "Very Happy"]
     
     override init(values: [String] = [], valueType: ValueUtil.VALUE_TYPE = .emoji) {
-        super.init(values: emojiValues)
+        super.init(values: emojiValues, valueType: valueType)
     }
     
 }

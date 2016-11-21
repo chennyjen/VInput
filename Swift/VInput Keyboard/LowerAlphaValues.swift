@@ -15,6 +15,6 @@ class LowerAlphaValues : InsertableValues {
                               "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
     
     override init(values: [String] = [], valueType: ValueUtil.VALUE_TYPE = .lowercase) {
-        super.init(values: alphaValues)
+        super.init(values: alphaValues, valueType: valueType)
     }
 }

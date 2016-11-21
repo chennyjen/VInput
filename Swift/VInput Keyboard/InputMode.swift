@@ -43,21 +43,33 @@ class InputMode : Mode {
     }
     
     func onSwipeLeft() {
+        if keyboardController.currentValues.getValueType() == ValueUtil.VALUE_TYPE.uppercase {
+            ValueUtil.swapMode(keyboardController: keyboardController, valueType: ValueUtil.VALUE_TYPE.lowercase)
+        }
         keyboardController.currentValues.shiftLeft()
         VisualUtil.updateViewAndAnnounce(letter: keyboardController.currentValues.getCurrentValue())
     }
     
     func onSwipeRight() {
+        if keyboardController.currentValues.getValueType() == ValueUtil.VALUE_TYPE.uppercase {
+            ValueUtil.swapMode(keyboardController: keyboardController, valueType: ValueUtil.VALUE_TYPE.lowercase)
+        }
         keyboardController.currentValues.shiftRight()
         VisualUtil.updateViewAndAnnounce(letter: keyboardController.currentValues.getCurrentValue())
     }
     
     func onSwipeUp() {
         // TO DO
-        let text = "Inserting " + keyboardController.currentValues.getCurrentValue()
+        var text = "Inserting " + keyboardController.currentValues.getCurrentValue()
+        if keyboardController.currentValues.getValueType() == ValueUtil.VALUE_TYPE.uppercase{
+            text = "Inserting upper case " + keyboardController.currentValues.getCurrentValue()
+        }
         SpeechUtil.speak(textToSpeak: text)
         currentWord.append(keyboardController.currentValues.getCurrentValue())
         keyboardController.textDocumentProxy.insertText(keyboardController.currentValues.getCurrentValue())
+        if keyboardController.currentValues.getValueType() == ValueUtil.VALUE_TYPE.uppercase{
+            ValueUtil.swapMode(keyboardController: keyboardController, valueType: ValueUtil.VALUE_TYPE.lowercase)
+        }
         keyboardController.currentValues.resetIndexes()
         VisualUtil.updateViewAndAnnounce(letter: keyboardController.currentValues.getCurrentValue())
         
@@ -107,19 +119,34 @@ class InputMode : Mode {
                 
             }
         }
+        if keyboardController.currentValues.getValueType() == ValueUtil.VALUE_TYPE.uppercase{
+            ValueUtil.swapMode(keyboardController: keyboardController, valueType: ValueUtil.VALUE_TYPE.lowercase)
+        }
         VisualUtil.updateViewAndAnnounce(letter: keyboardController.currentValues.getCurrentValue())
     }
     
-    func doubleTap() {
-        let text = "Left or right of " + keyboardController.currentValues.getCurrentValue()
-        SpeechUtil.speak(textToSpeak: currentWord)
+    func onHold() {
+        if keyboardController.currentValues.getValueType() == .lowercase {
+            ValueUtil.swapMode(keyboardController: keyboardController, valueType: ValueUtil.VALUE_TYPE.uppercase)
+            VisualUtil.updateView(letter: keyboardController.currentValues.getCurrentValue())
+            SpeechUtil.speak(textToSpeak: "Current letter upper cased" )
+        }
+        else if keyboardController.currentValues.getValueType() == .uppercase {
+            ValueUtil.swapMode(keyboardController: keyboardController, valueType: ValueUtil.VALUE_TYPE.lowercase)
+            VisualUtil.updateView(letter: keyboardController.currentValues.getCurrentValue())
+            SpeechUtil.speak(textToSpeak: "Current letter lower cased")
+        }
     }
     
-    func onHold() {
+    func doubleTap() {
         
         SpeechUtil.speak(textToSpeak: "Inserting space")
         keyboardController.textDocumentProxy.insertText(" ")
         currentWord = ""
+        
+        if keyboardController.currentValues.getValueType() == ValueUtil.VALUE_TYPE.uppercase{
+            ValueUtil.swapMode(keyboardController: keyboardController, valueType: ValueUtil.VALUE_TYPE.lowercase)
+        }
         
         // Save word to Core Data
         let lastWordTyped = loadFromProxy()

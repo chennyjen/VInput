@@ -245,6 +245,7 @@ class KeyboardViewController: UIInputViewController {
     }
     
     func onDoubleTap() {
+        SpeechUtil.stopSpeech()
 //        currentMode!.doubleTap()
         ValueUtil.swapMode(keyboardController: self, valueType: .emoji)
         VisualUtil.updateViewAndAnnounce(letter: currentValues.getCurrentValue())
@@ -259,22 +260,27 @@ class KeyboardViewController: UIInputViewController {
     }
     
     func onTwoTouchTap() {
+        SpeechUtil.stopSpeech()
         currentMode!.onTwoTouchTap()
     }
 
     func onSwipeLeft() {
+        SpeechUtil.stopSpeech()
         currentMode!.onSwipeLeft()
     }
     
     func onSwipeDown() {
+        SpeechUtil.stopSpeech()
         currentMode!.swipeDown()
     }
     
     func onSwipeRight() {
+        SpeechUtil.stopSpeech()
         currentMode!.onSwipeRight()
     }
     
     func onSwipeUp() {
+        SpeechUtil.stopSpeech()
         currentMode!.onSwipeUp()
     }
     
@@ -283,6 +289,7 @@ class KeyboardViewController: UIInputViewController {
 //    }
     
     func onPinch() {
+        SpeechUtil.stopSpeech()
         if pinchRecognizer.state == UIGestureRecognizerState.ended {
             self.dismissKeyboard()
         }
@@ -290,21 +297,25 @@ class KeyboardViewController: UIInputViewController {
     
     func onHold() {
         if shortHoldRecognizer.state == UIGestureRecognizerState.began {
+            SpeechUtil.stopSpeech()
             currentMode!.onHold()
         }
     }
     
     func onTwoTouchHold(gestureRecognizer: UILongPressGestureRecognizer) {
         if gestureRecognizer.state == UIGestureRecognizerState.began{
+            SpeechUtil.stopSpeech()
             currentMode!.onTwoTouchHold()
         }
     }
     
     func onTwoFingerSwipeRight() {
+        SpeechUtil.stopSpeech()
         SpeechUtil.speak(textToSpeak: "Two Finger Swipe Right")
     }
     
     func onThreeFingerSwipeRight() {
+        SpeechUtil.stopSpeech()
         // Renable normalVO functionality and allow user to transition 
         // to another keyboard
         fullView.accessibilityTraits = UIAccessibilityTraitNone
