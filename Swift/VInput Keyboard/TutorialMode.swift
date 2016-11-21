@@ -92,6 +92,10 @@ class TutorialMode : Mode {
         return
     }
     
+    func onLongHold() {
+        return
+    }
+    
     //Holder:
     private func launchTraining() {
         var trainingStrings: [String] = []

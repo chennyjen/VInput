@@ -95,6 +95,9 @@ class TrainingMode : InputMode {
         SpeechUtil.speak(textToSpeak: text)
         
     }
+    override func onLongHold() {
+        return
+    }
     
     enum TRAINING_LEVELS: Int {
         case leftRightUp = 0, fullword, space, delete, promptLetter, promptWord, all

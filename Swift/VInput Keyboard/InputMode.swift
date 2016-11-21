@@ -138,6 +138,10 @@ class InputMode : Mode {
         }
     }
     
+    func onLongHold() {
+        ModeUtil.swapMode(keyboardController: keyboardController, stateKey: Key(index: 0, callingMode: .input), mode: .tutorial)
+    }
+    
     func doubleTap() {
         
         SpeechUtil.speak(textToSpeak: "Inserting space")

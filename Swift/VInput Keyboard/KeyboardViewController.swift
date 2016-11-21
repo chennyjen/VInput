@@ -154,6 +154,13 @@ class KeyboardViewController: UIInputViewController {
         shortHoldRecognizer.minimumPressDuration = TimeInterval(1)
         shortHoldRecognizer.allowableMovement = 50
         shortHoldRecognizer.addTarget(self, action: #selector(onHold))
+        shortHoldRecognizer.require(toFail: longHoldRecognizer)
+        
+        longHoldRecognizer.minimumPressDuration = TimeInterval(4)
+        longHoldRecognizer.numberOfTouchesRequired = 1
+        longHoldRecognizer.allowableMovement = 50
+        longHoldRecognizer.addTarget(self, action: #selector(onLongHold))
+        //longHoldRecognizer.require(toFail: shortHoldRecognizer)
         
         twoTouchHoldRecognizer.numberOfTouchesRequired = 2
         twoTouchHoldRecognizer.minimumPressDuration = TimeInterval(1)
@@ -176,6 +183,7 @@ class KeyboardViewController: UIInputViewController {
         //fullView.addGestureRecognizer(panFromTopRecognizer)
         fullView.addGestureRecognizer(pinchRecognizer)
         fullView.addGestureRecognizer(shortHoldRecognizer)
+        fullView.addGestureRecognizer(longHoldRecognizer)
         fullView.addGestureRecognizer(twoTouchHoldRecognizer)
         
         // TODO fix this to check for orientation and set constraint to desired value
@@ -299,6 +307,14 @@ class KeyboardViewController: UIInputViewController {
         if shortHoldRecognizer.state == UIGestureRecognizerState.began {
             SpeechUtil.stopSpeech()
             currentMode!.onHold()
+        }
+    }
+    
+    func onLongHold() {
+        if longHoldRecognizer.state == UIGestureRecognizerState.began {
+            //SpeechUtil.speak(textToSpeak: "Long Hold recognized")
+            SpeechUtil.stopSpeech()
+            currentMode!.onLongHold()
         }
     }
     
