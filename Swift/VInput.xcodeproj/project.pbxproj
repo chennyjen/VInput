@@ -48,6 +48,8 @@
 		CEEE67901DE2A29C0043A4F1 /* CapitalAlphaValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE678E1DE2A29C0043A4F1 /* CapitalAlphaValues.swift */; };
 		CEEE67921DE2BB050043A4F1 /* ValueUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE67911DE2BB050043A4F1 /* ValueUtil.swift */; };
 		CEEE67931DE2BB050043A4F1 /* ValueUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE67911DE2BB050043A4F1 /* ValueUtil.swift */; };
+		CEEE67951DE2D2BC0043A4F1 /* NumericalValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE67941DE2D2BC0043A4F1 /* NumericalValues.swift */; };
+		CEEE67961DE2D2BC0043A4F1 /* NumericalValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE67941DE2D2BC0043A4F1 /* NumericalValues.swift */; };
 		FE3CCB741DC286DE0036DEF1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3CCB731DC286DE0036DEF1 /* AppDelegate.swift */; };
 		FE3CCB761DC286DE0036DEF1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3CCB751DC286DE0036DEF1 /* ViewController.swift */; };
 		FE3CCB791DC286DE0036DEF1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE3CCB771DC286DE0036DEF1 /* Main.storyboard */; };
@@ -116,6 +118,7 @@
 		CEEE67891DE29F820043A4F1 /* InsertableValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsertableValues.swift; sourceTree = "<group>"; };
 		CEEE678E1DE2A29C0043A4F1 /* CapitalAlphaValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CapitalAlphaValues.swift; sourceTree = "<group>"; };
 		CEEE67911DE2BB050043A4F1 /* ValueUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueUtil.swift; sourceTree = "<group>"; };
+		CEEE67941DE2D2BC0043A4F1 /* NumericalValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumericalValues.swift; sourceTree = "<group>"; };
 		FE3CCB701DC286DE0036DEF1 /* VInput.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VInput.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE3CCB731DC286DE0036DEF1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FE3CCB751DC286DE0036DEF1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -183,6 +186,7 @@
 			children = (
 				CED2B0A31DDD0C4E00A5827F /* Values.swift */,
 				CEEE67891DE29F820043A4F1 /* InsertableValues.swift */,
+				CEEE67941DE2D2BC0043A4F1 /* NumericalValues.swift */,
 				CED2B0A91DDD18C900A5827F /* LowerAlphaValues.swift */,
 				CEEE678E1DE2A29C0043A4F1 /* CapitalAlphaValues.swift */,
 				CED2B0AC1DDD18E000A5827F /* EmojiValues.swift */,
@@ -456,6 +460,7 @@
 				FE3CCB741DC286DE0036DEF1 /* AppDelegate.swift in Sources */,
 				CEEE67841DE219860043A4F1 /* ModeUtil.swift in Sources */,
 				CE2C0C391DDCDB8D0074BCEF /* InputMode.swift in Sources */,
+				CEEE67951DE2D2BC0043A4F1 /* NumericalValues.swift in Sources */,
 				CED2B0A71DDD12E400A5827F /* SpeechUtil.swift in Sources */,
 				CE2C0C341DDCDB790074BCEF /* Mode.swift in Sources */,
 				CEEE678B1DE29F850043A4F1 /* InsertableValues.swift in Sources */,
@@ -505,6 +510,7 @@
 				CEEE67851DE219860043A4F1 /* ModeUtil.swift in Sources */,
 				CED2B0B11DDD326000A5827F /* TrainingValues.swift in Sources */,
 				CED2B0BA1DDD420F00A5827F /* TrainingMode.swift in Sources */,
+				CEEE67961DE2D2BC0043A4F1 /* NumericalValues.swift in Sources */,
 				CED2B0AE1DDD18E000A5827F /* EmojiValues.swift in Sources */,
 				CED2B0A51DDD0C4E00A5827F /* Values.swift in Sources */,
 				1D5E48AC1DDFEE0B008AE472 /* AppDelegate.swift in Sources */,

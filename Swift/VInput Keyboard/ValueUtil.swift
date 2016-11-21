@@ -12,6 +12,7 @@ class ValueUtil {
     
     enum VALUE_TYPE
     {
+        case numerical
         case lowercase
         case uppercase
         case emoji
