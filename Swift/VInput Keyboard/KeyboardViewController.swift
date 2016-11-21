@@ -23,6 +23,7 @@ class KeyboardViewController: UIInputViewController {
     let swipeDownRecognizer = UISwipeGestureRecognizer()
     let swipeRightRecognizer = UISwipeGestureRecognizer()
     let swipeUpRecognizer = UISwipeGestureRecognizer()
+    let twoTouchSwipeRightRecognizer = UISwipeGestureRecognizer()
     //let panFromTopRecognizer = UIScreenEdgePanGestureRecognizer() - have to suppress opening notification center for this to work
     let pinchRecognizer = UIPinchGestureRecognizer()
     let shortHoldRecognizer = UILongPressGestureRecognizer()
@@ -128,9 +129,16 @@ class KeyboardViewController: UIInputViewController {
         
         swipeRightRecognizer.direction = UISwipeGestureRecognizerDirection.right
         swipeRightRecognizer.addTarget(self, action: #selector(onSwipeRight))
+        swipeRightRecognizer.require(toFail: twoTouchSwipeRightRecognizer)
         
         swipeUpRecognizer.direction = UISwipeGestureRecognizerDirection.up
         swipeUpRecognizer.addTarget(self, action: #selector(onSwipeUp))
+        
+        twoTouchSwipeRightRecognizer.direction = UISwipeGestureRecognizerDirection.right
+        twoTouchSwipeRightRecognizer.numberOfTouchesRequired = 2
+        twoTouchSwipeRightRecognizer.addTarget(self, action: #selector(onTwoTouchSwipeRight))
+        
+        twoTouchSwipeLeftRecognizer.direction = UISwipeGestureRecognizerDirection.left
         
         //panFromTopRecognizer.edges.insert(UIRectEdge.top)
         //panFromTopRecognizer.addTarget(self, action: #selector(onPanFromTop))
@@ -157,6 +165,7 @@ class KeyboardViewController: UIInputViewController {
         fullView.addGestureRecognizer(swipeDownRecognizer)
         fullView.addGestureRecognizer(swipeRightRecognizer)
         fullView.addGestureRecognizer(swipeUpRecognizer)
+        fullView.addGestureRecognizer(twoTouchSwipeRightRecognizer)
         //fullView.addGestureRecognizer(panFromTopRecognizer)
         fullView.addGestureRecognizer(pinchRecognizer)
         fullView.addGestureRecognizer(shortHoldRecognizer)
@@ -254,6 +263,10 @@ class KeyboardViewController: UIInputViewController {
 //        let text = alphabet[mid] + " inserted"
 //        SpeachUtil.speak(textToSpeak: text, pitchMultiplier: 1.0, postDelay: TimeInterval(4))
 //        restartSearch()
+    }
+    
+    func onTwoTouchSwipeRight () {
+        SpeechUtil.speak(textToSpeak: "Two touch right swipe recognized")
     }
     
 //    func onPanFromTop() {
