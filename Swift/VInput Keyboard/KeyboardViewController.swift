@@ -79,7 +79,7 @@ class KeyboardViewController: UIInputViewController {
         nextKeyboardButton.setTitle(NSLocalizedString("Next Keyboard", comment: "Title for 'Next Keyboard' button"), for: [])
         nextKeyboardButton.sizeToFit()
         nextKeyboardButton.translatesAutoresizingMaskIntoConstraints = false
-        nextKeyboardButton.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
+        nextKeyboardButton.addTarget(self, action: #selector(UIInputViewController.advanceToNextInputMode), for: .allTouchEvents)
         nextKeyboardButton.backgroundColor = .clear
         nextKeyboardButton.contentEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
         nextKeyboardButton.layer.cornerRadius = 5
@@ -240,7 +240,7 @@ class KeyboardViewController: UIInputViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         currentMode = InputMode(values: currentValues, keyboardController: self)
-        SpeechUtil.speak(textToSpeak: "Vinput Keyboard", preDelay: 0.5)
+        SpeechUtil.speak(textToSpeak: "Vinput Keyboard", preDelay: 0.7)
         currentMode!.initialize()
     }
     
