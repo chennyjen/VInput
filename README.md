@@ -11,7 +11,7 @@ As defined in our Alpha release project plan, below are the deliverables we have
 * "Hello World" full screen keyboard (GitHub)
 
 ## Beta Release
-As defined in our Beta release project plan, below are the deliverables we have completed:
+As defined in our Beta release project plan, below are the deliverables we have completed. [Additional and more detailed information can be found here](https://docs.google.com/document/d/1ckNWmpqcP-tZ3jRCnp_ZpskCHK__58Kwda_WcLUEZXA/edit?usp=sharing).
 * Algorithm logic
  * The `Values` interface and subclasses primarily handle this logic
 * Swiping/gesture setup
