@@ -11,7 +11,6 @@ class TutorialMode : Mode {
 
     let DUMMY: String = "Tutorial Mode"
     //override let MODE_NAME = "TutorialMode"
-    //let speechSynthesizer = AVSpeechSynthesizer()
     var tutorialIndex: Int!
     var values: Values
     var keyboardController: KeyboardViewController
@@ -48,11 +47,7 @@ class TutorialMode : Mode {
             SpeechUtil.speak(textToSpeak: tut[tutorialIndex], postDelay: TimeInterval(4))
             tutorialIndex = tutorialIndex + 1
         }
-//        SpeechUtil.speak(textToSpeak: "Initializing Tutorial")
-//        VisualUtil.updateView(letter: " ")
-//        promptAndLaunchTraining()
         SpeechUtil.speak(textToSpeak: tut[tutorialIndex])
-//        SpeechUtil.blockIfSpeeking()
     }
     
     
@@ -66,8 +61,6 @@ class TutorialMode : Mode {
             tutorialIndex = tutorialIndex - 1
         }
         SpeechUtil.speak(textToSpeak: tut[tutorialIndex])
-//        promptAndLaunchTraining()
-        //TODO: launch training mode only after done speaking
     }
     
     func onSwipeRight() {
@@ -76,17 +69,17 @@ class TutorialMode : Mode {
             tutorialIndex = tutorialIndex + 1
         }
         SpeechUtil.speak(textToSpeak: tut[tutorialIndex])
-//        promptAndLaunchTraining()
     }
     
     func onSwipeUp() {
-        // TO DO: Enter Training mode
-        promptAndLaunchTraining()
+        SpeechUtil.stopSpeech()
+        launchTraining()
     }
     
     func swipeDown() {
-        //TODO: Enter Input Mode
-//        ModeUtil.swapMode(keyboardController: keyboardController, stateKey: Key(index: tutorialIndex), mode: "Input_Mode")
+        SpeechUtil.stopSpeech()
+        SpeechUtil.speak(textToSpeak: "Exiting tutorial mode")
+        ModeUtil.swapMode(keyboardController: keyboardController, stateKey: Key(index: tutorialIndex, callingMode: .tutorial), mode: .input)
     }
     
     func doubleTap() {
@@ -99,7 +92,7 @@ class TutorialMode : Mode {
     }
     
     //Holder:
-    private func promptAndLaunchTraining() {
+    private func launchTraining() {
         var trainingStrings: [String] = []
         switch tutorialIndex {
             case 1:

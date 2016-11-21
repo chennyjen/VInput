@@ -60,6 +60,7 @@ class TrainingMode : InputMode {
     override func onSwipeUp() {
         SpeechUtil.speak(textToSpeak: "Inserting " + values.getCurrentValue())
         currentWord.append(values.getCurrentValue())
+        values.isSearchingThenReset()
         VisualUtil.updateViewAndAnnounce(letter: values.getCurrentValue())
     }
     
@@ -80,6 +81,7 @@ class TrainingMode : InputMode {
     override func onHold() {
         currentWord = ""
         startingIndex += 1
+        values.isSearchingThenReset()
         
         if trainingLevel == .space && startingIndex < key!.getStrings().count {
             SpeechUtil.speak(textToSpeak: "Space inserted")
