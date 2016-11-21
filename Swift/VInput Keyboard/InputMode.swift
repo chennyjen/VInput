@@ -45,11 +45,13 @@ class InputMode : Mode {
     func onSwipeLeft() {
         values.shiftLeft()
         VisualUtil.updateViewAndAnnounce(letter: values.getCurrentValue())
+        capsOn = false
     }
     
     func onSwipeRight() {
         values.shiftRight()
         VisualUtil.updateViewAndAnnounce(letter: values.getCurrentValue())
+        capsOn = false
     }
     
     func onSwipeUp() {
@@ -68,7 +70,7 @@ class InputMode : Mode {
         SpeechUtil.speak(textToSpeak: text)
         values.isSearchingThenReset()
         VisualUtil.updateViewAndAnnounce(letter: values.getCurrentValue())
-        
+        capsOn = false
         
         
         // search for results
@@ -119,7 +121,7 @@ class InputMode : Mode {
         VisualUtil.updateViewAndAnnounce(letter: values.getCurrentValue())
     }
     
-    func doubleTap() {
+    func onHold() {
 //        let text = "Left or right of " + values.getCurrentValue()
 //        SpeechUtil.speak(textToSpeak: currentWord)
         if capsOn {
@@ -134,7 +136,7 @@ class InputMode : Mode {
         }
     }
     
-    func onHold() {
+    func doubleTap() {
         SpeechUtil.speak(textToSpeak: "Inserting space")
         keyboardController.textDocumentProxy.insertText(" ")
         currentWord = ""
