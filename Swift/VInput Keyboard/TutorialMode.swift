@@ -119,11 +119,18 @@ class TutorialMode : Mode {
         ModeUtil.swapMode(keyboardController: keyboardController, stateKey: Key(index: tutorialIndex, trainingStrings: trainingStrings, callingMode: .tutorial), mode: .training)
     }
     
+    //*** STUBBED ***
     func onTwoTouchTap() {
         return
     }
     
+    //*** STUBBED ***
     func onTwoTouchHold() {
+        return
+    }
+    
+    //*** STUBBED ***
+    func onTwoFingerSwipeRight() {
         return
     }
 }

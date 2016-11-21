@@ -254,9 +254,7 @@ class KeyboardViewController: UIInputViewController {
     
     func onDoubleTap() {
         SpeechUtil.stopSpeech()
-//        currentMode!.doubleTap()
-        ValueUtil.swapMode(keyboardController: self, valueType: .numerical)
-        VisualUtil.updateViewAndAnnounce(letter: currentValues.getCurrentValue())
+        currentMode!.doubleTap()
     }
     
 //  TODO: Migrate Over -> Mike
@@ -327,7 +325,7 @@ class KeyboardViewController: UIInputViewController {
     
     func onTwoFingerSwipeRight() {
         SpeechUtil.stopSpeech()
-        SpeechUtil.speak(textToSpeak: "Two Finger Swipe Right")
+        currentMode!.onTwoFingerSwipeRight()
     }
     
     func onThreeFingerSwipeRight() {
