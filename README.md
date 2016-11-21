@@ -20,7 +20,7 @@ As defined in our Beta release project plan, below are the deliverables we have 
 * Layout of keyboard
  * Different UIView elements make up the visual interface within `KeyboardViewController.swift`
 * Controller development and input processing
- * `KeyboardViewController.swift` handles
+ * `KeyboardViewController.swift` handles this in conjunction with different mode files (i.e. `InputMode.swift`)
 * Voice prompting
  * Pervasive use throughout the project of AVFoundation's `AVSpeechSynthesizer`
 * Keyboard activation
@@ -32,5 +32,6 @@ We also went beyond these specified items in our project plan in completing the 
 * **Tutorial and Training Modes:** informative and interactive guide and steps to using VInput
 * **Multiple Alphabets:** users can two finger swipe between lowercase, uppercase, basic emoji and numeric alphabets
 * **Fault Tolerance:** resiliency and correction against crashes, errors, faults by reloading in memory the last word where the user left off (allowing the user to continue where they left off)
+* **Ensuring Correct Input:** correctly places the input cursor at the rightmost location in the text field to prevent accidental deletion and correct appending of additional characters
 * **CoreData Implementation:** as a user types right now, the words they type are stored on-device for later use in developing prediction features
 * **Code Quality:** we spent significant time in the design of our code such that it is readable, maintainable, and extendable (i.e. inheritance in different input modes and alphabet values)
