@@ -24,6 +24,9 @@ class KeyboardViewController: UIInputViewController {
     let swipeRightRecognizer = UISwipeGestureRecognizer()
     let swipeUpRecognizer = UISwipeGestureRecognizer()
     let twoTouchSwipeRightRecognizer = UISwipeGestureRecognizer()
+    let twoTouchSwipeLeftRecognizer = UISwipeGestureRecognizer()
+    let threeTouchSwipeRightRecognizer = UISwipeGestureRecognizer()
+    let threeTouchSwipeLeftRecognizer = UISwipeGestureRecognizer()
     //let panFromTopRecognizer = UIScreenEdgePanGestureRecognizer() - have to suppress opening notification center for this to work
     let pinchRecognizer = UIPinchGestureRecognizer()
     let shortHoldRecognizer = UILongPressGestureRecognizer()
@@ -122,6 +125,7 @@ class KeyboardViewController: UIInputViewController {
         
         swipeLeftRecognizer.direction = UISwipeGestureRecognizerDirection.left
         swipeLeftRecognizer.addTarget(self, action: #selector(onSwipeLeft))
+        swipeLeftRecognizer.require(toFail: twoTouchSwipeLeftRecognizer)
         
         swipeDownRecognizer.direction = UISwipeGestureRecognizerDirection.down
         swipeDownRecognizer.addTarget(self, action: #selector(onSwipeDown))
@@ -135,9 +139,21 @@ class KeyboardViewController: UIInputViewController {
         
         twoTouchSwipeRightRecognizer.direction = UISwipeGestureRecognizerDirection.right
         twoTouchSwipeRightRecognizer.numberOfTouchesRequired = 2
+        twoTouchSwipeRightRecognizer.require(toFail: threeTouchSwipeRightRecognizer)
         twoTouchSwipeRightRecognizer.addTarget(self, action: #selector(onTwoTouchSwipeRight))
         
         twoTouchSwipeLeftRecognizer.direction = UISwipeGestureRecognizerDirection.left
+        twoTouchSwipeLeftRecognizer.numberOfTouchesRequired = 2
+        twoTouchSwipeLeftRecognizer.require(toFail: threeTouchSwipeLeftRecognizer)
+        twoTouchSwipeLeftRecognizer.addTarget(self, action: #selector(onTwoTouchSwipeLeft))
+        
+        threeTouchSwipeRightRecognizer.direction = UISwipeGestureRecognizerDirection.right
+        threeTouchSwipeRightRecognizer.numberOfTouchesRequired = 3
+        threeTouchSwipeRightRecognizer.addTarget(self, action: #selector(onThreeTouchSwipeRight))
+        
+        threeTouchSwipeLeftRecognizer.direction = UISwipeGestureRecognizerDirection.left
+        threeTouchSwipeLeftRecognizer.numberOfTouchesRequired = 3
+        threeTouchSwipeLeftRecognizer.addTarget(self, action: #selector(onThreeTouchSwipeLeft))
         
         //panFromTopRecognizer.edges.insert(UIRectEdge.top)
         //panFromTopRecognizer.addTarget(self, action: #selector(onPanFromTop))
@@ -165,6 +181,7 @@ class KeyboardViewController: UIInputViewController {
         fullView.addGestureRecognizer(swipeRightRecognizer)
         fullView.addGestureRecognizer(swipeUpRecognizer)
         fullView.addGestureRecognizer(twoTouchSwipeRightRecognizer)
+        fullView.addGestureRecognizer(twoTouchSwipeLeftRecognizer)
         //fullView.addGestureRecognizer(panFromTopRecognizer)
         fullView.addGestureRecognizer(pinchRecognizer)
         fullView.addGestureRecognizer(shortHoldRecognizer)
@@ -256,8 +273,20 @@ class KeyboardViewController: UIInputViewController {
         currentMode!.onSwipeUp()
     }
     
-    func onTwoTouchSwipeRight () {
-        SpeechUtil.speak(textToSpeak: "Two touch right swipe recognized")
+    func onTwoTouchSwipeRight() {
+        print("Two touch right swipe recognized")
+    }
+    
+    func onTwoTouchSwipeLeft() {
+        print("Two touch left swipe recognized")
+    }
+    
+    func onThreeTouchSwipeRight() {
+        print("Three touch right swipe recognized")
+    }
+    
+    func onThreeTouchSwipeLeft() {
+        print("Three touch left swipe recognized")
     }
     
 //    func onPanFromTop() {
