@@ -39,7 +39,7 @@ class TrainingMode : InputMode {
         var text = ""
         if providedTrainingWords != nil {
             if stateIndex == 1 {
-                text = "Try finding the letter " + providedTrainingWords![0] + ". Hold on the screen with one finger when you find it"
+                text = "Try finding the letter " + providedTrainingWords![0] + ". Hold on the screen with one finger when you find it."
             }
             else if (stateIndex == 3) {
                 text = "Try to spell out " + providedTrainingWords![0]
@@ -51,12 +51,12 @@ class TrainingMode : InputMode {
         else {
             text = "The first word to spell is " + defaultTrainingWords[0]
         }
-        SpeechUtil.speak(textToSpeak: text)
+        SpeechUtil.speak(textToSpeak: text, speechRate: 0.5)
         VisualUtil.updateViewAndAnnounce(letter: keyboardController.currentValues.getCurrentValue())
     }
     
     override func onSwipeUp() {
-        SpeechUtil.speak(textToSpeak: "Inserting " + keyboardController.currentValues.getCurrentValue())
+        SpeechUtil.speak(textToSpeak: "Inserting " + keyboardController.currentValues.getCurrentValue(), speechRate: 0.5)
         currentWord.append(keyboardController.currentValues.getCurrentValue())
         keyboardController.currentValues.resetIndexes()
         VisualUtil.updateViewAndAnnounce(letter: keyboardController.currentValues.getCurrentValue())
@@ -65,11 +65,11 @@ class TrainingMode : InputMode {
     override func swipeDown() {
         if !keyboardController.currentValues.isSearchingResetAndAnounce() {
             if trainingLevel.rawValue >= TRAINING_LEVELS.delete.rawValue && !currentWord.isEmpty {
-                SpeechUtil.speak(textToSpeak: "Deleting previous character")
+                SpeechUtil.speak(textToSpeak: "Deleting previous character", speechRate: 0.5)
                 currentWord = currentWord.substring(to: currentWord.index(before: currentWord.endIndex))
             }
             else {
-                SpeechUtil.speak(textToSpeak: "No characters in this word to delete")
+                SpeechUtil.speak(textToSpeak: "No characters in this word to delete", speechRate: 0.5)
             }
         }
         VisualUtil.updateViewAndAnnounce(letter: keyboardController.currentValues.getCurrentValue())
@@ -82,7 +82,7 @@ class TrainingMode : InputMode {
         keyboardController.currentValues.resetIndexes()
         
         if trainingLevel == .space && startingIndex < key!.getStrings().count {
-            SpeechUtil.speak(textToSpeak: "Space inserted")
+            SpeechUtil.speak(textToSpeak: "Space inserted", speechRate: 0.5)
         }
         
         if shouldSwapBack && startingIndex >= key!.getStrings().count {
@@ -92,11 +92,11 @@ class TrainingMode : InputMode {
         
         var text = "The next word to spell is "
         text += providedTrainingWords != nil ? providedTrainingWords![startingIndex] : defaultTrainingWords[startingIndex]
-        SpeechUtil.speak(textToSpeak: text)
+        SpeechUtil.speak(textToSpeak: text, speechRate: 0.5)
         
     }
     override func onLongHold() {
-        return
+        onHold()
     }
     
     enum TRAINING_LEVELS: Int {
