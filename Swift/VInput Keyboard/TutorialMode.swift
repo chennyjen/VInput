@@ -112,4 +112,12 @@ class TutorialMode : Mode {
         }
         ModeUtil.swapMode(keyboardController: keyboardController, stateKey: Key(index: tutorialIndex, trainingStrings: trainingStrings, callingMode: .tutorial), mode: .training)
     }
+    
+    func onTwoTouchTap() {
+        return
+    }
+    
+    func onTwoTouchHold() {
+        return
+    }
 }

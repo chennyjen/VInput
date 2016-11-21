@@ -116,6 +116,7 @@ class InputMode : Mode {
     }
     
     func onHold() {
+        
         SpeechUtil.speak(textToSpeak: "Inserting space")
         keyboardController.textDocumentProxy.insertText(" ")
         currentWord = ""
@@ -163,6 +164,24 @@ class InputMode : Mode {
         values.isSearchingThenReset()
         VisualUtil.updateViewAndAnnounce(letter: values.getCurrentValue())
     }
+    
+    
+    func onTwoTouchTap() {
+        SpeechUtil.speak(textToSpeak: "Left or right of " + values.getCurrentValue())
+    }
+    
+    func onTwoTouchHold(){
+        var text = ""
+        if (currentWord != ""){
+            text = "Current word: " + currentWord
+        }
+        else {
+            text = "No letters in current word yet."
+        }
+        SpeechUtil.speak(textToSpeak: text)
+    }
+    
+
     
     private func loadFromProxy() -> String {
         let textInDocumentProxy : [String] = keyboardController.textDocumentProxy.documentContextBeforeInput!.components(separatedBy: " ").filter{$0.isEmpty == false}

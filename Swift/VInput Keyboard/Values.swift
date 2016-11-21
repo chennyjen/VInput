@@ -42,6 +42,7 @@ extension Values {
         if leftIndex != leftBound || rightIndex != rightBound {
             leftIndex = leftBound
             rightIndex = rightBound
+            SpeechUtil.speak(textToSpeak: "Restarting Search")
             return true
         }
         return false

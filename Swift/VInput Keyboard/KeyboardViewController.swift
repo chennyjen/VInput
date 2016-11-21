@@ -18,6 +18,7 @@ class KeyboardViewController: UIInputViewController {
     let singleTapRecognizer = UITapGestureRecognizer()
     let doubleTapRecognizer = UITapGestureRecognizer()
     let doubleTapTwoTouchRecognizer = UITapGestureRecognizer()
+    let twoTouchTapRecognizer = UITapGestureRecognizer()
     let swipeLeftRecognizer = UISwipeGestureRecognizer()
     let swipeDownRecognizer = UISwipeGestureRecognizer()
     let swipeRightRecognizer = UISwipeGestureRecognizer()
@@ -26,6 +27,7 @@ class KeyboardViewController: UIInputViewController {
     let pinchRecognizer = UIPinchGestureRecognizer()
     let shortHoldRecognizer = UILongPressGestureRecognizer()
     let longHoldRecognizer = UILongPressGestureRecognizer()
+    let twoTouchHoldRecognizer = UILongPressGestureRecognizer()
     var heightConstraint: NSLayoutConstraint?
     let alphabet: [String] = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
                               "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
@@ -108,6 +110,11 @@ class KeyboardViewController: UIInputViewController {
         doubleTapRecognizer.addTarget(self, action: #selector(onDoubleTap))
         doubleTapRecognizer.require(toFail: doubleTapTwoTouchRecognizer)
         
+        twoTouchTapRecognizer.numberOfTapsRequired = 1
+        twoTouchTapRecognizer.numberOfTouchesRequired = 2
+        twoTouchTapRecognizer.addTarget(self, action: #selector(onTwoTouchTap))
+        twoTouchTapRecognizer.require(toFail: doubleTapTwoTouchRecognizer)
+        
         doubleTapTwoTouchRecognizer.numberOfTapsRequired = 2
         doubleTapTwoTouchRecognizer.numberOfTouchesRequired = 2
         doubleTapTwoTouchRecognizer.addTarget(self, action: #selector(onDoubleTapTwoTouch))
@@ -133,8 +140,16 @@ class KeyboardViewController: UIInputViewController {
         shortHoldRecognizer.allowableMovement = 50
         shortHoldRecognizer.addTarget(self, action: #selector(onHold))
         
+        twoTouchHoldRecognizer.numberOfTouchesRequired = 2
+        twoTouchHoldRecognizer.minimumPressDuration = TimeInterval(1)
+        twoTouchHoldRecognizer.allowableMovement = 50
+        twoTouchHoldRecognizer.addTarget(self, action: #selector(onTwoTouchHold))
+        twoTouchHoldRecognizer.require(toFail: shortHoldRecognizer)
+        //twoTouchHoldRecognizer.delaysTouchesBegan = true
+        
         // Add gesture recognizers to fullView
         fullView.addGestureRecognizer(doubleTapRecognizer)
+        fullView.addGestureRecognizer(twoTouchTapRecognizer)
         fullView.addGestureRecognizer(doubleTapTwoTouchRecognizer)
         fullView.addGestureRecognizer(singleTapRecognizer)
         fullView.addGestureRecognizer(swipeLeftRecognizer)
@@ -144,6 +159,7 @@ class KeyboardViewController: UIInputViewController {
         //fullView.addGestureRecognizer(panFromTopRecognizer)
         fullView.addGestureRecognizer(pinchRecognizer)
         fullView.addGestureRecognizer(shortHoldRecognizer)
+        fullView.addGestureRecognizer(twoTouchHoldRecognizer)
         
         // TODO fix this to check for orientation and set constraint to desired value
         heightConstraint = NSLayoutConstraint(item: view, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1.0, constant: 256)
@@ -208,6 +224,11 @@ class KeyboardViewController: UIInputViewController {
 //        for character in word.characters {
 //            speak(textToSpeak: String(character))
 //        }
+        //SpeechUtil.speak(textToSpeak: "Two touch recognized")
+    }
+    
+    func onTwoTouchTap() {
+        currentMode!.onTwoTouchTap()
     }
 
     func onSwipeLeft() {
@@ -239,6 +260,12 @@ class KeyboardViewController: UIInputViewController {
     func onHold() {
         if shortHoldRecognizer.state == UIGestureRecognizerState.began {
             currentMode!.onHold()
+        }
+    }
+    
+    func onTwoTouchHold(gestureRecognizer: UILongPressGestureRecognizer) {
+        if gestureRecognizer.state == UIGestureRecognizerState.began{
+            currentMode!.onTwoTouchHold()
         }
     }
 
