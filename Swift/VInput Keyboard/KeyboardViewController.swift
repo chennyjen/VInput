@@ -254,7 +254,8 @@ class KeyboardViewController: UIInputViewController {
     
     func onDoubleTap() {
         SpeechUtil.stopSpeech()
-        currentMode!.doubleTap()
+        currentMode!.onTwoFingerSwipeRight()
+//        currentMode!.doubleTap()
     }
     
 //  TODO: Migrate Over -> Mike
