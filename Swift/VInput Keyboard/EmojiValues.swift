@@ -8,20 +8,13 @@
 
 import Foundation
 
-class EmojiValues : Values {
+class EmojiValues : InsertableValues {
     
-    let values : [String] = ["😡","☹","😐","😬","😃"]
-    let valueNames: [String] = ["Angry", "Sad", "Neutral", "Grinning", "Very Happy"]
+    let emojiValues : [String] = ["😡","☹","😐","😬","😃"]
+    let emojiValueNames: [String] = ["Angry", "Sad", "Neutral", "Grinning", "Very Happy"]
     
-    let leftBound: Int
-    let rightBound: Int
-    var leftIndex, rightIndex : Int
-    
-    init() {
-        self.leftBound = 0
-        self.rightBound = self.values.count - 1
-        self.leftIndex = self.leftBound
-        self.rightIndex = self.rightBound
+    override init(values: [String] = []) {
+        super.init(values: emojiValues)
     }
     
 }

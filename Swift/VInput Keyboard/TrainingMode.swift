@@ -57,12 +57,12 @@ class TrainingMode : InputMode {
     override func onSwipeUp() {
         SpeechUtil.speak(textToSpeak: "Inserting " + values.getCurrentValue())
         currentWord.append(values.getCurrentValue())
-        values.isSearchingThenReset()
+        values.resetIndexes()
         VisualUtil.updateViewAndAnnounce(letter: values.getCurrentValue())
     }
     
     override func swipeDown() {
-        if !values.isSearchingThenReset() {
+        if !values.isSearchingResetAndAnounce() {
             if trainingLevel.rawValue >= TRAINING_LEVELS.delete.rawValue && !currentWord.isEmpty {
                 SpeechUtil.speak(textToSpeak: "Deleting previous character")
                 currentWord = currentWord.substring(to: currentWord.index(before: currentWord.endIndex))
@@ -78,7 +78,7 @@ class TrainingMode : InputMode {
     override func onHold() {
         currentWord = ""
         startingIndex += 1
-        values.isSearchingThenReset()
+        values.resetIndexes()
         
         if trainingLevel == .space && startingIndex < key!.getStrings().count {
             SpeechUtil.speak(textToSpeak: "Space inserted")

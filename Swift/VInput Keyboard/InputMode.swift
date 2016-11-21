@@ -58,7 +58,7 @@ class InputMode : Mode {
         SpeechUtil.speak(textToSpeak: text)
         currentWord.append(values.getCurrentValue())
         keyboardController.textDocumentProxy.insertText(values.getCurrentValue())
-        values.isSearchingThenReset()
+        values.resetIndexes()
         VisualUtil.updateViewAndAnnounce(letter: values.getCurrentValue())
         
         
@@ -91,7 +91,7 @@ class InputMode : Mode {
     
     func swipeDown() {
         //TO-DO: Change this to be handled outside
-        if !values.isSearchingThenReset() {
+        if !values.isSearchingResetAndAnounce() {
             if keyboardController.textDocumentProxy.documentContextBeforeInput == nil {
                 SpeechUtil.speak(textToSpeak: "No characters to delete")
                 return
@@ -161,7 +161,7 @@ class InputMode : Mode {
             print(fetchError)
         }     
         //TO-DO: Figure out on-hold behavior if in the middle of the search
-        values.isSearchingThenReset()
+        values.resetIndexes()
         VisualUtil.updateViewAndAnnounce(letter: values.getCurrentValue())
     }
     
