@@ -17,10 +17,11 @@ class ValueUtil {
         case numerical
         case emoji
         case punctuation
+        case common_words
         
         func numValueTypes() -> Int {
             //This is bad b/c hardcoded, but it's not like it even matters
-            return VALUE_TYPE.punctuation.rawValue
+            return VALUE_TYPE.common_words.rawValue
         }
         
     }
@@ -38,6 +39,8 @@ class ValueUtil {
             toSwap = EmojiValues()
         case .punctuation:
             toSwap = PunctuationValues()
+        case .common_words:
+            toSwap = MostCommonValues(keyboardController: keyboardController)
         default:
             toSwap = NumericalValues()
         }

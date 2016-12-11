@@ -277,7 +277,8 @@ class KeyboardViewController: UIInputViewController {
     
     func onSwipeDown() {
         SpeechUtil.stopSpeech()
-        currentMode!.swipeDown()
+//        currentMode!.swipeDown()
+        currentMode!.onTwoFingerSwipeRight()
     }
     
     func onSwipeRight() {

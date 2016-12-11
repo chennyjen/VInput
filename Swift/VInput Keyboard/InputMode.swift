@@ -243,6 +243,8 @@ class InputMode : Mode {
             text += "emoticons"
         case 4:
             text += "punctuation"
+        case 5:
+            text += "your most common words"
         default:
             break
         }

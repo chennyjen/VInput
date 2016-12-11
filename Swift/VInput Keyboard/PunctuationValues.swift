@@ -11,7 +11,6 @@ import Foundation
 class PunctuationValues : Values {
     
     let puncutationValues : [String] = [".","/",",","!","@","#","$","%", "^","&", "*", "(", ")"]
-//    let emojiValueNames: [String] = ["Angry", "Sad", "Neutral", "Grinning", "Very Happy"]
     var index: Int
     var valueType: ValueUtil.VALUE_TYPE
     
@@ -29,7 +28,8 @@ class PunctuationValues : Values {
         }
     }
     
-    func shiftRight() {
+    func shiftRight()
+    {
         if index < puncutationValues.count - 1
         {
             index += 1
@@ -41,19 +41,23 @@ class PunctuationValues : Values {
         return puncutationValues[index]
     }
     
-    func resetIndexes() {
+    func resetIndexes()
+    {
         index = 0
     }
     
-    func getLeftIndex() -> Int {
+    func getLeftIndex() -> Int
+    {
         return index
     }
     
-    func getRightIndex() -> Int {
+    func getRightIndex() -> Int
+    {
         return index
     }
     
-    func isSearchingResetAndAnounce() -> Bool {
+    func isSearchingResetAndAnounce() -> Bool
+    {
         if index != 0 {
             index = 0
             return true
@@ -61,11 +65,13 @@ class PunctuationValues : Values {
         return false
     }
     
-    func getValueType() -> ValueUtil.VALUE_TYPE {
+    func getValueType() -> ValueUtil.VALUE_TYPE
+    {
         return valueType
     }
     
-    func isDone() -> Bool {
+    func isDone() -> Bool
+    {
         return index == (puncutationValues.count - 1)
     }
     
