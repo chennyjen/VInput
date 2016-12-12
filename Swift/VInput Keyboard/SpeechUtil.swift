@@ -18,6 +18,9 @@ class SpeechUtil {
                       postDelay: TimeInterval = TimeInterval(0),
                       preDelay: TimeInterval = TimeInterval(0),
                       speechRate: Float = 0.55) {
+//        if textToSpeak.range(of: " a") != nil {
+//            
+//        }
         utterance = AVSpeechUtterance(string: textToSpeak)
         // TODO some of these values should be exposed as options in the Settings bundle
         utterance.pitchMultiplier = pitchMultiplier

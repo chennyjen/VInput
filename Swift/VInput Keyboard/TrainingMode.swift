@@ -56,7 +56,7 @@ class TrainingMode : InputMode {
     }
     
     override func onSwipeUp() {
-        SpeechUtil.speak(textToSpeak: "Inserting " + keyboardController.currentValues.getCurrentValue(), speechRate: 0.5)
+        SpeechUtil.speak(textToSpeak: "Inserting " + keyboardController.currentValues.getCurrentValue().uppercased(), speechRate: 0.5)
         currentWord.append(keyboardController.currentValues.getCurrentValue())
         keyboardController.currentValues.resetIndexes()
         VisualUtil.updateViewAndAnnounce(letter: keyboardController.currentValues.getCurrentValue())
