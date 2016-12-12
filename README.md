@@ -35,3 +35,6 @@ We also went beyond these specified items in our project plan in completing the 
 * **Ensuring Correct Input:** correctly places the input cursor at the rightmost location in the text field to prevent accidental deletion and correct appending of additional characters
 * **CoreData Implementation:** as a user types right now, the words they type are stored on-device for later use in developing prediction features
 * **Code Quality:** we spent significant time in the design of our code such that it is readable, maintainable, and extendable (i.e. inheritance in different input modes and alphabet values)
+
+## Gama Release
+https://docs.google.com/a/umich.edu/document/d/1XTVoPCVIVRVMSoKFGWaqs9isXvAEo0pUQTC9SAfd9gM/edit?usp=sharing
