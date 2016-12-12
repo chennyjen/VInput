@@ -364,6 +364,7 @@ class KeyboardViewController: UIInputViewController {
     
     func onThreeFingerSwipeRight() {
         SpeechUtil.stopSpeech()
+        SpeechUtil.speak(textToSpeak: "Exiting VInput.")
         // Renable normalVO functionality and allow user to transition 
         // to another keyboard
         fullView.accessibilityTraits = UIAccessibilityTraitNone

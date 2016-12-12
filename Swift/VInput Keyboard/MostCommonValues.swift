@@ -36,6 +36,7 @@ class MostCommonValues : Values
                 {
                     let word: String = (result as! TypedWord).word!
                     let frequency = (result as! TypedWord).frequency
+                    //Hack: not actually removing words from CoreData for now
                     if frequency > 0
                     {
                         self.commonValues.append(word)
