@@ -124,7 +124,7 @@ class InputMode : Mode {
             }
             else if keyboardController.textDocumentProxy.documentContextBeforeInput?.characters.last != " " {
                 currentWord = loadFromProxy()
-                
+                //reload word here and decrement from count
             }
         }
         if swapBack && keyboardController.currentValues.getValueType() == ValueUtil.VALUE_TYPE.uppercase {
@@ -234,6 +234,7 @@ class InputMode : Mode {
         
         let currentValueType: ValueUtil.VALUE_TYPE = keyboardController.currentValues.getValueType()
         let numValueTypes: Int = ValueUtil.VALUE_TYPE.numValueTypes(currentValueType)() + 1
+        print("$$$$$$ " + String(numValueTypes))
         ValueUtil.swapMode(keyboardController: keyboardController, valueType: ValueUtil.VALUE_TYPE(rawValue: ((currentValueType.rawValue + 1) % numValueTypes))!)
         
         //TODO: Clean and refactor this
@@ -248,6 +249,8 @@ class InputMode : Mode {
             text += "numbers 0 through 9"
         case 3:
             text += "emoticons"
+        case 4:
+            text += "punctuation"
         default:
             break
         }

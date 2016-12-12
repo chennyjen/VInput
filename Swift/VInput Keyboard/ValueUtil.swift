@@ -16,9 +16,11 @@ class ValueUtil {
         case uppercase
         case numerical
         case emoji
+        case punctuation
         
         func numValueTypes() -> Int {
-            return VALUE_TYPE.emoji.rawValue
+            //This is bad b/c hardcoded, but it's not like it even matters
+            return VALUE_TYPE.punctuation.rawValue
         }
         
     }
@@ -34,6 +36,8 @@ class ValueUtil {
             toSwap = CapitalAlphaValues(valueType: .uppercase, presetLeftIndex: keyboardController.currentValues.getLeftIndex(), presetRightIndex: keyboardController.currentValues.getRightIndex())
         case .emoji:
             toSwap = EmojiValues()
+        case .punctuation:
+            toSwap = PunctuationValues()
         default:
             toSwap = NumericalValues()
         }
