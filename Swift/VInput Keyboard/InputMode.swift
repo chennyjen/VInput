@@ -17,10 +17,11 @@ class InputMode : Mode {
     var keyboardController: KeyboardViewController!
     let MODE_NAME = "InputMode"
     var currentWord: String = ""
+    var swapBack: Bool = false
     
     init(keyboardController: KeyboardViewController) {
-//        self.values = values
         self.keyboardController = keyboardController
+        self.swapBack = false
     }
     
     func initialize() {
@@ -34,6 +35,25 @@ class InputMode : Mode {
         let textBeforeMarker: String? = keyboardController.textDocumentProxy.documentContextBeforeInput
         if textBeforeMarker != nil && textBeforeMarker!.characters.last != " " {
             currentWord = loadFromProxy()
+            
+            //Need to decrement here - This is repeat code for now - same as swipe down
+            let context = self.keyboardController.persistentContainer!.viewContext
+            let request = NSFetchRequest<NSFetchRequestResult>()
+            request.predicate = NSPredicate(format: "word = %@", currentWord)
+            request.entity = NSEntityDescription.entity(forEntityName: "TypedWord", in: context)
+            
+            do {
+                let results = try context.fetch(request)
+                let wordToInsertOrUpdate: TypedWord?
+                if results.count > 0 {
+                    wordToInsertOrUpdate = (results[0] as! TypedWord)
+                    wordToInsertOrUpdate!.frequency -= 1
+                    try context.save()
+                }
+            } catch {
+                let fetchError = error as NSError
+                print(fetchError)
+            }
         }
         VisualUtil.updateViewAndAnnounce(letter: keyboardController.currentValues.getCurrentValue())
     }
@@ -43,19 +63,35 @@ class InputMode : Mode {
     }
     
     func onSwipeLeft() {
-        if keyboardController.currentValues.getValueType() == ValueUtil.VALUE_TYPE.uppercase {
+        if swapBack && keyboardController.currentValues.getValueType() == ValueUtil.VALUE_TYPE.uppercase {
             ValueUtil.swapMode(keyboardController: keyboardController, valueType: ValueUtil.VALUE_TYPE.lowercase)
+            swapBack = false
         }
         keyboardController.currentValues.shiftLeft()
-        VisualUtil.updateViewAndAnnounce(letter: keyboardController.currentValues.getCurrentValue())
+        if keyboardController.currentValues.isDone() {
+            SpeechUtil.speak(textToSpeak: keyboardController.currentValues.getCurrentValue())
+            SpeechUtil.speak(textToSpeak: "Swipe up to insert. Swipe down to reset.")
+            let systemSoundID: SystemSoundID = 4095
+            AudioServicesPlaySystemSound (systemSoundID)
+        } else {
+            VisualUtil.updateViewAndAnnounce(letter: keyboardController.currentValues.getCurrentValue())
+        }
     }
     
     func onSwipeRight() {
-        if keyboardController.currentValues.getValueType() == ValueUtil.VALUE_TYPE.uppercase {
+        if swapBack && keyboardController.currentValues.getValueType() == ValueUtil.VALUE_TYPE.uppercase {
             ValueUtil.swapMode(keyboardController: keyboardController, valueType: ValueUtil.VALUE_TYPE.lowercase)
+            swapBack = false
         }
-        keyboardController.currentValues.shiftRight()
-        VisualUtil.updateViewAndAnnounce(letter: keyboardController.currentValues.getCurrentValue())
+        if keyboardController.currentValues.isDone() {
+            SpeechUtil.speak(textToSpeak: keyboardController.currentValues.getCurrentValue())
+            SpeechUtil.speak(textToSpeak: "Swipe up to insert. Swipe down to reset.")
+            let systemSoundID: SystemSoundID = 4095
+            AudioServicesPlaySystemSound (systemSoundID)
+        } else {
+            keyboardController.currentValues.shiftRight()
+            VisualUtil.updateViewAndAnnounce(letter: keyboardController.currentValues.getCurrentValue())
+        }
     }
     
     func onSwipeUp() {
@@ -64,11 +100,15 @@ class InputMode : Mode {
         if keyboardController.currentValues.getValueType() == ValueUtil.VALUE_TYPE.uppercase{
             text = "Inserting upper case " + keyboardController.currentValues.getCurrentValue()
         }
+        if keyboardController.currentValues.getValueType() == ValueUtil.VALUE_TYPE.lowercase {
+            text = "Inserting " + keyboardController.currentValues.getCurrentValue().uppercased()
+        }
         SpeechUtil.speak(textToSpeak: text)
         currentWord.append(keyboardController.currentValues.getCurrentValue())
         keyboardController.textDocumentProxy.insertText(keyboardController.currentValues.getCurrentValue())
-        if keyboardController.currentValues.getValueType() == ValueUtil.VALUE_TYPE.uppercase{
+        if swapBack && keyboardController.currentValues.getValueType() == ValueUtil.VALUE_TYPE.uppercase{
             ValueUtil.swapMode(keyboardController: keyboardController, valueType: ValueUtil.VALUE_TYPE.lowercase)
+            swapBack = false
         }
         keyboardController.currentValues.resetIndexes()
         VisualUtil.updateViewAndAnnounce(letter: keyboardController.currentValues.getCurrentValue())
@@ -117,23 +157,45 @@ class InputMode : Mode {
             else if keyboardController.textDocumentProxy.documentContextBeforeInput?.characters.last != " " {
                 currentWord = loadFromProxy()
                 
+                //reload word here and decrement from count
+                let context = self.keyboardController.persistentContainer!.viewContext
+                let request = NSFetchRequest<NSFetchRequestResult>()
+                request.predicate = NSPredicate(format: "word = %@", currentWord)
+                request.entity = NSEntityDescription.entity(forEntityName: "TypedWord", in: context)
+                
+                do {
+                    let results = try context.fetch(request)
+                    let wordToInsertOrUpdate: TypedWord?
+                    if results.count > 0 {
+                        wordToInsertOrUpdate = (results[0] as! TypedWord)
+                        wordToInsertOrUpdate!.frequency -= 1
+                        try context.save()
+                    }
+                } catch {
+                    let fetchError = error as NSError
+                    print(fetchError)
+                }
             }
         }
-        if keyboardController.currentValues.getValueType() == ValueUtil.VALUE_TYPE.uppercase{
+        if swapBack && keyboardController.currentValues.getValueType() == ValueUtil.VALUE_TYPE.uppercase {
             ValueUtil.swapMode(keyboardController: keyboardController, valueType: ValueUtil.VALUE_TYPE.lowercase)
+            swapBack = false
         }
         VisualUtil.updateViewAndAnnounce(letter: keyboardController.currentValues.getCurrentValue())
     }
     
     func onHold() {
+        //TODO: This needs to be refactored throughout
         if keyboardController.currentValues.getValueType() == .lowercase {
             ValueUtil.swapMode(keyboardController: keyboardController, valueType: ValueUtil.VALUE_TYPE.uppercase)
             VisualUtil.updateView(letter: keyboardController.currentValues.getCurrentValue())
+            swapBack = true
             SpeechUtil.speak(textToSpeak: "Current letter upper cased" )
         }
         else if keyboardController.currentValues.getValueType() == .uppercase {
             ValueUtil.swapMode(keyboardController: keyboardController, valueType: ValueUtil.VALUE_TYPE.lowercase)
             VisualUtil.updateView(letter: keyboardController.currentValues.getCurrentValue())
+            swapBack = false
             SpeechUtil.speak(textToSpeak: "Current letter lower cased")
         }
     }
@@ -198,10 +260,15 @@ class InputMode : Mode {
     
     
     func onTwoTouchTap() {
-        SpeechUtil.speak(textToSpeak: "Left or right of " + keyboardController.currentValues.getCurrentValue())
+        if keyboardController.currentValues.getValueType() == ValueUtil.VALUE_TYPE.lowercase {
+            SpeechUtil.speak(textToSpeak: "Left or right of " + keyboardController.currentValues.getCurrentValue().uppercased())
+        }
+        else {
+            SpeechUtil.speak(textToSpeak: "Left or right of " + keyboardController.currentValues.getCurrentValue())
+        }
     }
     
-    func onTwoTouchHold(){
+    func onTwoTouchHold() {
         var text = ""
         if (currentWord != ""){
             text = "Current word: " + currentWord
@@ -213,6 +280,37 @@ class InputMode : Mode {
     }
     
 
+    func onTwoFingerSwipeRight() {
+        
+        let currentValueType: ValueUtil.VALUE_TYPE = keyboardController.currentValues.getValueType()
+        let numValueTypes: Int = ValueUtil.VALUE_TYPE.numValueTypes(currentValueType)() + 1
+        ValueUtil.swapMode(keyboardController: keyboardController, valueType: ValueUtil.VALUE_TYPE(rawValue: ((currentValueType.rawValue + 1) % numValueTypes))!)
+        
+        //TODO: Clean and refactor this
+        let valHolder: Int = keyboardController.currentValues.getValueType().rawValue
+        var text: String = "Switching to "
+        switch valHolder {
+        case 0:
+            text += "lower case alphabet"
+        case 1:
+            text += "upper case alphabet"
+        case 2:
+            text += "numbers 0 through 9"
+        case 3:
+            text += "emoticons"
+        case 4:
+            text += "punctuation"
+        case 5:
+            text += "your most common words"
+        default:
+            break
+        }
+        SpeechUtil.speak(textToSpeak: text)
+        
+        keyboardController.currentValues.resetIndexes()
+        VisualUtil.updateViewAndAnnounce(letter: keyboardController.currentValues.getCurrentValue())
+        
+    }
     
     private func loadFromProxy() -> String {
         let textInDocumentProxy : [String] = keyboardController.textDocumentProxy.documentContextBeforeInput!.components(separatedBy: " ").filter{$0.isEmpty == false}

@@ -1,22 +1,24 @@
 //
-//  EmojiKeyboard.swift
+//  Punctuation.swift
 //  VInput
 //
-//  Created by Michael Vander Lugt on 11/16/16.
+//  Created by Michael Vander Lugt on 12/10/16.
 //  Copyright © 2016 EECS481-VInput. All rights reserved.
 //
 
 import Foundation
 
-class EmojiValues : Values {
+class PunctuationValues : Values {
     
-    let emojiValues : [String] = ["😃","😊","😬","😐","☹","😭","😡"]
+    //Punctuation chosen based on http://mdickens.me/typing/letter_frequency.html
+    let puncutationValues : [String] = [",",".","-","\"","_","\'",")","(",";", "=",":", "/", "*", "!", "?", "$", "&", "@"]
     var index: Int
     var valueType: ValueUtil.VALUE_TYPE
     
-    init(values: [String] = [], valueType: ValueUtil.VALUE_TYPE = .emoji) {
+    init(values: [String] = [], valueType: ValueUtil.VALUE_TYPE = .punctuation)
+    {
         self.index = 0
-        self.valueType = .emoji
+        self.valueType = .punctuation
     }
     
     func shiftLeft()
@@ -29,7 +31,7 @@ class EmojiValues : Values {
     
     func shiftRight()
     {
-        if index < emojiValues.count - 1
+        if index < puncutationValues.count - 1
         {
             index += 1
         }
@@ -37,7 +39,7 @@ class EmojiValues : Values {
     
     func getCurrentValue() -> String
     {
-        return emojiValues[index]
+        return puncutationValues[index]
     }
     
     func resetIndexes()
@@ -71,7 +73,7 @@ class EmojiValues : Values {
     
     func isDone() -> Bool
     {
-        return index == (emojiValues.count - 1)
+        return index == (puncutationValues.count - 1)
     }
-
+    
 }

@@ -12,17 +12,45 @@ import AVFoundation
 class SpeechUtil {
     
     static var utterance: AVSpeechUtterance!
-    static let speechSynthesizer = AVSpeechSynthesizer()
+    static var speechSynthesizer = AVSpeechSynthesizer()
+    static var punctuationKeys: [String:String] = [
+        "Left or right of ," : "Left or right of comma",
+        "Left or right of ." : "Left or right of period",
+        "Left or right of -" : "Left or right of hyphen",
+        "Left or right of \"" : "Left or right of double quotation mark",
+        "Left or right of _" : "Left or right of underscore",
+        "Left or right of \'" : "Left or right of single quotation mark",
+        "Left or right of )" : "Left or right of close paranthesis",
+        "Left or right of (" : "Left or right of open paranthesis",
+        "Left or right of ;" : "Left or right of semi-colon",
+        "Left or right of =" : "Left or right of equal sign",
+        "Left or right of :" : "Left or right of colon",
+        "Left or right of /" : "Left or right of forward slash",
+        "Left or right of *" : "Left or right of asteric",
+        "Left or right of !" : "Left or right of exclamation point",
+        "Left or right of ?" : "Left or right of question mark",
+        "Left or right of $" : "Left or right of dollar sign",
+        "Left or right of &" : "Left or right of ampersand",
+        "Left or right of @" : "Left or right of at sign"
+    ]
     
     static func speak(textToSpeak: String, pitchMultiplier: Float = 1.0,
                       postDelay: TimeInterval = TimeInterval(0),
-                      preDelay: TimeInterval = TimeInterval(0)) {
+                      preDelay: TimeInterval = TimeInterval(0),
+                      speechRate: Float = 0.55) {
+//        if textToSpeak.range(of: " a") != nil {
+//            
+//        }
         utterance = AVSpeechUtterance(string: textToSpeak)
         // TODO some of these values should be exposed as options in the Settings bundle
         utterance.pitchMultiplier = pitchMultiplier
         //utterance.postUtteranceDelay = postDelay
         utterance.preUtteranceDelay = preDelay
-        utterance.rate = 0.55
+        utterance.rate = speechRate
+        print(textToSpeak)
+        if let newText = punctuationKeys[textToSpeak] {
+            utterance = AVSpeechUtterance(string: newText)
+        }
         speechSynthesizer.speak(utterance)
     }
     
@@ -33,6 +61,7 @@ class SpeechUtil {
     static func stopSpeech() {
         if speechSynthesizer.isSpeaking {
             speechSynthesizer.stopSpeaking(at: AVSpeechBoundary.immediate)
+            speechSynthesizer = AVSpeechSynthesizer()
         }
     }
     

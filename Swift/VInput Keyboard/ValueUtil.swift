@@ -10,13 +10,20 @@ import Foundation
 
 class ValueUtil {
     
-    enum VALUE_TYPE
+    enum VALUE_TYPE: Int
     {
-        case numerical
-        case lowercase
+        case lowercase = 0
         case uppercase
+        case numerical
         case emoji
-        case training
+        case punctuation
+        case common_words
+        
+        func numValueTypes() -> Int {
+            //This is bad b/c hardcoded, but it's not like it even matters
+            return VALUE_TYPE.common_words.rawValue
+        }
+        
     }
 
     static func swapMode(keyboardController: KeyboardViewController, valueType: VALUE_TYPE)
@@ -30,6 +37,10 @@ class ValueUtil {
             toSwap = CapitalAlphaValues(valueType: .uppercase, presetLeftIndex: keyboardController.currentValues.getLeftIndex(), presetRightIndex: keyboardController.currentValues.getRightIndex())
         case .emoji:
             toSwap = EmojiValues()
+        case .punctuation:
+            toSwap = PunctuationValues()
+        case .common_words:
+            toSwap = MostCommonValues(keyboardController: keyboardController)
         default:
             toSwap = NumericalValues()
         }

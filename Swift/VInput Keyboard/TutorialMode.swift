@@ -44,11 +44,11 @@ class TutorialMode : Mode {
     func initialize() {
         KeyboardViewController.letterLabel.text = ""
         if tutorialIndex == 0 {
-            SpeechUtil.speak(textToSpeak: "You've entered tutorial mode.", postDelay: TimeInterval(4))
-            SpeechUtil.speak(textToSpeak: tut[tutorialIndex], postDelay: TimeInterval(4))
+            SpeechUtil.speak(textToSpeak: "You've entered tutorial mode.", postDelay: TimeInterval(4),speechRate: 0.5)
+            SpeechUtil.speak(textToSpeak: tut[tutorialIndex], postDelay: TimeInterval(4),speechRate: 0.5)
             tutorialIndex = tutorialIndex + 1
         }
-        SpeechUtil.speak(textToSpeak: tut[tutorialIndex])
+        SpeechUtil.speak(textToSpeak: tut[tutorialIndex], speechRate: 0.5)
     }
     
     
@@ -61,7 +61,7 @@ class TutorialMode : Mode {
         if tutorialIndex > 0 {
             tutorialIndex = tutorialIndex - 1
         }
-        SpeechUtil.speak(textToSpeak: tut[tutorialIndex])
+        SpeechUtil.speak(textToSpeak: tut[tutorialIndex], speechRate: 0.5)
     }
     
     func onSwipeRight() {
@@ -69,7 +69,7 @@ class TutorialMode : Mode {
         if tutorialIndex < tut.count{
             tutorialIndex = tutorialIndex + 1
         }
-        SpeechUtil.speak(textToSpeak: tut[tutorialIndex])
+        SpeechUtil.speak(textToSpeak: tut[tutorialIndex], speechRate: 0.5)
     }
     
     func onSwipeUp() {
@@ -79,13 +79,13 @@ class TutorialMode : Mode {
     
     func swipeDown() {
         SpeechUtil.stopSpeech()
-        SpeechUtil.speak(textToSpeak: "Exiting tutorial mode")
+        SpeechUtil.speak(textToSpeak: "Exiting tutorial mode", speechRate: 0.5)
         ModeUtil.swapMode(keyboardController: keyboardController, stateKey: Key(index: tutorialIndex, callingMode: .tutorial), mode: .input)
     }
     
     func doubleTap() {
         SpeechUtil.stopSpeech()
-        SpeechUtil.speak(textToSpeak: tut[tutorialIndex])
+        SpeechUtil.speak(textToSpeak: tut[tutorialIndex], speechRate: 0.5)
     }
     
     func onHold() {
@@ -119,11 +119,18 @@ class TutorialMode : Mode {
         ModeUtil.swapMode(keyboardController: keyboardController, stateKey: Key(index: tutorialIndex, trainingStrings: trainingStrings, callingMode: .tutorial), mode: .training)
     }
     
+    //*** STUBBED ***
     func onTwoTouchTap() {
         return
     }
     
+    //*** STUBBED ***
     func onTwoTouchHold() {
+        return
+    }
+    
+    //*** STUBBED ***
+    func onTwoFingerSwipeRight() {
         return
     }
 }

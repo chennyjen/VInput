@@ -32,4 +32,6 @@ protocol Mode {
     
     func onTwoTouchHold()
     
+    func onTwoFingerSwipeRight()
+    
 }
