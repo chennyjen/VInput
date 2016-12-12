@@ -13,7 +13,7 @@ class VisualUtil {
     
     static func updateViewAndAnnounce(letter: String) {
         KeyboardViewController.letterLabel.text = letter
-        let text = "Left or right of " + letter
+        let text = "Left or right of " + letter.uppercased()
         SpeechUtil.speak(textToSpeak: text)
     }
     

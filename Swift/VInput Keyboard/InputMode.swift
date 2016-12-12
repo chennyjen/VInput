@@ -68,6 +68,9 @@ class InputMode : Mode {
         if keyboardController.currentValues.getValueType() == ValueUtil.VALUE_TYPE.uppercase{
             text = "Inserting upper case " + keyboardController.currentValues.getCurrentValue()
         }
+        if keyboardController.currentValues.getValueType() == ValueUtil.VALUE_TYPE.lowercase {
+            text = "Inserting " + keyboardController.currentValues.getCurrentValue().uppercased()
+        }
         SpeechUtil.speak(textToSpeak: text)
         currentWord.append(keyboardController.currentValues.getCurrentValue())
         keyboardController.textDocumentProxy.insertText(keyboardController.currentValues.getCurrentValue())
@@ -207,7 +210,12 @@ class InputMode : Mode {
     
     
     func onTwoTouchTap() {
-        SpeechUtil.speak(textToSpeak: "Left or right of " + keyboardController.currentValues.getCurrentValue())
+        if keyboardController.currentValues.getValueType() == ValueUtil.VALUE_TYPE.lowercase {
+            SpeechUtil.speak(textToSpeak: "Left or right of " + keyboardController.currentValues.getCurrentValue().uppercased())
+        }
+        else {
+            SpeechUtil.speak(textToSpeak: "Left or right of " + keyboardController.currentValues.getCurrentValue())
+        }
     }
     
     func onTwoTouchHold() {
