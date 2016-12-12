@@ -20,7 +20,6 @@ class InputMode : Mode {
     var swapBack: Bool = false
     
     init(keyboardController: KeyboardViewController) {
-//        self.values = values
         self.keyboardController = keyboardController
         self.swapBack = false
     }
@@ -36,6 +35,7 @@ class InputMode : Mode {
         let textBeforeMarker: String? = keyboardController.textDocumentProxy.documentContextBeforeInput
         if textBeforeMarker != nil && textBeforeMarker!.characters.last != " " {
             currentWord = loadFromProxy()
+            
             //Need to decrement here - This is repeat code for now - same as swipe down
             let context = self.keyboardController.persistentContainer!.viewContext
             let request = NSFetchRequest<NSFetchRequestResult>()
@@ -284,7 +284,6 @@ class InputMode : Mode {
         
         let currentValueType: ValueUtil.VALUE_TYPE = keyboardController.currentValues.getValueType()
         let numValueTypes: Int = ValueUtil.VALUE_TYPE.numValueTypes(currentValueType)() + 1
-        print("$$$$$$ " + String(numValueTypes))
         ValueUtil.swapMode(keyboardController: keyboardController, valueType: ValueUtil.VALUE_TYPE(rawValue: ((currentValueType.rawValue + 1) % numValueTypes))!)
         
         //TODO: Clean and refactor this

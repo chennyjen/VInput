@@ -13,6 +13,26 @@ class SpeechUtil {
     
     static var utterance: AVSpeechUtterance!
     static var speechSynthesizer = AVSpeechSynthesizer()
+    static var punctuationKeys: [String:String] = [
+        "Left or right of ," : "Left or right of comma",
+        "Left or right of ." : "Left or right of period",
+        "Left or right of -" : "Left or right of hyphen",
+        "Left or right of \"" : "Left or right of double quotation mark",
+        "Left or right of _" : "Left or right of underscore",
+        "Left or right of \'" : "Left or right of single quotation mark",
+        "Left or right of )" : "Left or right of close paranthesis",
+        "Left or right of (" : "Left or right of open paranthesis",
+        "Left or right of ;" : "Left or right of semi-colon",
+        "Left or right of =" : "Left or right of equal sign",
+        "Left or right of :" : "Left or right of colon",
+        "Left or right of /" : "Left or right of forward slash",
+        "Left or right of *" : "Left or right of asteric",
+        "Left or right of !" : "Left or right of exclamation point",
+        "Left or right of ?" : "Left or right of question mark",
+        "Left or right of $" : "Left or right of dollar sign",
+        "Left or right of &" : "Left or right of ampersand",
+        "Left or right of @" : "Left or right of at sign"
+    ]
     
     static func speak(textToSpeak: String, pitchMultiplier: Float = 1.0,
                       postDelay: TimeInterval = TimeInterval(0),
@@ -27,6 +47,10 @@ class SpeechUtil {
         //utterance.postUtteranceDelay = postDelay
         utterance.preUtteranceDelay = preDelay
         utterance.rate = speechRate
+        print(textToSpeak)
+        if let newText = punctuationKeys[textToSpeak] {
+            utterance = AVSpeechUtterance(string: newText)
+        }
         speechSynthesizer.speak(utterance)
     }
     

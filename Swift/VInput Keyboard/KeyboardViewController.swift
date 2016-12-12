@@ -39,10 +39,6 @@ class KeyboardViewController: UIInputViewController {
     
     var persistentContainer: NSPersistentContainer?
     
-    deinit {
-        print("%%%%%% DEINIT")
-    }
-    
     override func updateViewConstraints() {
         super.updateViewConstraints()
         
@@ -281,8 +277,7 @@ class KeyboardViewController: UIInputViewController {
     
     func onSwipeDown() {
         SpeechUtil.stopSpeech()
-//        currentMode!.swipeDown()
-        currentMode!.onTwoFingerSwipeRight()
+        currentMode!.swipeDown()
     }
     
     func onSwipeRight() {

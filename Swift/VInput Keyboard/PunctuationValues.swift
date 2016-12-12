@@ -10,7 +10,8 @@ import Foundation
 
 class PunctuationValues : Values {
     
-    let puncutationValues : [String] = [".","/",",","!","@","#","$","%", "^","&", "*", "(", ")"]
+    //Punctuation chosen based on http://mdickens.me/typing/letter_frequency.html
+    let puncutationValues : [String] = [",",".","-","\"","_","\'",")","(",";", "=",":", "/", "*", "!", "?", "$", "&", "@"]
     var index: Int
     var valueType: ValueUtil.VALUE_TYPE
     
