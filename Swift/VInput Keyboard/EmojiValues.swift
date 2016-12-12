@@ -8,13 +8,70 @@
 
 import Foundation
 
-class EmojiValues : InsertableValues {
+class EmojiValues : Values {
     
-    let emojiValues : [String] = ["😡","☹","😐","😬","😃"]
-    let emojiValueNames: [String] = ["Angry", "Sad", "Neutral", "Grinning", "Very Happy"]
+    let emojiValues : [String] = ["😃","😊","😬","😐","☹","😭","😡"]
+    var index: Int
+    var valueType: ValueUtil.VALUE_TYPE
     
-    override init(values: [String] = [], valueType: ValueUtil.VALUE_TYPE = .emoji) {
-        super.init(values: emojiValues, valueType: valueType)
+    init(values: [String] = [], valueType: ValueUtil.VALUE_TYPE = .emoji) {
+        self.index = 0
+        self.valueType = .emoji
     }
     
+    func shiftLeft()
+    {
+        if index > 0
+        {
+            index -= 1
+        }
+    }
+    
+    func shiftRight()
+    {
+        if index < emojiValues.count - 1
+        {
+            index += 1
+        }
+    }
+    
+    func getCurrentValue() -> String
+    {
+        return emojiValues[index]
+    }
+    
+    func resetIndexes()
+    {
+        index = 0
+    }
+    
+    func getLeftIndex() -> Int
+    {
+        return index
+    }
+    
+    func getRightIndex() -> Int
+    {
+        return index
+    }
+    
+    func isSearchingResetAndAnounce() -> Bool
+    {
+        if index != 0 {
+            index = 0
+            return true
+        }
+        return false
+    }
+    
+    func getValueType() -> ValueUtil.VALUE_TYPE
+    {
+        return valueType
+    }
+    
+    func isDone() -> Bool
+    {
+        return index == (emojiValues.count - 1)
+    }
+
 }
