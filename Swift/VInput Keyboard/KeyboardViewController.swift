@@ -38,7 +38,11 @@ class KeyboardViewController: UIInputViewController {
     var currentMode: Mode? = nil
     
     var persistentContainer: NSPersistentContainer?
-
+    
+    deinit {
+        print("%%%%%% DEINIT")
+    }
+    
     override func updateViewConstraints() {
         super.updateViewConstraints()
         
@@ -204,12 +208,12 @@ class KeyboardViewController: UIInputViewController {
             var containerPath = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.VInput")!
             containerPath = URL(fileURLWithPath: documentsDirectory.appending("/store.sqlite"), isDirectory: false)
 //            containerPath = containerPath.appendingPathComponent("store.sqlite")
-            do {
-                try FileManager.default.removeItem(at: containerPath)
-            } catch {
-                // nothing
-                print("Could not delete CD DB")
-            }
+//            do {
+//                try FileManager.default.removeItem(at: containerPath)
+//            } catch {
+//                // nothing
+//                print("Could not delete CD DB")
+//            }
             let description = NSPersistentStoreDescription(url: containerPath)
             container.persistentStoreDescriptions = [description]
             container.loadPersistentStores(completionHandler: { (storeDescription, error) in
@@ -277,7 +281,8 @@ class KeyboardViewController: UIInputViewController {
     
     func onSwipeDown() {
         SpeechUtil.stopSpeech()
-        currentMode!.swipeDown()
+//        currentMode!.swipeDown()
+        currentMode!.onTwoFingerSwipeRight()
     }
     
     func onSwipeRight() {
@@ -297,6 +302,35 @@ class KeyboardViewController: UIInputViewController {
     func onPinch() {
         SpeechUtil.stopSpeech()
         if pinchRecognizer.state == UIGestureRecognizerState.ended {
+            
+            //Hack for now
+            let textInDocumentProxy : [String] = self.textDocumentProxy.documentContextBeforeInput!.components(separatedBy: " ").filter{$0.isEmpty == false}
+            var lastWord = textInDocumentProxy.isEmpty ? "" : textInDocumentProxy.last!
+            
+            let context = self.persistentContainer!.viewContext
+            let request = NSFetchRequest<NSFetchRequestResult>()
+            
+            request.predicate = NSPredicate(format: "word = %@", lastWord)
+            request.entity = NSEntityDescription.entity(forEntityName: "TypedWord", in: context)
+            
+            do {
+                let results = try context.fetch(request)
+                let wordToInsertOrUpdate: TypedWord?
+                if results.count == 0 {
+                    wordToInsertOrUpdate = NSEntityDescription.insertNewObject(forEntityName: "TypedWord", into: context) as! TypedWord
+                    wordToInsertOrUpdate!.word = lastWord
+                    wordToInsertOrUpdate!.frequency = 0
+                } else {
+                    wordToInsertOrUpdate = (results[0] as! TypedWord)
+                }
+                wordToInsertOrUpdate!.frequency += 1
+                try context.save()
+            } catch {
+                let fetchError = error as NSError
+                print(fetchError)
+            }
+            //Code Repeat
+            
             self.dismissKeyboard()
         }
     }
@@ -330,6 +364,7 @@ class KeyboardViewController: UIInputViewController {
     
     func onThreeFingerSwipeRight() {
         SpeechUtil.stopSpeech()
+        SpeechUtil.speak(textToSpeak: "Exiting VInput.")
         // Renable normalVO functionality and allow user to transition 
         // to another keyboard
         fullView.accessibilityTraits = UIAccessibilityTraitNone

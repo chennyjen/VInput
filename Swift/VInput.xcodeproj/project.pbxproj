@@ -27,6 +27,10 @@
 		CE38268C1DFD10C6000F81C3 /* PunctuationValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE38268A1DFD10C6000F81C3 /* PunctuationValues.swift */; };
 		CE38268D1DFD10C6000F81C3 /* PunctuationValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE38268A1DFD10C6000F81C3 /* PunctuationValues.swift */; };
 		CE38268E1DFD10C6000F81C3 /* PunctuationValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE38268A1DFD10C6000F81C3 /* PunctuationValues.swift */; };
+		CE3826901DFD2692000F81C3 /* MostCommonValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE38268F1DFD2692000F81C3 /* MostCommonValues.swift */; };
+		CE3826911DFD2692000F81C3 /* MostCommonValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE38268F1DFD2692000F81C3 /* MostCommonValues.swift */; };
+		CE3826921DFD2692000F81C3 /* MostCommonValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE38268F1DFD2692000F81C3 /* MostCommonValues.swift */; };
+		CE3826931DFD2692000F81C3 /* MostCommonValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE38268F1DFD2692000F81C3 /* MostCommonValues.swift */; };
 		CED2B0A41DDD0C4E00A5827F /* Values.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2B0A31DDD0C4E00A5827F /* Values.swift */; };
 		CED2B0A51DDD0C4E00A5827F /* Values.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2B0A31DDD0C4E00A5827F /* Values.swift */; };
 		CED2B0A71DDD12E400A5827F /* SpeechUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2B0A61DDD12E400A5827F /* SpeechUtil.swift */; };
@@ -111,6 +115,7 @@
 		CE2C0C381DDCDB8D0074BCEF /* InputMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputMode.swift; sourceTree = "<group>"; };
 		CE2C0C3D1DDCDD4A0074BCEF /* TutorialMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialMode.swift; sourceTree = "<group>"; };
 		CE38268A1DFD10C6000F81C3 /* PunctuationValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PunctuationValues.swift; sourceTree = "<group>"; };
+		CE38268F1DFD2692000F81C3 /* MostCommonValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MostCommonValues.swift; sourceTree = "<group>"; };
 		CED2B0A31DDD0C4E00A5827F /* Values.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Values.swift; sourceTree = "<group>"; };
 		CED2B0A61DDD12E400A5827F /* SpeechUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechUtil.swift; sourceTree = "<group>"; };
 		CED2B0A91DDD18C900A5827F /* LowerAlphaValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LowerAlphaValues.swift; sourceTree = "<group>"; };
@@ -197,6 +202,7 @@
 				CED2B0AC1DDD18E000A5827F /* EmojiValues.swift */,
 				CED2B0AF1DDD326000A5827F /* TrainingValues.swift */,
 				CE38268A1DFD10C6000F81C3 /* PunctuationValues.swift */,
+				CE38268F1DFD2692000F81C3 /* MostCommonValues.swift */,
 			);
 			name = Values;
 			sourceTree = "<group>";
@@ -465,6 +471,7 @@
 				FE3CCB761DC286DE0036DEF1 /* ViewController.swift in Sources */,
 				CE38268B1DFD10C6000F81C3 /* PunctuationValues.swift in Sources */,
 				FE3CCB741DC286DE0036DEF1 /* AppDelegate.swift in Sources */,
+				CE3826901DFD2692000F81C3 /* MostCommonValues.swift in Sources */,
 				CEEE67841DE219860043A4F1 /* ModeUtil.swift in Sources */,
 				CE2C0C391DDCDB8D0074BCEF /* InputMode.swift in Sources */,
 				CEEE67951DE2D2BC0043A4F1 /* NumericalValues.swift in Sources */,
@@ -489,6 +496,7 @@
 				CE38268C1DFD10C6000F81C3 /* PunctuationValues.swift in Sources */,
 				CE2C0C351DDCDB790074BCEF /* Mode.swift in Sources */,
 				FE3CCB891DC286DE0036DEF1 /* VInputTests.swift in Sources */,
+				CE3826911DFD2692000F81C3 /* MostCommonValues.swift in Sources */,
 				CE2C0C3F1DDCDD4A0074BCEF /* TutorialMode.swift in Sources */,
 				CE2C0C3A1DDCDB8D0074BCEF /* InputMode.swift in Sources */,
 			);
@@ -501,6 +509,7 @@
 				CE38268D1DFD10C6000F81C3 /* PunctuationValues.swift in Sources */,
 				CE2C0C361DDCDB790074BCEF /* Mode.swift in Sources */,
 				FE3CCB941DC286DE0036DEF1 /* VInputUITests.swift in Sources */,
+				CE3826921DFD2692000F81C3 /* MostCommonValues.swift in Sources */,
 				CE2C0C401DDCDD4A0074BCEF /* TutorialMode.swift in Sources */,
 				CE2C0C3B1DDCDB8D0074BCEF /* InputMode.swift in Sources */,
 			);
@@ -519,6 +528,7 @@
 				CEEE67851DE219860043A4F1 /* ModeUtil.swift in Sources */,
 				CED2B0B11DDD326000A5827F /* TrainingValues.swift in Sources */,
 				CED2B0BA1DDD420F00A5827F /* TrainingMode.swift in Sources */,
+				CE3826931DFD2692000F81C3 /* MostCommonValues.swift in Sources */,
 				CEEE67961DE2D2BC0043A4F1 /* NumericalValues.swift in Sources */,
 				CE38268E1DFD10C6000F81C3 /* PunctuationValues.swift in Sources */,
 				CED2B0AE1DDD18E000A5827F /* EmojiValues.swift in Sources */,
