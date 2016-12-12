@@ -36,6 +36,24 @@ class InputMode : Mode {
         let textBeforeMarker: String? = keyboardController.textDocumentProxy.documentContextBeforeInput
         if textBeforeMarker != nil && textBeforeMarker!.characters.last != " " {
             currentWord = loadFromProxy()
+            //Need to decrement here - This is repeat code for now - same as swipe down
+            let context = self.keyboardController.persistentContainer!.viewContext
+            let request = NSFetchRequest<NSFetchRequestResult>()
+            request.predicate = NSPredicate(format: "word = %@", currentWord)
+            request.entity = NSEntityDescription.entity(forEntityName: "TypedWord", in: context)
+            
+            do {
+                let results = try context.fetch(request)
+                let wordToInsertOrUpdate: TypedWord?
+                if results.count > 0 {
+                    wordToInsertOrUpdate = (results[0] as! TypedWord)
+                    wordToInsertOrUpdate!.frequency -= 1
+                    try context.save()
+                }
+            } catch {
+                let fetchError = error as NSError
+                print(fetchError)
+            }
         }
         VisualUtil.updateViewAndAnnounce(letter: keyboardController.currentValues.getCurrentValue())
     }
@@ -121,7 +139,25 @@ class InputMode : Mode {
             }
             else if keyboardController.textDocumentProxy.documentContextBeforeInput?.characters.last != " " {
                 currentWord = loadFromProxy()
+                
                 //reload word here and decrement from count
+                let context = self.keyboardController.persistentContainer!.viewContext
+                let request = NSFetchRequest<NSFetchRequestResult>()
+                request.predicate = NSPredicate(format: "word = %@", currentWord)
+                request.entity = NSEntityDescription.entity(forEntityName: "TypedWord", in: context)
+                
+                do {
+                    let results = try context.fetch(request)
+                    let wordToInsertOrUpdate: TypedWord?
+                    if results.count > 0 {
+                        wordToInsertOrUpdate = (results[0] as! TypedWord)
+                        wordToInsertOrUpdate!.frequency -= 1
+                        try context.save()
+                    }
+                } catch {
+                    let fetchError = error as NSError
+                    print(fetchError)
+                }
             }
         }
         if swapBack && keyboardController.currentValues.getValueType() == ValueUtil.VALUE_TYPE.uppercase {

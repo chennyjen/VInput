@@ -21,23 +21,32 @@ class MostCommonValues : Values
         self.index = 0
         self.valueType = .common_words
         self.commonValues = []
+        
         let context = keyboardController.persistentContainer!.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>()
         request.entity = NSEntityDescription.entity(forEntityName: "TypedWord", in: context)
         request.sortDescriptors = [NSSortDescriptor(key: "frequency", ascending: false)]
-        do {
+        
+        do
+        {
             let results = try context.fetch(request)
-            if results.count > 0 {
-                // PRINT ALL WORDS
-                for result in results {
+            if results.count > 0
+            {
+                for result in results
+                {
                     let word: String = (result as! TypedWord).word!
-                    self.commonValues.append(word)
+                    let frequency = (result as! TypedWord).frequency
+                    if frequency > 0
+                    {
+                        self.commonValues.append(word)
+                    }
                     print(word)
-                    print((result as! TypedWord).frequency)
+                    print(frequency)
                     
                 }
             }
-        } catch {
+        } catch
+        {
             let fetchError = error as NSError
             print(fetchError)
         }
@@ -81,7 +90,8 @@ class MostCommonValues : Values
     
     func isSearchingResetAndAnounce() -> Bool
     {
-        if index != 0 {
+        if index != 0
+        {
             index = 0
             return true
         }
