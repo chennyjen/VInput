@@ -68,7 +68,14 @@ class InputMode : Mode {
             swapBack = false
         }
         keyboardController.currentValues.shiftLeft()
-        VisualUtil.updateViewAndAnnounce(letter: keyboardController.currentValues.getCurrentValue())
+        if keyboardController.currentValues.isDone() {
+            SpeechUtil.speak(textToSpeak: keyboardController.currentValues.getCurrentValue())
+            SpeechUtil.speak(textToSpeak: "Swipe up to insert. Swipe down to reset.")
+            let systemSoundID: SystemSoundID = 4095
+            AudioServicesPlaySystemSound (systemSoundID)
+        } else {
+            VisualUtil.updateViewAndAnnounce(letter: keyboardController.currentValues.getCurrentValue())
+        }
     }
     
     func onSwipeRight() {
@@ -76,8 +83,15 @@ class InputMode : Mode {
             ValueUtil.swapMode(keyboardController: keyboardController, valueType: ValueUtil.VALUE_TYPE.lowercase)
             swapBack = false
         }
-        keyboardController.currentValues.shiftRight()
-        VisualUtil.updateViewAndAnnounce(letter: keyboardController.currentValues.getCurrentValue())
+        if keyboardController.currentValues.isDone() {
+            SpeechUtil.speak(textToSpeak: keyboardController.currentValues.getCurrentValue())
+            SpeechUtil.speak(textToSpeak: "Swipe up to insert. Swipe down to reset.")
+            let systemSoundID: SystemSoundID = 4095
+            AudioServicesPlaySystemSound (systemSoundID)
+        } else {
+            keyboardController.currentValues.shiftRight()
+            VisualUtil.updateViewAndAnnounce(letter: keyboardController.currentValues.getCurrentValue())
+        }
     }
     
     func onSwipeUp() {

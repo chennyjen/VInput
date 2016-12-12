@@ -12,7 +12,7 @@ import AVFoundation
 class SpeechUtil {
     
     static var utterance: AVSpeechUtterance!
-    static let speechSynthesizer = AVSpeechSynthesizer()
+    static var speechSynthesizer = AVSpeechSynthesizer()
     
     static func speak(textToSpeak: String, pitchMultiplier: Float = 1.0,
                       postDelay: TimeInterval = TimeInterval(0),
@@ -37,6 +37,7 @@ class SpeechUtil {
     static func stopSpeech() {
         if speechSynthesizer.isSpeaking {
             speechSynthesizer.stopSpeaking(at: AVSpeechBoundary.immediate)
+            speechSynthesizer = AVSpeechSynthesizer()
         }
     }
     
